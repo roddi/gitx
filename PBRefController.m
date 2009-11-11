@@ -401,6 +401,43 @@
     //	NSLog([NSString stringWithFormat:@"Fetch hit for %@!", refName]);
 }
 
+- (void) addRemoteButton:(id)sender
+{
+    [addRemoteErrorMessage setStringValue:@""];
+	[addRemoteName setStringValue:@""];
+    [addRemoteName setTextColor:[NSColor blackColor]];
+	[addRemoteURL setStringValue:@""];
+    [NSApp beginSheet:addRemoteSheet
+       modalForWindow:[[historyController view] window]
+        modalDelegate:NULL
+       didEndSelector:NULL
+          contextInfo:NULL];
+}
+
+- (void) newTagButton:(id)sender
+{
+    [newTagErrorMessage setStringValue:@""];
+	[newTagName setStringValue:@""];
+    
+	if ([[commitController selectedObjects] count] != 0) {
+		PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
+        [newTagCommit setStringValue:[commit subject]];
+        [newTagSHA	setStringValue:[commit realSha]];
+        [newTagSHALabel setHidden:NO];
+    } else {
+        [newTagCommit setStringValue:historyController.repository.currentBranch.description];
+        [newTagSHA	setStringValue:@""];
+        [newTagSHALabel setHidden:YES];
+    }
+    
+    
+    [NSApp beginSheet:newTagSheet
+       modalForWindow:[[historyController view] window]
+        modalDelegate:NULL
+       didEndSelector:NULL
+          contextInfo:NULL];
+}
+
 #pragma mark Sheets
 
 - (void) showMessageSheet:(NSString *)title message:(NSString *)msg {
@@ -454,19 +491,6 @@
 	[newBranchSheet orderOut:self];
 }
 
-- (void) addRemoteButton:(id)sender
-{
-    [addRemoteErrorMessage setStringValue:@""];
-	[addRemoteName setStringValue:@""];
-    [addRemoteName setTextColor:[NSColor blackColor]];
-	[addRemoteURL setStringValue:@""];
-    [NSApp beginSheet:addRemoteSheet
-       modalForWindow:[[historyController view] window]
-        modalDelegate:NULL
-       didEndSelector:NULL
-          contextInfo:NULL];
-}
-
 - (void) addRemoteSheet:(id)sender
 {
     NSString *remoteName = [addRemoteName stringValue];
@@ -507,30 +531,6 @@
     [addRemoteName setTextColor:[NSColor blackColor]];
 	[addRemoteURL setStringValue:@""];
 	[addRemoteSheet orderOut:self];
-}
-
-- (void) newTagButton:(id)sender
-{
-    [newTagErrorMessage setStringValue:@""];
-	[newTagName setStringValue:@""];
-    
-	if ([[commitController selectedObjects] count] != 0) {
-		PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
-        [newTagCommit setStringValue:[commit subject]];
-        [newTagSHA	setStringValue:[commit realSha]];
-        [newTagSHALabel setHidden:NO];
-    } else {
-        [newTagCommit setStringValue:historyController.repository.currentBranch.description];
-        [newTagSHA	setStringValue:@""];
-        [newTagSHALabel setHidden:YES];
-    }
-
-    
-    [NSApp beginSheet:newTagSheet
-       modalForWindow:[[historyController view] window]
-        modalDelegate:NULL
-       didEndSelector:NULL
-          contextInfo:NULL];
 }
 
 - (void) newTagSheet:(id)sender
