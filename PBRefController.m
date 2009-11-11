@@ -354,7 +354,7 @@
          contextInfo:NULL];
 }
 
-// MARK: Buttons
+#pragma mark Buttons
 -(void)rebaseButton:(id)sender
 {
 	NSString *refName = [[[[historyController repository] currentBranch] simpleRef] refForSpec];
@@ -401,7 +401,7 @@
     //	NSLog([NSString stringWithFormat:@"Fetch hit for %@!", refName]);
 }
 
-// MARK: Sheets
+#pragma mark Sheets
 
 - (void) showMessageSheet:(NSString *)title message:(NSString *)msg {
 

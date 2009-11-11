@@ -16,7 +16,7 @@
 @implementation PBGitHistoryController
 @synthesize selectedTab, webCommit, rawCommit, gitTree, commitController;
 
-// MARK: Quick Look panel support
+#pragma mark Quick Look panel support
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel;
 {
@@ -41,7 +41,7 @@
     previewPanel = nil;
 }
 
-// MARK: Quick Look panel data source
+#pragma mark Quick Look panel data source
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
@@ -53,7 +53,7 @@
     return [[treeController selectedObjects] objectAtIndex:index];
 }
 
-// MARK: Quick Look panel delegate
+#pragma mark Quick Look panel delegate
 
 - (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
 {
@@ -96,7 +96,7 @@
     return treeItem.iconImage;
 }
 
-// MARK: NSToolbarItemValidation Methods
+#pragma mark NSToolbarItemValidation Methods
 
 - (BOOL) validateToolbarItem:(NSToolbarItem *)theItem {
     
@@ -116,7 +116,7 @@
     return res;
 }
 
-// MARK: PBGitHistoryController
+#pragma mark PBGitHistoryController
 
 - (void)awakeFromNib
 {
