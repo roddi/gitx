@@ -696,78 +696,6 @@
     [item setMenu: remoteMenu];
 }
 
-// !!! Andre Berg 20091110: The two methods below have been replaced with a more generic one (see above).
-// Need to remove this at a later time...
-
-/*
-- (void) updatePullMenuWithRemotes:(NSMutableArray *)remoteBranches
-{
-    if (!pullItem)
-        return;
-
-	NSMenu *remoteMenu = [[NSMenu alloc] initWithTitle:@"Pull menu"];
-
-    // Remotes
-	NSMenu *currentMenu = nil;
-	for (PBGitRevSpecifier *rev in remoteBranches)
-	{
-		NSString *ref = [rev simpleRef];
-		NSArray *components = [ref componentsSeparatedByString:@"/"];
-
-		NSString *remoteName = [components objectAtIndex:2];
-		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
-
-		if (![[currentMenu title] isEqualToString:remoteName])
-		{
-			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
-			[item setSubmenu:currentMenu];
-			[remoteMenu addItem:item];
-		}
-
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:@selector(pullMenuAction:) keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[currentMenu addItem:item];
-	}
-
-    [pullItem setMenu: remoteMenu];
-}
-
-- (void) updatePushMenuWithRemotes:(NSMutableArray *)remoteBranches
-{
-    if (!pushItem)
-        return;
-
-	NSMenu *remoteMenu = [[NSMenu alloc] initWithTitle:@"Push menu"];
-
-    // Remotes
-	NSMenu *currentMenu = nil;
-	for (PBGitRevSpecifier *rev in remoteBranches)
-	{
-		NSString *ref = [rev simpleRef];
-		NSArray *components = [ref componentsSeparatedByString:@"/"];
-
-		NSString *remoteName = [components objectAtIndex:2];
-		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
-
-		if (![[currentMenu title] isEqualToString:remoteName])
-		{
-			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
-			[item setSubmenu:currentMenu];
-			[remoteMenu addItem:item];
-		}
-
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:@selector(pushMenuAction:) keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[currentMenu addItem:item];
-	}
-
-    [pushItem setMenu: remoteMenu];
-}*/
-
 - (void) updateBranchMenus
 {
 	NSMutableArray *localBranches = [NSMutableArray array];
@@ -798,10 +726,6 @@
     [self updatePopUpToolbarItemMenu:pushItem remotes:remoteBranches action:@selector(pushMenuAction:) title:@"Push menu"];
     [self updatePopUpToolbarItemMenu:pullItem remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Push menu"];
     [self updatePopUpToolbarItemMenu:rebaseItem remotes:remoteBranches action:@selector(rebaseMenuAction:) title:@"Push menu"];
-
-// 	[self updatePullMenuWithRemotes:remoteBranches];
-// 
-// 	[self updatePushMenuWithRemotes:remoteBranches];
 }
 
 - (void) changeBranch:(NSMenuItem *)sender
