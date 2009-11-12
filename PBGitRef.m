@@ -12,6 +12,12 @@
 @implementation PBGitRef
 
 @synthesize ref;
+
+- (NSString *) description
+{
+    return self.ref;
+}
+
 - (NSString*) shortName
 {
 	if ([self type])

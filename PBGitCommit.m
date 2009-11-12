@@ -13,6 +13,19 @@
 
 @synthesize repository, subject, timestamp, author, parentShas, nParents, sign, lineInfo;
 
+- (NSString *) description
+{
+    NSMutableString *description = [NSMutableString stringWithFormat:@"sha: %@\n", [self realSha]];
+    [description appendFormat:@"subject: %@\n", self.subject];
+    [description appendFormat:@"author: %@\n", self.author];
+    [description appendFormat:@"date: %@\n", self.date];
+    [description appendFormat:@"parents: %@\n", self.parents];
+    [description appendFormat:@"refs: %@\n", self.refs];
+    [description appendFormat:@"tree sha: %@\n", self.tree.sha];
+    
+    return [[description copy] autorelease];
+}
+
 - (NSArray *) parents
 {
 	if (nParents == 0)
