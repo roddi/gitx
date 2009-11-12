@@ -72,6 +72,25 @@
 	return array;
 }
 
++ (NSArray *) defaultMenuItemsForCommit:(PBGitCommit *)commit target:(id)target
+{
+    NSMutableArray *items = [NSMutableArray array];
+    
+    NSMenuItem *copySHAItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy SHA" action:@selector(copySHA:) keyEquivalent:@""];
+    [items addObject:copySHAItem];
+    
+    NSMenuItem *copyPatchItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy Patch" action:@selector(copyPatch:) keyEquivalent:@""];
+    [items addObject:copyPatchItem];
+    
+	for (PBRefMenuItem *item in items)
+	{
+		[item setTarget: target];
+		[item setCommit:commit];
+	}
+    
+	return items;
+}
+
 + (PBRefMenuItem *)separatorItem {
     PBRefMenuItem * item = (PBRefMenuItem *) [super separatorItem];
     return item;

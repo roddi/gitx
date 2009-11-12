@@ -217,9 +217,32 @@
     return;
 }
 
+- (void)copySHA:(PBRefMenuItem *)sender
+{
+    PBGitCommit *commit = [sender commit];
+
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteboard setString:[commit realSha] forType:NSStringPboardType];
+}
+
+- (void)copyPatch:(PBRefMenuItem *)sender
+{
+    PBGitCommit *commit = [sender commit];
+
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteboard setString:[commit patch] forType:NSStringPboardType];
+}
+
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit
 {
 	return [PBRefMenuItem defaultMenuItemsForRef:ref commit:commit target:self];
+}
+
+- (NSArray *) menuItemsForCommit:(PBGitCommit *)commit
+{
+	return [PBRefMenuItem defaultMenuItemsForCommit:commit target:self];
 }
 
 - (BOOL) addRemoteImplWithName:(NSString *)remoteName forURL:(NSString *)remoteURL

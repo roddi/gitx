@@ -61,6 +61,7 @@
 - (IBAction)closeNewTagSheet:(id)sender;
 
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit;
+- (NSArray *) menuItemsForCommit:(PBGitCommit *)commit;
 
 - (void) changeBranch:(NSMenuItem *)sender;
 - (void) selectCurrentBranch;
