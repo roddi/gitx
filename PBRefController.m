@@ -759,7 +759,7 @@
 		[rebaseMenu addItem:item];
 	}
     
-    if ([localBranches count] && [remoteBranches count])
+    if ([localBranches count] && [remoteBranches count] && !(([localBranches count] == 1) && [headRef isEqualTo:[localBranches objectAtIndex:0]]))
         [rebaseMenu addItem:[NSMenuItem separatorItem]];
     
     // Remotes
