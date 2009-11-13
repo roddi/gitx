@@ -147,6 +147,23 @@
     return success;
 }
 
+- (BOOL) rebaseFromLocalBranch:(NSString *)localBranch
+{
+	int ret = 1;
+    BOOL success = NO;
+    NSArray * args = [NSArray arrayWithObjects:@"rebase", localBranch, nil];    
+	NSString *rval = [historyController.repository outputInWorkdirForArguments:args retValue: &ret];
+	if (ret) {
+		NSString *info = [NSString stringWithFormat:@"There was an error rebasing from the local branch %@.\n\n%d\n%@", localBranch, ret, rval];
+		[[historyController.repository windowController] showMessageSheet:@"Rebase from local branch failed" infoText:info];
+		return success;
+	}
+	[historyController.repository reloadRefs];
+	[commitController rearrangeObjects];
+    success = YES;
+    return success;
+}
+
 - (BOOL) fetchRef:(NSString *)refName fromRemote:(NSString *)remote
 {
 	int ret = 1;
@@ -719,6 +736,56 @@
     [item setMenu: remoteMenu];
 }
 
+- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle
+{
+    if (!item)
+        return;
+    
+	NSMenu *rebaseMenu = [[NSMenu alloc] initWithTitle:menuTitle];
+    PBGitRevSpecifier *headRef = [[historyController repository] headRef];
+    
+    // Local
+	for (PBGitRevSpecifier *rev in localBranches)
+	{
+        if ([rev isEqualTo:headRef]) {
+            continue;
+        }
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
+		[item setTarget:self];
+		[item setRepresentedObject:rev];
+		[rebaseMenu addItem:item];
+	}
+    
+    if ([localBranches count] && [remoteBranches count])
+        [rebaseMenu addItem:[NSMenuItem separatorItem]];
+    
+    // Remotes
+	NSMenu *currentMenu = nil;
+	for (PBGitRevSpecifier *rev in remoteBranches)
+	{
+		NSString *ref = [rev simpleRef];
+		NSArray *components = [ref componentsSeparatedByString:@"/"];
+        
+		NSString *remoteName = [components objectAtIndex:2];
+		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
+        
+		if (![[currentMenu title] isEqualToString:remoteName])
+		{
+			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
+			[item setSubmenu:currentMenu];
+			[rebaseMenu addItem:item];
+		}
+        
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:action keyEquivalent:@""];
+		[item setTarget:self];
+		[item setRepresentedObject:rev];
+		[currentMenu addItem:item];
+	}
+    
+    [item setMenu: rebaseMenu];
+}
+
 - (void) updateBranchMenus
 {
 	NSMutableArray *localBranches = [NSMutableArray array];
@@ -747,8 +814,8 @@
     [self updateAllBranchesMenuWithLocal:localBranches remote:remoteBranches tag:tags other:other];
     
     [self updatePopUpToolbarItemMenu:pushItem remotes:remoteBranches action:@selector(pushMenuAction:) title:@"Push menu"];
-    [self updatePopUpToolbarItemMenu:pullItem remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Push menu"];
-    [self updatePopUpToolbarItemMenu:rebaseItem remotes:remoteBranches action:@selector(rebaseMenuAction:) title:@"Push menu"];
+    [self updatePopUpToolbarItemMenu:pullItem remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Pull menu"];
+    [self updatePopUpToolbarItemMenu:rebaseItem local:localBranches remotes:remoteBranches action:@selector(rebaseMenuAction:) title:@"Rebase menu"];
 }
 
 - (void) changeBranch:(NSMenuItem *)sender
@@ -759,6 +826,7 @@
 
 - (void) selectCurrentBranch
 {
+    [self updateBranchMenus];
 	PBGitRevSpecifier *rev = historyController.repository.currentBranch;
     [branchPopUp setTitle:[rev description]];
 
@@ -807,9 +875,11 @@
 {
     NSString *ref = [(PBGitRevSpecifier *)[sender representedObject] description];
     NSArray *refComponents = [ref componentsSeparatedByString:@"/"];
-    if ([refComponents count] != 2)
-        return;
-    [self rebaseRef:[refComponents objectAtIndex:1] fromRemote:[refComponents objectAtIndex:0]];
+    if ([refComponents count] == 2) {
+    	[self rebaseRef:[refComponents objectAtIndex:1] fromRemote:[refComponents objectAtIndex:0]];
+    } else if ([refComponents count] == 1) {
+    	[self rebaseFromLocalBranch:[refComponents objectAtIndex:0]];
+    }
 }
 
 @end
