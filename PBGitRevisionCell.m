@@ -280,7 +280,6 @@
 
 - (NSMenu *) menuForEvent:(NSEvent *)event inRect:(NSRect)rect ofView:(NSView *)view
 {
-    NSLog(@"\n%@", [[self objectValue] description]);
 	if (!contextMenuDelegate)
 		return [self menu];
 
