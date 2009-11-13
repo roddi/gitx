@@ -125,6 +125,7 @@
 		return success;
 	}
 	[historyController.repository reloadRefs];
+    [historyController.repository readCurrentBranch];
 	[commitController rearrangeObjects];
     success = YES;
     return success;
@@ -142,6 +143,7 @@
 		return success;
 	}
 	[historyController.repository reloadRefs];
+    [historyController.repository readCurrentBranch];
 	[commitController rearrangeObjects];
     success = YES;
     return success;
@@ -159,6 +161,7 @@
 		return success;
 	}
 	[historyController.repository reloadRefs];
+    [historyController.repository readCurrentBranch];
 	[commitController rearrangeObjects];
     success = YES;
     return success;
