@@ -175,8 +175,13 @@ static NSString * repositoryBasePath = nil;
 	if (![[PBGitRef refFromString:[[self headRef] simpleRef]] type]) {
 		displayName = [NSString stringWithFormat:@"%@ (detached HEAD)", dirName];
 	} else {
-		displayName = [NSString stringWithFormat:@"%@ (branch: %@)", dirName,
-					 [[self headRef] description]];
+        NSString *headRef = [[self headRef] description];
+        NSString *remote = [self.config valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", headRef]];
+        if (remote) {
+            displayName = [NSString stringWithFormat:@"%@ (branch: %@ — remote: %@)", dirName, headRef, remote];
+        } else {
+            displayName = [NSString stringWithFormat:@"%@ (branch: %@)", dirName, headRef];
+        }
 	}
 
 	return displayName;
