@@ -138,8 +138,8 @@
     NSArray * args = [NSArray arrayWithObjects:@"pull", @"--rebase", remote, refName, nil];    
 	NSString *rval = [historyController.repository outputInWorkdirForArguments:args retValue: &ret];
 	if (ret) {
-		NSString *info = [NSString stringWithFormat:@"There was an error pulling from the remote repository.\n\n%d\n%@", ret, rval];
-		[[historyController.repository windowController] showMessageSheet:@"Pulling from remote failed" infoText:info];
+		NSString *info = [NSString stringWithFormat:@"There was an error pulling or rebasing from the remote repository.\n\n%d\n%@", ret, rval];
+		[[historyController.repository windowController] showMessageSheet:@"Pull from Remote and Rebase failed" infoText:info];
 		return success;
 	}
 	[historyController.repository reloadRefs];
