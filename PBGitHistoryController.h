@@ -14,11 +14,13 @@
 #import <Quartz/Quartz.h> /* for the QLPreviewPanelDataSource et al. stuff */
 
 @class PBQLOutlineView;
+@class PBRefController;
 
 @interface PBGitHistoryController : PBViewController <QLPreviewPanelDataSource, QLPreviewPanelDelegate> {
     IBOutlet NSSearchField *searchField;
     IBOutlet NSArrayController* commitController;
     IBOutlet NSTreeController* treeController;
+    IBOutlet __weak PBRefController *refController;
     IBOutlet NSTableView* commitList;
     IBOutlet PBQLOutlineView* fileBrowser;
     IBOutlet PBCollapsibleSplitView *historySplitView;
@@ -55,6 +57,15 @@
 - (void)showCommitsFromTree:(id)sender;
 - (void)showInFinderAction:(id)sender;
 - (void)openFilesAction:(id)sender;
+
+// Repository menu methods
+- (IBAction) fetchDefaultRemote:(id)sender;
+- (IBAction) pullDefaultRemote:(id)sender;
+- (IBAction) rebaseDefaultRemote:(id)sender;
+- (IBAction) pushDefaultRemote:(id)sender;
+- (IBAction) createBranch:(id)sender;
+- (IBAction) createTag:(id)sender;
+- (IBAction) addRemote:(id)sender;
 
 - (void) copyCommitInfo;
 

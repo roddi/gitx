@@ -7,6 +7,7 @@
 //
 
 #import "PBGitHistoryController.h"
+#import "PBRefController.h"
 #import "PBGitGrapher.h"
 #import "PBGitRevisionCell.h"
 #import "PBCommitList.h"
@@ -427,6 +428,42 @@
 	if(offset == 1)
 		return proposedMax - historySplitView.bottomViewMin;
 	return [sender frame].size.height;
+}
+
+#pragma mark Repository Menu Methods
+- (IBAction) fetchDefaultRemote:(id)sender
+{
+    [refController fetchButton:sender];
+}
+
+- (IBAction) pullDefaultRemote:(id)sender
+{
+    [refController pullButton:sender];
+}
+
+- (IBAction) rebaseDefaultRemote:(id)sender
+{
+    [refController rebaseButton:sender];
+}
+
+- (IBAction) pushDefaultRemote:(id)sender
+{
+    [refController pushButton:sender];
+}
+
+- (IBAction) createBranch:(id)sender
+{
+    [refController addRef:sender];
+}
+
+- (IBAction) createTag:(id)sender
+{
+    [refController newTagButton:sender];
+}
+
+- (IBAction) addRemote:(id)sender
+{
+    [refController addRemoteButton:sender];
 }
 
 @end
