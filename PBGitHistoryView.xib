@@ -21,11 +21,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="4"/>
+			<integer value="518"/>
+			<integer value="427"/>
 			<integer value="237"/>
 			<integer value="459"/>
-			<integer value="4"/>
-			<integer value="427"/>
-			<integer value="354"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -951,6 +951,7 @@
 						<string>AF4D111F-4FE6-4D6A-8B1E-827F7A419C11</string>
 						<string>C034B3AD-2E7F-4D76-BCB7-E8332F007018</string>
 						<string>EB7863DB-808B-46C2-8B61-65D6C40F796C</string>
+						<string>F6703490-5165-4CA4-B363-5C7F152E8AC9</string>
 						<string>F9FF1109-493C-467D-9CB9-CC87365784FF</string>
 						<string>NSToolbarFlexibleSpaceItem</string>
 						<string>NSToolbarSeparatorItem</string>
@@ -1442,6 +1443,48 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
+						<object class="NSToolbarItem" id="840575537">
+							<object class="NSMutableString" key="NSToolbarItemIdentifier">
+								<characters key="NS.bytes">F6703490-5165-4CA4-B363-5C7F152E8AC9</characters>
+							</object>
+							<string key="NSToolbarItemLabel">Fetch</string>
+							<string key="NSToolbarItemPaletteLabel">Fetch</string>
+							<string key="NSToolbarItemToolTip"/>
+							<object class="NSButton" key="NSToolbarItemView" id="387743434">
+								<reference key="NSNextResponder"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{1, 14}, {35, 25}}</string>
+								<reference key="NSSuperview"/>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSButtonCell" key="NSCell" id="338477603">
+									<int key="NSCellFlags">-2080244224</int>
+									<int key="NSCellFlags2">134217728</int>
+									<string key="NSContents"/>
+									<reference key="NSSupport" ref="924107556"/>
+									<reference key="NSControlView" ref="387743434"/>
+									<int key="NSButtonFlags">-2033434369</int>
+									<int key="NSButtonFlags2">163</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="827129513">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">FetchPopUpTemplate</string>
+									</object>
+									<string key="NSAlternateContents"/>
+									<string key="NSKeyEquivalent"/>
+									<int key="NSPeriodicDelay">400</int>
+									<int key="NSPeriodicInterval">75</int>
+								</object>
+							</object>
+							<reference key="NSToolbarItemImage" ref="827129513"/>
+							<nil key="NSToolbarItemTarget"/>
+							<nil key="NSToolbarItemAction"/>
+							<string key="NSToolbarItemMinSize">{25, 25}</string>
+							<string key="NSToolbarItemMaxSize">{35, 25}</string>
+							<bool key="NSToolbarItemEnabled">YES</bool>
+							<bool key="NSToolbarItemAutovalidates">YES</bool>
+							<int key="NSToolbarItemTag">0</int>
+							<bool key="NSToolbarIsUserRemovable">YES</bool>
+							<int key="NSToolbarItemVisibilityPriority">0</int>
+						</object>
 						<object class="NSToolbarItem" id="995733896">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">F9FF1109-493C-467D-9CB9-CC87365784FF</characters>
@@ -1540,7 +1583,7 @@
 						</object>
 					</object>
 				</object>
-				<object class="NSArray" key="NSToolbarIBAllowedItems">
+				<object class="NSMutableArray" key="NSToolbarIBAllowedItems">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<reference ref="774449010"/>
 					<reference ref="1046415447"/>
@@ -1553,6 +1596,7 @@
 					<reference ref="425122427"/>
 					<reference ref="412717087"/>
 					<reference ref="1033703265"/>
+					<reference ref="840575537"/>
 					<reference ref="587605996"/>
 				</object>
 				<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
@@ -3000,6 +3044,22 @@
 					</object>
 					<int key="connectionID">517</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">fetchItem</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="840575537"/>
+					</object>
+					<int key="connectionID">523</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">fetchButton:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="387743434"/>
+					</object>
+					<int key="connectionID">524</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3457,6 +3517,7 @@
 							<reference ref="1046415447"/>
 							<reference ref="995733896"/>
 							<reference ref="77495503"/>
+							<reference ref="840575537"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">History Toolbar</string>
@@ -4065,6 +4126,29 @@
 						<reference key="object" ref="577118520"/>
 						<reference key="parent" ref="165790808"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">518</int>
+						<reference key="object" ref="840575537"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="387743434"/>
+						</object>
+						<reference key="parent" ref="931038723"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">519</int>
+						<reference key="object" ref="387743434"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="338477603"/>
+						</object>
+						<reference key="parent" ref="840575537"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">520</int>
+						<reference key="object" ref="338477603"/>
+						<reference key="parent" ref="387743434"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -4264,7 +4348,14 @@
 					<string>507.IBPluginDependency</string>
 					<string>51.IBPluginDependency</string>
 					<string>51.IBSegmentedControlInspectorSelectedSegmentMetadataKey</string>
+					<string>518.CustomClassName</string>
+					<string>518.IBPluginDependency</string>
+					<string>519.CustomClassName</string>
+					<string>519.IBAttributePlaceholdersKey</string>
+					<string>519.IBPluginDependency</string>
 					<string>52.IBPluginDependency</string>
+					<string>520.CustomClassName</string>
+					<string>520.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -4536,6 +4627,28 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="0"/>
+					<string>KBPopUpToolbarItem</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>KBDelayedPopUpButton</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="387743434"/>
+							<string type="base64-UTF8" key="toolTip">Z2l0IHB1bGwgLS1yZWJhc2UgPHJlbW90ZT4gPHJlbW90ZSBicmFuY2g+CgpUaGlzIHdpbGwgZmV0Y2gg
+YWxsIGNoYW5nZXMgZnJvbSA8cmVtb3RlPiBhbmQgaW5zdGVhZCBvZiBhIG1lcmdlLCBwZXJmb3JtIGEg
+cmViYXNlIGFmdGVyIGZldGNoaW5nLgoKPHJlbW90ZT4gd2lsbCBiZSB0aGUgZGVmYXVsdCByZW1vdGUg
+Y29uZmlndXJlZCBmb3IgdGhlIGN1cnJlbnRseSBzZWxlY3RlZCBicmFuY2ggaW4gdGhlIGJyYW5jaCBw
+b3B1cCBtZW51LiBPciBob2xkIGRvd24gTE1CIGZvciAyIHNlY29uZHMgYW5kIGNob29zZSBhIHJlbW90
+ZSBmcm9tIHRoZSBwb3B1cCBtZW51LgoKPHJlbW90ZSBicmFuY2g+IHdpbGwgYmUgdGhlIHJlbW90ZSdz
+IGN1cnJlbnQgSEVBRC4KCk5vdGU6IHRoZSBjdXJyZW50bHkgc2VsZWN0ZWQgYnJhbmNoIGhhcyB0byBi
+ZSBzcGVjaWZpYy4gJ0FsbCBicmFuY2hlcycgb3IgJ0xvY2FsIGJyYW5jaGVzJyB3aWxsIG5vdCB3b3Jr
+Lg</string>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>KBDelayedPopUpButtonCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4559,7 +4672,7 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">517</int>
+			<int key="maxID">524</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4623,11 +4736,13 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 							<string>createTag:</string>
 							<string>fetchDefaultRemote:</string>
 							<string>openFilesAction:</string>
+							<string>openInTerminal:</string>
 							<string>openSelectedFile:</string>
 							<string>pullDefaultRemote:</string>
 							<string>pushDefaultRemote:</string>
 							<string>rebaseDefaultRemote:</string>
 							<string>refresh:</string>
+							<string>revealInFinder:</string>
 							<string>setDetailedView:</string>
 							<string>setRawView:</string>
 							<string>setTreeView:</string>
@@ -4637,6 +4752,8 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4792,6 +4909,7 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 							<string>commitController</string>
 							<string>commitList</string>
 							<string>errorMessage</string>
+							<string>fetchItem</string>
 							<string>historyController</string>
 							<string>newBranchName</string>
 							<string>newBranchSheet</string>
@@ -4816,6 +4934,7 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 							<string>NSArrayController</string>
 							<string>PBCommitList</string>
 							<string>NSTextField</string>
+							<string>KBPopUpToolbarItem</string>
 							<string>PBGitHistoryController</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>

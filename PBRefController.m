@@ -816,6 +816,7 @@
 
     [self updateAllBranchesMenuWithLocal:localBranches remote:remoteBranches tag:tags other:other];
     
+    [self updatePopUpToolbarItemMenu:fetchItem remotes:remoteBranches action:@selector(fetchMenuAction:) title:@"Fetch menu"];
     [self updatePopUpToolbarItemMenu:pushItem remotes:remoteBranches action:@selector(pushMenuAction:) title:@"Push menu"];
     [self updatePopUpToolbarItemMenu:pullItem remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Pull menu"];
     [self updatePopUpToolbarItemMenu:rebaseItem local:localBranches remotes:remoteBranches action:@selector(rebaseMenuAction:) title:@"Rebase menu"];
@@ -854,6 +855,15 @@
     //         /* just in case, re-enable all toolbar buttons */
     //         [self toggleToolbarItems:tb matchingLabels:nil enabledState:YES];
     //     }
+}
+
+- (void) fetchMenuAction:(NSMenuItem *)sender
+{
+    NSString *ref = [(PBGitRevSpecifier *)[sender representedObject] description];
+    NSArray *refComponents = [ref componentsSeparatedByString:@"/"];
+    if ([refComponents count] != 2)
+        return;
+    [self fetchRef:[refComponents objectAtIndex:1] fromRemote:[refComponents objectAtIndex:0]];
 }
 
 - (void) pullMenuAction:(NSMenuItem *)sender

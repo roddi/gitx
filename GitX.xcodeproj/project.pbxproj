@@ -57,6 +57,7 @@
 		93F7857F0EA3ABF100C1F443 /* PBCommitMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */; };
 		D26DC6450E782C9000C777B2 /* gitx.icns in Resources */ = {isa = PBXBuildFile; fileRef = D26DC6440E782C9000C777B2 /* gitx.icns */; };
 		D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8701E0D10ADFED70073689C /* ScriptingBridge.framework */; };
+		D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */; };
 		D8E41F1410A7B023007BB8FC /* KBPopUpToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */; };
 		EB2A734A0FEE3F09006601CF /* PBCollapsibleSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A73490FEE3F09006601CF /* PBCollapsibleSplitView.m */; };
 		F50A411F0EBB874C00208746 /* mainSplitterBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F50A411D0EBB874C00208746 /* mainSplitterBar.tiff */; };
@@ -236,6 +237,7 @@
 		D26DC6440E782C9000C777B2 /* gitx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gitx.icns; sourceTree = "<group>"; };
 		D8701DF810ADF7410073689C /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		D8701E0D10ADFED70073689C /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
+		D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FetchPopUpTemplate.png; path = Images/FetchPopUpTemplate.png; sourceTree = "<group>"; };
 		D8E41F1210A7B019007BB8FC /* KBPopUpToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopUpToolbarItem.h; sourceTree = "<group>"; };
 		D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPopUpToolbarItem.m; sourceTree = "<group>"; };
 		EB2A73480FEE3F09006601CF /* PBCollapsibleSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBCollapsibleSplitView.h; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */,
 				653D949D109C257500B26705 /* RebaseTemplate.png */,
 				653D949F109C27D400B26705 /* PullTemplate.png */,
 				653D94A0109C27D400B26705 /* PushTemplate.png */,
@@ -891,6 +894,7 @@
 				652C162710A94D0800B80380 /* PullPopUpTemplate.png in Resources */,
 				652C162810A94D0800B80380 /* PushPopUpTemplate.png in Resources */,
 				652C162910A94D0800B80380 /* RebasePopUpTemplate.png in Resources */,
+				D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

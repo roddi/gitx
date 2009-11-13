@@ -41,6 +41,7 @@
     IBOutlet KBPopUpToolbarItem *pullItem;
     IBOutlet KBPopUpToolbarItem *pushItem;
     IBOutlet KBPopUpToolbarItem *rebaseItem;
+    IBOutlet KBPopUpToolbarItem *fetchItem;
 }
 
 - (IBAction)addRef:(id)sender;
