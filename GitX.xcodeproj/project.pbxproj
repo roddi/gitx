@@ -56,6 +56,7 @@
 		93CB42C20EAB7B2200530609 /* PBGitDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB42C10EAB7B2200530609 /* PBGitDefaults.m */; };
 		93F7857F0EA3ABF100C1F443 /* PBCommitMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */; };
 		D26DC6450E782C9000C777B2 /* gitx.icns in Resources */ = {isa = PBXBuildFile; fileRef = D26DC6440E782C9000C777B2 /* gitx.icns */; };
+		D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8701E0D10ADFED70073689C /* ScriptingBridge.framework */; };
 		D8E41F1410A7B023007BB8FC /* KBPopUpToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */; };
 		EB2A734A0FEE3F09006601CF /* PBCollapsibleSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A73490FEE3F09006601CF /* PBCollapsibleSplitView.m */; };
 		F50A411F0EBB874C00208746 /* mainSplitterBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F50A411D0EBB874C00208746 /* mainSplitterBar.tiff */; };
@@ -233,6 +234,8 @@
 		93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBCommitMessageView.m; sourceTree = "<group>"; };
 		93FCCBA80EA8AF450061B02B /* PBGitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBGitConfig.m; sourceTree = "<group>"; };
 		D26DC6440E782C9000C777B2 /* gitx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gitx.icns; sourceTree = "<group>"; };
+		D8701DF810ADF7410073689C /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
+		D8701E0D10ADFED70073689C /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		D8E41F1210A7B019007BB8FC /* KBPopUpToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopUpToolbarItem.h; sourceTree = "<group>"; };
 		D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPopUpToolbarItem.m; sourceTree = "<group>"; };
 		EB2A73480FEE3F09006601CF /* PBCollapsibleSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBCollapsibleSplitView.h; sourceTree = "<group>"; };
@@ -349,6 +352,7 @@
 				F5E4DBFB0EAB58D90013FAFC /* SystemConfiguration.framework in Frameworks */,
 				F5C580E50EDA250900995434 /* libgit2.a in Frameworks */,
 				65C77FA0108BF560003BD3B5 /* Quartz.framework in Frameworks */,
+				D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +409,7 @@
 				77C82804067257F0000B614F /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				D8701E0D10ADFED70073689C /* ScriptingBridge.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -626,6 +631,7 @@
 				653D9309109BEAFE00B26705 /* PBGitXErrors.m */,
 				D8E41F1210A7B019007BB8FC /* KBPopUpToolbarItem.h */,
 				D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */,
+				D8701DF810ADF7410073689C /* Terminal.h */,
 			);
 			name = Aux;
 			sourceTree = "<group>";

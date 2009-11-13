@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="963"/>
 			<integer value="984"/>
+			<integer value="963"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -726,6 +726,32 @@
 									<string key="NSTitle">Add Remote</string>
 									<string key="NSKeyEquiv">r</string>
 									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="889736156"/>
+									<reference key="NSMixedImage" ref="37108609"/>
+								</object>
+								<object class="NSMenuItem" id="388289220">
+									<reference key="NSMenu" ref="509818460"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="889736156"/>
+									<reference key="NSMixedImage" ref="37108609"/>
+								</object>
+								<object class="NSMenuItem" id="794770333">
+									<reference key="NSMenu" ref="509818460"/>
+									<string key="NSTitle">Open in Terminal</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="889736156"/>
+									<reference key="NSMixedImage" ref="37108609"/>
+								</object>
+								<object class="NSMenuItem" id="556240521">
+									<reference key="NSMenu" ref="509818460"/>
+									<string key="NSTitle">Reveal in Finder</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="889736156"/>
 									<reference key="NSMixedImage" ref="37108609"/>
@@ -1554,6 +1580,22 @@
 					</object>
 					<int key="connectionID">1004</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openInTerminal:</string>
+						<reference key="source" ref="954860085"/>
+						<reference key="destination" ref="794770333"/>
+					</object>
+					<int key="connectionID">1009</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">revealInFinder:</string>
+						<reference key="source" ref="954860085"/>
+						<reference key="destination" ref="556240521"/>
+					</object>
+					<int key="connectionID">1010</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2303,6 +2345,9 @@
 							<reference ref="918897756"/>
 							<reference ref="953962564"/>
 							<reference ref="876671747"/>
+							<reference ref="388289220"/>
+							<reference ref="794770333"/>
+							<reference ref="556240521"/>
 						</object>
 						<reference key="parent" ref="808852774"/>
 					</object>
@@ -2346,6 +2391,21 @@
 						<reference key="object" ref="362364806"/>
 						<reference key="parent" ref="509818460"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1006</int>
+						<reference key="object" ref="388289220"/>
+						<reference key="parent" ref="509818460"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1007</int>
+						<reference key="object" ref="794770333"/>
+						<reference key="parent" ref="509818460"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1008</int>
+						<reference key="object" ref="556240521"/>
+						<reference key="parent" ref="509818460"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2354,6 +2414,9 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-3.IBPluginDependency</string>
 					<string>-3.ImportedFromIB2</string>
+					<string>1006.IBPluginDependency</string>
+					<string>1007.IBPluginDependency</string>
+					<string>1008.IBPluginDependency</string>
 					<string>103.IBPluginDependency</string>
 					<string>103.ImportedFromIB2</string>
 					<string>106.IBEditorWindowLastContentRect</string>
@@ -2571,6 +2634,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{785, 725}, {135, 23}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2771,7 +2837,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{573, 595}, {197, 153}}</string>
+					<string>{{573, 545}, {220, 203}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2799,7 +2865,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1005</int>
+			<int key="maxID">1010</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2939,6 +3005,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cachedFilesController</string>
+							<string>commitButton</string>
 							<string>commitMessageView</string>
 							<string>indexController</string>
 							<string>unstagedFilesController</string>
@@ -2947,6 +3014,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSArrayController</string>
+							<string>NSButton</string>
 							<string>NSTextView</string>
 							<string>PBGitIndexController</string>
 							<string>NSArrayController</string>
@@ -2970,11 +3038,13 @@
 							<string>createTag:</string>
 							<string>fetchDefaultRemote:</string>
 							<string>openFilesAction:</string>
+							<string>openInTerminal:</string>
 							<string>openSelectedFile:</string>
 							<string>pullDefaultRemote:</string>
 							<string>pushDefaultRemote:</string>
 							<string>rebaseDefaultRemote:</string>
 							<string>refresh:</string>
+							<string>revealInFinder:</string>
 							<string>setDetailedView:</string>
 							<string>setRawView:</string>
 							<string>setTreeView:</string>
@@ -2984,6 +3054,8 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
