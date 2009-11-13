@@ -48,7 +48,7 @@
         PBRefMenuItem *item = [[PBRefMenuItem alloc] initWithTitle:[@"Checkout " stringByAppendingString:targetRef]
                                                             action:@selector(checkoutRef:)
                                                      keyEquivalent: @""];
-        if ([targetRef isEqualToString:[[commit repository] currentBranch].description])
+        if ([targetRef isEqualToString:[[[commit repository] headRef] description]])
             [item setEnabled:NO];
         
 		[array addObject:item];
