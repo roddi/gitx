@@ -20,5 +20,9 @@
 + (BOOL) refreshAutomatically;
 + (BOOL)openCurDirOnLaunch;
 + (BOOL)showOpenPanelOnLaunch;
++ (BOOL) openPreviousDocumentsOnLaunch;
++ (void) setPreviousDocumentPaths:(NSArray *)documentPaths;
++ (NSArray *) previousDocumentPaths;
++ (void) removePreviousDocumentPaths;
 
 @end

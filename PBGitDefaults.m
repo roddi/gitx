@@ -18,6 +18,8 @@
 #define kRefreshAutomatically @"PBRefreshAutomatically"
 #define kOpenCurDirOnLaunch @"PBOpenCurDirOnLaunch"
 #define kShowOpenPanelOnLaunch @"PBShowOpenPanelOnLaunch"
+#define kOpenPreviousDocumentsOnLaunch @"PBOpenPreviousDocumentsOnLaunch"
+#define kPreviousDocumentPaths @"PBPreviousDocumentPaths"
 
 @implementation PBGitDefaults
 
@@ -40,6 +42,8 @@
 			  forKey:kOpenCurDirOnLaunch];
 	[defaultValues setObject:[NSNumber numberWithBool:YES]
 			  forKey:kShowOpenPanelOnLaunch];
+	[defaultValues setObject:[NSNumber numberWithBool:NO]
+                      forKey:kOpenPreviousDocumentsOnLaunch];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
 
@@ -86,6 +90,26 @@
 + (BOOL)showOpenPanelOnLaunch
 {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:kShowOpenPanelOnLaunch];
+}
+
++ (BOOL) openPreviousDocumentsOnLaunch
+{
+	return [[NSUserDefaults standardUserDefaults] boolForKey:kOpenPreviousDocumentsOnLaunch];
+}
+
++ (void) setPreviousDocumentPaths:(NSArray *)documentPaths
+{
+	[[NSUserDefaults standardUserDefaults] setObject:documentPaths forKey:kPreviousDocumentPaths];
+}
+
++ (NSArray *) previousDocumentPaths
+{
+	return [[NSUserDefaults standardUserDefaults] arrayForKey:kPreviousDocumentPaths];
+}
+
++ (void) removePreviousDocumentPaths
+{
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kPreviousDocumentPaths];
 }
 
 @end
