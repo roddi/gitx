@@ -66,8 +66,6 @@
 - (IBAction) createBranch:(id)sender;
 - (IBAction) createTag:(id)sender;
 - (IBAction) addRemote:(id)sender;
-- (IBAction) revealInFinder:(id)sender;
-- (IBAction) openInTerminal:(id)sender;
 
 - (void) copyCommitInfo;
 

@@ -13,7 +13,6 @@
 #import "PBCommitList.h"
 #import "ApplicationController.h"
 #import "PBQLOutlineView.h"
-#import "Terminal.h"
 
 @implementation PBGitHistoryController
 @synthesize selectedTab, webCommit, rawCommit, gitTree, commitController;
@@ -482,22 +481,6 @@
 - (IBAction) addRemote:(id)sender
 {
     [refController addRemoteButton:sender];
-}
-
-- (IBAction) revealInFinder:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openFile:[repository workingDirectory]];
-}
-
-- (IBAction) openInTerminal:(id)sender
-{
-    TerminalApplication *term = [SBApplication applicationWithBundleIdentifier: @"com.apple.Terminal"];
-	NSString *workingDirectory = [[repository workingDirectory] stringByAppendingString:@"/"];
-    NSString *cmd = [NSString stringWithFormat: @"cd %@; clear; echo '# Opened by GitX:'; git status", workingDirectory];
-    SBElementArray *termWindows = [term windows];
-    [term doScript: cmd in: nil];
-    [NSThread sleepForTimeInterval: 0.1];
-    [term activate];
 }
 
 @end
