@@ -119,6 +119,23 @@
 }
 */
 
+#pragma mark NSMenuValidation Methods
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    NSArray * candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Rebase", @"Fetch", nil];
+    BOOL valid = YES;
+    
+    if ([candidates containsObject:[menuItem title]]) {
+        NSString *refName = [[[repository headRef] simpleRef] refForSpec];
+        NSString *remote = [[repository config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+        if (!remote) {
+            valid = NO;
+        }
+    }
+    
+    return valid;
+}
+
 #pragma mark PBGitHistoryController
 
 - (void)awakeFromNib
