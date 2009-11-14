@@ -28,6 +28,7 @@
 	PBGitRepository* repository;
 }
 
++ commitWithRepository:(PBGitRepository*) repo andSha:(git_oid)newSha;
 - initWithRepository:(PBGitRepository *)repo andSha:(git_oid)sha;
 
 - (void)addRef:(PBGitRef *)ref;

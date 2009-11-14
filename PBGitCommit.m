@@ -124,6 +124,11 @@
 	return &sha;
 }
 
++ commitWithRepository:(PBGitRepository*) repo andSha:(git_oid)newSha
+{
+    return [[[self alloc] initWithRepository:repo andSha:newSha] autorelease];
+}
+
 - initWithRepository:(PBGitRepository*) repo andSha:(git_oid)newSha
 {
 	details = nil;

@@ -303,6 +303,20 @@ static NSString * repositoryBasePath = nil;
 
 	return _headRef;
 }
+
+- (NSString *) headSHA
+{
+    return [self outputForCommand:@"rev-list -1 HEAD"];
+}
+
+- (PBGitCommit *) headCommit
+{
+    char const *hex = [[self headSHA] UTF8String];
+    git_oid sha;
+    if (git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
+        return [PBGitCommit commitWithRepository:self andSha:sha];
+    return nil;
+}
 		
 // Returns either this object, or an existing, equal object
 - (PBGitRevSpecifier*) addBranch: (PBGitRevSpecifier*) rev

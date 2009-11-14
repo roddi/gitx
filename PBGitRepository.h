@@ -13,6 +13,7 @@
 #import "PBGitXErrors.h"
 
 @class PBGitWindowController;
+@class PBGitCommit;
 
 @interface PBGitRepository : NSDocument {
 	PBGitRevList* revisionList;
@@ -50,6 +51,8 @@
 - (void) addRef:(PBGitRef *)ref fromParameters:(NSArray *)params;
 - (void) lazyReload;
 - (PBGitRevSpecifier*) headRef;
+- (NSString *) headSHA;
+- (PBGitCommit *) headCommit;
 - (NSString *) remoteForRefName:(NSString *)refName;
 
 - (void) readCurrentBranch;
