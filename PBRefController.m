@@ -15,6 +15,7 @@
 
 - (void)awakeFromNib
 {
+    [checkoutItem setPopUpDelay:0.0];
 	[commitList registerForDraggedTypes:[NSArray arrayWithObject:@"PBGitRef"]];
 	[historyController addObserver:self forKeyPath:@"repository.branches" options:0 context:@"branchChange"];
 	[historyController addObserver:self forKeyPath:@"repository.currentBranch" options:0 context:@"currentBranchChange"];
@@ -61,16 +62,7 @@
 
 - (void) checkoutRef:(PBRefMenuItem *)sender
 {
-	int ret = 1;
-	[historyController.repository outputInWorkdirForArguments:[NSArray arrayWithObjects:@"checkout", [[sender ref] shortName], nil] retValue: &ret];
-	if (ret) {
-		NSString *info = [NSString stringWithFormat:@"There was an error checking out the branch. Perhaps your working directory is not clean?"];
-		[[historyController.repository windowController] showMessageSheet:@"Checking out branch failed" infoText:info];
-		return;
-	}
-	[historyController.repository reloadRefs];
-	[historyController.repository readCurrentBranch];
-	[commitController rearrangeObjects];
+    [self checkoutImpl:[[sender ref] shortName]];
 }
 
 - (void) pushRef:(PBRefMenuItem *)sender
@@ -182,6 +174,21 @@
 	[commitController rearrangeObjects];
     success = YES;
     return success;
+}
+
+- (BOOL) checkoutImpl:(NSString *)refName
+{
+	int ret = 1;
+	[historyController.repository outputInWorkdirForArguments:[NSArray arrayWithObjects:@"checkout", refName, nil] retValue: &ret];
+	if (ret) {
+		NSString *info = [NSString stringWithFormat:@"There was an error checking out the branch. Perhaps your working directory is not clean?"];
+		[[historyController.repository windowController] showMessageSheet:@"Checking out branch failed" infoText:info];
+		return NO;
+	}
+	[historyController.repository reloadRefs];
+	[historyController.repository readCurrentBranch];
+	[commitController rearrangeObjects];
+    return YES;
 }
 
 - (BOOL) pushImpl:(NSString *)refName
@@ -705,62 +712,31 @@
 	[[branchPopUp cell] setMenu: menu];
 }
 
-- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle
-{
-    if (!item)
-        return;
-    
-	NSMenu *remoteMenu = [[NSMenu alloc] initWithTitle:menuTitle];
-    
-    // Remotes
-	NSMenu *currentMenu = nil;
-	for (PBGitRevSpecifier *rev in remoteBranches)
-	{
-		NSString *ref = [rev simpleRef];
-		NSArray *components = [ref componentsSeparatedByString:@"/"];
-        
-		NSString *remoteName = [components objectAtIndex:2];
-		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
-        
-		if (![[currentMenu title] isEqualToString:remoteName])
-		{
-			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
-			[item setSubmenu:currentMenu];
-			[remoteMenu addItem:item];
-		}
-        
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:action keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[currentMenu addItem:item];
-	}
-    
-    [item setMenu: remoteMenu];
-}
-
 - (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle
 {
     if (!item)
         return;
     
-	NSMenu *rebaseMenu = [[NSMenu alloc] initWithTitle:menuTitle];
-    PBGitRevSpecifier *headRef = [[historyController repository] headRef];
+	NSMenu *toolbarMenu = [[NSMenu alloc] initWithTitle:menuTitle];
     
-    // Local
-	for (PBGitRevSpecifier *rev in localBranches)
-	{
-        if ([rev isEqualTo:headRef]) {
-            continue;
+    if ([localBranches count]) {
+        PBGitRevSpecifier *headRef = [[historyController repository] headRef];
+        
+        for (PBGitRevSpecifier *rev in localBranches)
+        {
+            if ([rev isEqualTo:headRef]) {
+                continue;
+            }
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
+            [item setTarget:self];
+            [item setRepresentedObject:rev];
+            [toolbarMenu addItem:item];
         }
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[rebaseMenu addItem:item];
-	}
-    
-    if ([localBranches count] && [remoteBranches count] && !(([localBranches count] == 1) && [headRef isEqualTo:[localBranches objectAtIndex:0]]))
-        [rebaseMenu addItem:[NSMenuItem separatorItem]];
+        
+        if ([remoteBranches count] && !(([localBranches count] == 1) && [headRef isEqualTo:[localBranches objectAtIndex:0]])) {
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        }
+    }
     
     // Remotes
 	NSMenu *currentMenu = nil;
@@ -777,7 +753,7 @@
 			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
 			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
 			[item setSubmenu:currentMenu];
-			[rebaseMenu addItem:item];
+			[toolbarMenu addItem:item];
 		}
         
 		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:action keyEquivalent:@""];
@@ -786,7 +762,7 @@
 		[currentMenu addItem:item];
 	}
     
-    [item setMenu: rebaseMenu];
+    [item setMenu: toolbarMenu];
 }
 
 - (void) updateBranchMenus
@@ -816,10 +792,11 @@
 
     [self updateAllBranchesMenuWithLocal:localBranches remote:remoteBranches tag:tags other:other];
     
-    [self updatePopUpToolbarItemMenu:fetchItem remotes:remoteBranches action:@selector(fetchMenuAction:) title:@"Fetch menu"];
-    [self updatePopUpToolbarItemMenu:pushItem remotes:remoteBranches action:@selector(pushMenuAction:) title:@"Push menu"];
-    [self updatePopUpToolbarItemMenu:pullItem remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Pull menu"];
+    [self updatePopUpToolbarItemMenu:fetchItem local:nil remotes:remoteBranches action:@selector(fetchMenuAction:) title:@"Fetch menu"];
+    [self updatePopUpToolbarItemMenu:pushItem local:nil remotes:remoteBranches action:@selector(pushMenuAction:) title:@"Push menu"];
+    [self updatePopUpToolbarItemMenu:pullItem local:nil remotes:remoteBranches action:@selector(pullMenuAction:) title:@"Pull menu"];
     [self updatePopUpToolbarItemMenu:rebaseItem local:localBranches remotes:remoteBranches action:@selector(rebaseMenuAction:) title:@"Rebase menu"];
+    [self updatePopUpToolbarItemMenu:checkoutItem local:localBranches remotes:nil action:@selector(checkoutMenuAction:) title:@"Checkout menu"];
 }
 
 - (void) changeBranch:(NSMenuItem *)sender
@@ -855,6 +832,14 @@
     //         /* just in case, re-enable all toolbar buttons */
     //         [self toggleToolbarItems:tb matchingLabels:nil enabledState:YES];
     //     }
+}
+
+- (void) checkoutMenuAction:(NSMenuItem *)sender
+{
+    NSString *ref = [(PBGitRevSpecifier *)[sender representedObject] description];
+    NSArray *refComponents = [ref componentsSeparatedByString:@"/"];
+    if ([refComponents count] == 1)
+	    [self checkoutImpl:ref];
 }
 
 - (void) fetchMenuAction:(NSMenuItem *)sender

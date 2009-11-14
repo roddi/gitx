@@ -42,6 +42,7 @@
     IBOutlet KBPopUpToolbarItem *pushItem;
     IBOutlet KBPopUpToolbarItem *rebaseItem;
     IBOutlet KBPopUpToolbarItem *fetchItem;
+    IBOutlet KBPopUpToolbarItem *checkoutItem;
 }
 
 - (IBAction)addRef:(id)sender;
@@ -68,12 +69,15 @@
 - (void) selectCurrentBranch;
 - (void) updateBranchMenus;
 - (void) updateAllBranchesMenuWithLocal:(NSMutableArray *)localBranches remote:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags other:(NSMutableArray *)other;
-- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle;
+- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle;
 
 - (void) pullMenuAction:(NSMenuItem *)sender;
 - (void) pushMenuAction:(NSMenuItem *)sender;
 - (void) rebaseMenuAction:(NSMenuItem *)sender;
+- (void) fetchMenuAction:(NSMenuItem *)sender;
+- (void) checkoutMenuAction:(NSMenuItem *)sender;
 
+- (BOOL) checkoutImpl:(NSString *)refName;
 - (BOOL) pullImpl:(NSString *)refName;
 - (BOOL) pushImpl:(NSString *)refName;
 - (BOOL) rebaseImpl:(NSString *)refName;

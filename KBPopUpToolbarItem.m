@@ -9,9 +9,18 @@
 #import "KBPopUpToolbarItem.h"
 
 @interface KBDelayedPopUpButtonCell : NSButtonCell
+{
+    NSTimeInterval delay;
+}
+- (void)setDelay:(NSTimeInterval)newDelay;
 @end
 
 @implementation KBDelayedPopUpButtonCell
+
+- (void)setDelay:(NSTimeInterval)newDelay
+{
+    delay = newDelay;
+}
 
 - (NSPoint)menuPositionForFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
@@ -57,7 +66,7 @@
 		
 		// Set up timer for pop-up menu if we have one
 		if ([self menu])
-			endDate = [NSDate dateWithTimeIntervalSinceNow:0.6];
+			endDate = [NSDate dateWithTimeIntervalSinceNow:delay];
 		else
 			endDate = [NSDate distantFuture];
 		
@@ -115,6 +124,7 @@
 
 @end
 
+
 @interface KBDelayedPopUpButton : NSButton
 @end
 
@@ -130,11 +140,11 @@
 			if (title == nil) title = @"";			
 			[self setCell:[[[KBDelayedPopUpButtonCell alloc] initTextCell:title] autorelease]];
 			[[self cell] setControlSize:NSRegularControlSize];
+            [[self cell] setDelay:0.6];
 		}
 	}
 	return self;
 }
-
 @end
 
 
@@ -184,6 +194,11 @@
 - (NSMenu *)menu
 {
 	return [[self popupCell] menu];
+}
+
+- (void)setPopUpDelay:(NSTimeInterval)newDelay
+{
+    [[self popupCell] setDelay:newDelay];
 }
 
 - (void)setAction:(SEL)aSelector
