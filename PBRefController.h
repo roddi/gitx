@@ -83,6 +83,7 @@
 - (BOOL) pushImpl:(NSString *)refName;
 - (BOOL) rebaseImpl:(NSString *)refName;
 - (BOOL) fetchImpl:(NSString *)refName;
+- (BOOL) cherryPickImpl:(PBGitCommit *)commit;
 - (BOOL) addRemoteImplWithName:(NSString *)remoteName forURL:(NSString *)remoteURL;
 
 - (void) showMessageSheet:(NSString *)title message:(NSString *)msg;

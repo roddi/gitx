@@ -231,6 +231,21 @@
     return [self fetchRef:refName fromRemote:remote];
 }
 
+- (BOOL) cherryPickImpl:(PBGitCommit *)commit
+{
+	int ret = 1;
+	[historyController.repository outputInWorkdirForArguments:[NSArray arrayWithObjects:@"cherry-pick", [commit realSha], nil] retValue: &ret];
+	if (ret) {
+		NSString *info = [NSString stringWithFormat:@"There was an error applying the commit to the branch. Perhaps your working directory is not clean?"];
+		[[historyController.repository windowController] showMessageSheet:@"Cherry pick commit failed" infoText:info];
+		return NO;
+	}
+	[historyController.repository reloadRefs];
+	[historyController.repository readCurrentBranch];
+	[commitController rearrangeObjects];
+    return YES;
+}
+
 - (void) tagInfo:(PBRefMenuItem *)sender
 {
     NSString *message = [NSString stringWithFormat:@"Info for tag: %@", [[sender ref] shortName]];
@@ -272,6 +287,12 @@
 {
     cachedCommit = [sender commit];
     [self addRef:sender];
+}
+
+- (void) cherryPick:(PBRefMenuItem *)sender
+{
+    PBGitCommit *commit = [sender commit];
+    [self cherryPickImpl:commit];
 }
 
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit

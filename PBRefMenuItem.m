@@ -88,6 +88,11 @@
     NSMenuItem *createBranchHereItem = [[PBRefMenuItem alloc] initWithTitle:@"Create Branch here" action:@selector(createBranchHere:) keyEquivalent:@""];
     [items addObject:createBranchHereItem];
     
+    NSMenuItem *cherryPickItem = [[PBRefMenuItem alloc] initWithTitle:@"Cherry Pick Commit" action:@selector(cherryPick:) keyEquivalent:@""];
+    if ([commit isOnHeadBranch])
+        [cherryPickItem setEnabled:NO];
+    [items addObject:cherryPickItem];
+    
 	for (PBRefMenuItem *item in items)
 	{
 		[item setTarget: target];
