@@ -29,7 +29,7 @@
 		type = @"branch";
     
     NSString *targetRef = [ref shortName];
-	NSString *remote = [[historyController.repository remoteForRefName:targetRef]];
+	NSString *remote = [commit.repository remoteForRefName:targetRef];
 	BOOL hasRemote = (remote ? YES : NO); 
     
 	if ([type isEqualToString:@"branch"]) {

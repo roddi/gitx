@@ -193,7 +193,7 @@
 
 - (BOOL) pushImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository remoteForRefName:refName]];
+	NSString *remote = [historyController.repository remoteForRefName:refName];
     if (!remote) {
         [self showMessageSheet:@"Push to Remote" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -203,7 +203,7 @@
 
 - (BOOL) pullImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository remoteForRefName:refName]];
+	NSString *remote = [historyController.repository remoteForRefName:refName];
     if (!remote) {
         [self showMessageSheet:@"Pull from Remote" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -213,7 +213,7 @@
 
 - (BOOL) rebaseImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository remoteForRefName:refName]];
+	NSString *remote = [historyController.repository remoteForRefName:refName];
     if (!remote) {
         [self showMessageSheet:@"Pull from Remote and Rebase" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -223,7 +223,7 @@
 
 - (BOOL) fetchImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository remoteForRefName:refName]];
+	NSString *remote = [historyController.repository remoteForRefName:refName];
     if (!remote) {
         [self showMessageSheet:@"Fetch from Remote" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -407,7 +407,7 @@
 #pragma mark Buttons
 -(void)rebaseButton:(id)sender
 {
-	NSString *refName = [[[[historyController repository] currentBranch] simpleRef] refForSpec];
+	NSString *refName = [[[historyController repository] currentBranch] refName];
     if (refName) {
         [self rebaseImpl:refName];
     } else {        
@@ -418,7 +418,7 @@
 
 -(void)pushButton:(id)sender
 {
-	NSString *refName = [[[[historyController repository] currentBranch] simpleRef] refForSpec];
+	NSString *refName = [[[historyController repository] currentBranch] refName];
     if (refName) {
         [self pushImpl:refName];
     } else {
@@ -429,7 +429,7 @@
 
 - (void) pullButton:(id)sender 
 {
-    NSString * refName = [[[[historyController repository] currentBranch] simpleRef] refForSpec];
+    NSString * refName = [[[historyController repository] currentBranch] refName];
     if (refName) {
         [self pullImpl:refName];
     } else {
@@ -441,7 +441,7 @@
 
 -(void)fetchButton:(id)sender
 {
-	NSString *refName = [[[[historyController repository] currentBranch] simpleRef] refForSpec];
+	NSString *refName = [[[historyController repository] currentBranch] refName];
     if (refName) {
         [self fetchImpl:refName];
     } else {
@@ -722,9 +722,9 @@
     
     if (title) {
         if ([title isEqualToString:@"Push"]) {
-        	title = [NSString stringWithFormat:@"%@ from %@ to:", title, [[headRef simpleRef] refForSpec]];
+        	title = [NSString stringWithFormat:@"%@ from %@ to:", title, [headRef refName]];
         } else {
-            title = [NSString stringWithFormat:@"%@ to %@ from:", title, [[headRef simpleRef] refForSpec]];
+            title = [NSString stringWithFormat:@"%@ to %@ from:", title, [headRef refName]];
         }
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
         [toolbarMenu addItem:item];

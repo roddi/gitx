@@ -59,6 +59,11 @@
 	return [parameters objectAtIndex:0];
 }
 
+- (NSString *) refName
+{
+    return [[[self simpleRef] componentsSeparatedByString:@"/"] lastObject];
+}
+
 - (NSString*) description
 {
 	if (description)

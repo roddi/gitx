@@ -20,6 +20,7 @@
 
 - (BOOL) isSimpleRef;
 - (NSString*) simpleRef;
+- (NSString *) refName;
 - (BOOL) hasPathLimiter;
 - (BOOL) hasLeftRight;
 

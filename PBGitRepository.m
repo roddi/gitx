@@ -176,7 +176,7 @@ static NSString * repositoryBasePath = nil;
 		displayName = [NSString stringWithFormat:@"%@ (detached HEAD)", dirName];
 	} else {
         NSString *headRef = [[self headRef] description];
-        NSString *remote = [self.config valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", headRef]];
+        NSString *remote = [self remoteForRefName:[[self headRef] refName]];
         if (remote) {
             displayName = [NSString stringWithFormat:@"%@ (branch: %@ — remote: %@)", dirName, headRef, remote];
         } else {

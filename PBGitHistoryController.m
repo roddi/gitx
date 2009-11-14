@@ -126,8 +126,7 @@
     BOOL valid = YES;
     
     if ([candidates containsObject:[menuItem title]]) {
-        NSString *refName = [[[repository headRef] simpleRef] refForSpec];
-        NSString *remote = [[repository config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+        NSString *remote = [repository remoteForRefName:[[repository headRef] refName]];
         if (!remote) {
             valid = NO;
         }
