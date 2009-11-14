@@ -70,7 +70,7 @@
 - (void) selectCurrentBranch;
 - (void) updateBranchMenus;
 - (void) updateAllBranchesMenuWithLocal:(NSMutableArray *)localBranches remote:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags other:(NSMutableArray *)other;
-- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches action:(SEL)action title:(NSString *)menuTitle;
+- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags action:(SEL)action title:(NSString *)title;
 
 - (void) pullMenuAction:(NSMenuItem *)sender;
 - (void) pushMenuAction:(NSMenuItem *)sender;
