@@ -17,6 +17,11 @@
 
 @implementation KBDelayedPopUpButtonCell
 
+- awakeFromNib
+{
+    delay = 0.25;
+}
+
 - (void)setDelay:(NSTimeInterval)newDelay
 {
     delay = newDelay;
@@ -140,7 +145,7 @@
 			if (title == nil) title = @"";			
 			[self setCell:[[[KBDelayedPopUpButtonCell alloc] initTextCell:title] autorelease]];
 			[[self cell] setControlSize:NSRegularControlSize];
-            [[self cell] setDelay:0.6];
+            [[self cell] setDelay:0.25];
 		}
 	}
 	return self;
