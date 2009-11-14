@@ -193,7 +193,7 @@
 
 - (BOOL) pushImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+	NSString *remote = [[historyController.repository remoteForRefName:refName]];
     if (!remote) {
         [self showMessageSheet:@"Push to Remote" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -203,7 +203,7 @@
 
 - (BOOL) pullImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+	NSString *remote = [[historyController.repository remoteForRefName:refName]];
     if (!remote) {
         [self showMessageSheet:@"Pull from Remote" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -213,7 +213,7 @@
 
 - (BOOL) rebaseImpl:(NSString *)refName
 {
-	NSString *remote = [[[historyController repository] config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+	NSString *remote = [[historyController.repository remoteForRefName:refName]];
     if (!remote) {
         [self showMessageSheet:@"Pull from Remote and Rebase" message:PBMissingRemoteErrorMessage];
         return NO;
@@ -223,7 +223,7 @@
 
 - (BOOL) fetchImpl:(NSString *)refName
 {
-	NSString *remote = [[historyController.repository config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+	NSString *remote = [[historyController.repository remoteForRefName:refName]];
     if (!remote) {
         [self showMessageSheet:@"Fetch from Remote" message:PBMissingRemoteErrorMessage];
         return NO;

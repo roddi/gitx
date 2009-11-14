@@ -339,6 +339,14 @@ static NSString * repositoryBasePath = nil;
 		self.currentBranch = [self addBranch: [self headRef]];
 }
 
+- (NSString *) remoteForRefName:(NSString *)refName
+{
+    if (!refName || [refName isEqualToString:@""])
+        return nil;
+	return [[self config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+}
+    
+
 - (NSString *) workingDirectory
 {
     NSString * dotGitSuffix = @"/.git";

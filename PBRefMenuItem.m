@@ -27,10 +27,10 @@
 		type = @"remote branch";
 	else if ([type isEqualToString:@"head"])
 		type = @"branch";
-
-	NSString *remote = [[[commit repository] config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", [ref shortName]]];
-	BOOL hasRemote = (remote ? YES : NO);    
-    NSString * targetRef = [ref shortName];
+    
+    NSString *targetRef = [ref shortName];
+	NSString *remote = [[historyController.repository remoteForRefName:targetRef]];
+	BOOL hasRemote = (remote ? YES : NO); 
     
 	if ([type isEqualToString:@"branch"]) {
         if (hasRemote) {        
