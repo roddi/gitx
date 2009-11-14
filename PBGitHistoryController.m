@@ -99,7 +99,7 @@
 }
 
 #pragma mark NSToolbarItemValidation Methods
-
+/*
 - (BOOL) validateToolbarItem:(NSToolbarItem *)theItem {
     
     NSString * curBranchDesc = [[repository currentBranch] description];
@@ -117,6 +117,7 @@
     
     return res;
 }
+*/
 
 #pragma mark PBGitHistoryController
 
