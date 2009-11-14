@@ -35,6 +35,8 @@
 - (void)removeRef:(id)ref;
 
 - (NSString *)realSha;
+- (BOOL) isOnSameBranchAs:(PBGitCommit *)other;
+- (BOOL) isOnHeadBranch;
 
 @property (readonly) git_oid *sha;
 @property (copy) NSString* subject;

@@ -145,6 +145,29 @@
 	return str;
 }
 
+- (BOOL) isOnSameBranchAs:(PBGitCommit *)other
+{
+    if (!other)
+        return NO;
+    
+    NSString *mySHA = [self realSha];
+    NSString *otherSHA = [other	realSha];
+    
+    if ([otherSHA isEqualToString:mySHA])
+        return YES;
+    
+	NSString *mergeSHA = [repository outputForArguments:[NSArray arrayWithObjects:@"merge-base",  mySHA, otherSHA, nil]];
+    if ([mergeSHA isEqualToString:mySHA] || [mergeSHA isEqualToString:otherSHA])
+        return YES;
+    
+    return NO;
+}
+
+- (BOOL) isOnHeadBranch
+{
+    return [self isOnSameBranchAs:[repository headCommit]];
+}
+
 // FIXME: Remove this method once it's unused.
 - (NSString*) details
 {
