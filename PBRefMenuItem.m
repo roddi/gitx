@@ -82,6 +82,12 @@
     NSMenuItem *copyPatchItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy Patch" action:@selector(copyPatch:) keyEquivalent:@""];
     [items addObject:copyPatchItem];
     
+    NSMenuItem *addTagHereItem = [[PBRefMenuItem alloc] initWithTitle:@"Add Tag here" action:@selector(addTagHere:) keyEquivalent:@""];
+    [items addObject:addTagHereItem];
+    
+    NSMenuItem *createBranchHereItem = [[PBRefMenuItem alloc] initWithTitle:@"Create Branch here" action:@selector(createBranchHere:) keyEquivalent:@""];
+    [items addObject:createBranchHereItem];
+    
 	for (PBRefMenuItem *item in items)
 	{
 		[item setTarget: target];

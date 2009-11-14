@@ -262,6 +262,18 @@
     [pasteboard setString:[commit patch] forType:NSStringPboardType];
 }
 
+- (void) addTagHere:(PBRefMenuItem *)sender
+{
+    cachedCommit = [sender commit];
+    [self newTagButton:sender];
+}
+
+- (void) createBranchHere:(PBRefMenuItem *)sender
+{
+    cachedCommit = [sender commit];
+    [self addRef:sender];
+}
+
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit
 {
 	return [PBRefMenuItem defaultMenuItemsForRef:ref commit:commit target:self];
@@ -469,7 +481,12 @@
     [newTagErrorMessage setStringValue:@""];
 	[newTagName setStringValue:@""];
     
-	if ([[commitController selectedObjects] count] != 0) {
+    if (cachedCommit) {
+        [newTagCommit setStringValue:[cachedCommit subject]];
+        [newTagSHA	setStringValue:[cachedCommit realSha]];
+        [newTagSHALabel setHidden:NO];
+    }
+	else if ([[commitController selectedObjects] count] != 0) {
 		PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
         [newTagCommit setStringValue:[commit subject]];
         [newTagSHA	setStringValue:[commit realSha]];
@@ -509,10 +526,14 @@
 {
 	NSString *branchName = [@"refs/heads/" stringByAppendingString:[newBranchName stringValue]];
 	
-	if ([[commitController selectedObjects] count] == 0)
+	PBGitCommit *commit = nil;
+    if (cachedCommit) {
+        commit = cachedCommit;
+	} else if ([[commitController selectedObjects] count]) {
+        commit = [[commitController selectedObjects] objectAtIndex:0];
+    } else {
 		return;
-
-	PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
+    }
 
 	int retValue = 1;
 	[historyController.repository outputForArguments:[NSArray arrayWithObjects:@"check-ref-format", branchName, nil] retValue:&retValue];
@@ -539,6 +560,7 @@
 	[NSApp endSheet:newBranchSheet];
 	[newBranchName setStringValue:@""];
 	[newBranchSheet orderOut:self];
+    cachedCommit = nil;
 }
 
 - (void) addRemoteSheet:(id)sender
@@ -593,8 +615,11 @@
 	}
 
     PBGitCommit *commit = nil;
-	if ([[commitController selectedObjects] count] != 0)
+    if  (cachedCommit) {
+        commit = cachedCommit;
+    } else if ([[commitController selectedObjects] count] != 0) {
 		commit = [[commitController selectedObjects] objectAtIndex:0];
+    }
     
 	NSString *refName = [@"refs/tags/" stringByAppendingString:tagName];
 	int retValue = 1;
@@ -607,13 +632,13 @@
 	NSString *message = [newTagMessage string];
     NSMutableArray *arguments = [NSMutableArray arrayWithObject:@"tag"];
     if (![message isEqualToString:@""]) {
+        [arguments addObject:@"-a"];
         [arguments addObject:[@"-m" stringByAppendingString:message]];
     }
     [arguments addObject:tagName];
     if (commit) {
         [arguments addObject:[commit realSha]];
     }
-    NSLog(@"arguments = %@", arguments);
 	retValue = 1;
 	[historyController.repository outputForArguments:arguments retValue:&retValue];
 	if (retValue)
@@ -633,6 +658,7 @@
     [newTagErrorMessage setStringValue:@""];
 	[newTagName setStringValue:@""];
 	[newTagSheet orderOut:self];
+    cachedCommit = nil;
 }
 
 # pragma mark Branch menus

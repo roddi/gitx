@@ -36,6 +36,7 @@
 	IBOutlet NSTextField *newTagCommit;
 	IBOutlet NSTextField *newTagSHA;
 	IBOutlet NSTextField *newTagSHALabel;
+    PBGitCommit *cachedCommit;
 
 	IBOutlet NSPopUpButton *branchPopUp;
     IBOutlet KBPopUpToolbarItem *pullItem;
