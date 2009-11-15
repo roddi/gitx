@@ -44,23 +44,25 @@
         [array addObject:[self addRemoteMethod:hasRemote title:[NSString stringWithFormat:@"Push %@ to remote", targetRef] action:@selector(pushRef:)]];
 		[array addObject:[self addRemoteMethod:hasRemote title:[NSString stringWithFormat:@"Pull down latest"] action:@selector(pullRef:)]];
 		[array addObject:[self addRemoteMethod:hasRemote title:[NSString stringWithFormat:@"Rebase local changes with latest"] action:@selector(rebaseRef:)]];
-		
-        PBRefMenuItem *item = [[PBRefMenuItem alloc] initWithTitle:[@"Checkout " stringByAppendingString:targetRef]
-                                                            action:@selector(checkoutRef:)
-                                                     keyEquivalent: @""];
-        if ([targetRef isEqualToString:[[[commit repository] headRef] description]])
-            [item setEnabled:NO];
-        
-		[array addObject:item];
     }
+    
+    if ([type isEqualToString:@"tag"])
+		[array addObject:[[PBRefMenuItem alloc] initWithTitle:@"View tag info"
+													   action:@selector(tagInfo:)
+												keyEquivalent: @""]];
 
 	[array addObject:[[PBRefMenuItem alloc] initWithTitle:[@"Delete " stringByAppendingString:targetRef]
 												   action:@selector(removeRef:)
 											keyEquivalent: @""]];
-    if ([type isEqualToString:@"tag"])
-		[array addObject:[[PBRefMenuItem alloc] initWithTitle:@"View tag info"
-													   action:@selector(tagInfo:)
-												keyEquivalent: @""]];    
+    
+    
+    PBRefMenuItem *item = [[PBRefMenuItem alloc] initWithTitle:[@"Checkout " stringByAppendingString:targetRef]
+                                                        action:@selector(checkoutRef:)
+                                                 keyEquivalent: @""];
+    if ([targetRef isEqualToString:[[[commit repository] headRef] description]])
+        [item setEnabled:NO];
+    
+    [array addObject:item];
 
 	for (PBRefMenuItem *item in array)
 	{
@@ -75,28 +77,32 @@
 + (NSArray *) defaultMenuItemsForCommit:(PBGitCommit *)commit target:(id)target
 {
     NSMutableArray *items = [NSMutableArray array];
+    NSMenuItem *menuItem = nil;
     
-    NSMenuItem *copySHAItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy SHA" action:@selector(copySHA:) keyEquivalent:@""];
-    [items addObject:copySHAItem];
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy SHA" action:@selector(copySHA:) keyEquivalent:@""];
+    [items addObject:menuItem];
     
-    NSMenuItem *copyPatchItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy Patch" action:@selector(copyPatch:) keyEquivalent:@""];
-    [items addObject:copyPatchItem];
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Copy Patch" action:@selector(copyPatch:) keyEquivalent:@""];
+    [items addObject:menuItem];
     
-    NSMenuItem *addTagHereItem = [[PBRefMenuItem alloc] initWithTitle:@"Add Tag here" action:@selector(addTagHere:) keyEquivalent:@""];
-    [items addObject:addTagHereItem];
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Add Tag here" action:@selector(addTagHere:) keyEquivalent:@""];
+    [items addObject:menuItem];
     
-    NSMenuItem *createBranchHereItem = [[PBRefMenuItem alloc] initWithTitle:@"Create Branch here" action:@selector(createBranchHere:) keyEquivalent:@""];
-    [items addObject:createBranchHereItem];
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Create Branch here" action:@selector(createBranchHere:) keyEquivalent:@""];
+    [items addObject:menuItem];
     
-    NSMenuItem *cherryPickItem = [[PBRefMenuItem alloc] initWithTitle:@"Cherry Pick Commit" action:@selector(cherryPick:) keyEquivalent:@""];
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Checkout Commit" action:@selector(checkoutCommit:) keyEquivalent:@""];
+    [items addObject:menuItem];
+    
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:@"Cherry Pick Commit" action:@selector(cherryPick:) keyEquivalent:@""];
     if ([commit isOnHeadBranch])
-        [cherryPickItem setEnabled:NO];
-    [items addObject:cherryPickItem];
+        [menuItem setEnabled:NO];
+    [items addObject:menuItem];
     
-	for (PBRefMenuItem *item in items)
+	for (PBRefMenuItem *menuItem in items)
 	{
-		[item setTarget: target];
-		[item setCommit:commit];
+		[menuItem setTarget: target];
+		[menuItem setCommit:commit];
 	}
     
 	return items;

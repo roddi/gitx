@@ -65,6 +65,11 @@
     [self checkoutImpl:[[sender ref] shortName]];
 }
 
+- (void) checkoutCommit:(PBRefMenuItem *)sender
+{
+    [self checkoutImpl:[[sender commit] realSha]];
+}
+
 - (void) pushRef:(PBRefMenuItem *)sender
 {
 	[self pushImpl:[[sender ref] shortName]];
@@ -181,8 +186,8 @@
 	int ret = 1;
 	[historyController.repository outputInWorkdirForArguments:[NSArray arrayWithObjects:@"checkout", refName, nil] retValue: &ret];
 	if (ret) {
-		NSString *info = [NSString stringWithFormat:@"There was an error checking out the branch. Perhaps your working directory is not clean?"];
-		[[historyController.repository windowController] showMessageSheet:@"Checking out branch failed" infoText:info];
+		NSString *info = [NSString stringWithFormat:@"There was an error checking out the branch or commit. Perhaps your working directory is not clean?"];
+		[[historyController.repository windowController] showMessageSheet:@"Checking out failed" infoText:info];
 		return NO;
 	}
 	[historyController.repository reloadRefs];
