@@ -168,6 +168,11 @@
     return [self isOnSameBranchAs:[repository headCommit]];
 }
 
+- (BOOL) isOnActiveBranch
+{
+    return [self isOnSameBranchAs:[repository commitForRev:[repository activeBranch]]];
+}
+
 // FIXME: Remove this method once it's unused.
 - (NSString*) details
 {

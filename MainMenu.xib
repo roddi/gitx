@@ -12,8 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="984"/>
-			<integer value="963"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -974,7 +972,7 @@
 				<string key="NSWindowContentMaxSize">{9000, 115}</string>
 				<string key="NSWindowContentMinSize">{401, 115}</string>
 				<object class="NSView" key="NSWindowView" id="541343394">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1086,7 +1084,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{401, 115}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{401, 137}</string>
@@ -3242,32 +3239,27 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addRef:</string>
-							<string>addRemoteButton:</string>
-							<string>addRemoteSheet:</string>
 							<string>changeBranch:</string>
 							<string>closeAddRemoteSheet:</string>
-							<string>closeNewTagSheet:</string>
-							<string>closeSheet:</string>
-							<string>fetchButton:</string>
-							<string>newTagButton:</string>
-							<string>newTagSheet:</string>
-							<string>pullButton:</string>
-							<string>pullMenuAction:</string>
-							<string>pushButton:</string>
-							<string>pushMenuAction:</string>
-							<string>rebaseButton:</string>
-							<string>rebaseMenuAction:</string>
-							<string>saveSheet:</string>
+							<string>closeCreateBranchSheet:</string>
+							<string>closeCreateTagSheet:</string>
+							<string>fetchCurrentRemote:</string>
+							<string>pullCurrentRemote:</string>
+							<string>pullFromRemote:</string>
+							<string>pushCurrentRemote:</string>
+							<string>pushToRemote:</string>
+							<string>rebaseCurrentBranch:</string>
+							<string>rebaseOnUpstreamBranch:</string>
+							<string>saveNewBranch:</string>
+							<string>saveNewRemote:</string>
+							<string>saveNewTag:</string>
+							<string>showAddRemoteSheet:</string>
+							<string>showCreateBranchSheet:</string>
+							<string>showCreateTagSheet:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
 							<string>NSMenuItem</string>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3278,6 +3270,11 @@
 							<string>NSMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 						</object>
 					</object>
@@ -4294,29 +4291,6 @@
 						</object>
 					</object>
 					<reference key="sourceIdentifier" ref="886518508"/>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">QCView</string>
-					<string key="superclassName">NSView</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>play:</string>
-							<string>start:</string>
-							<string>stop:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzComposer.framework/Headers/QCView.h</string>
-					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SUUpdater</string>

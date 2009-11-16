@@ -23,10 +23,21 @@ NSString * const PBGitXErrorDomain      = @"PBGitXErrorDomain";
 NSString * const PBCLIProxyErrorDomain  = @"PBCLIProxyErrorDomain";
 
 NSString * const PBInvalidBranchErrorMessage  = @"Please select a local branch from the branch popup menu, which has a corresponding remote tracking branch set up.\n\n"
-                                                @"You can also use the context menu to choose a branch by right clicking on its label in the history view.";
+                                                @"You can also use a contextual menu to choose a branch by right clicking on its label in the history view.";
 
 NSString * const PBMissingRemoteErrorMessage  = @"This branch does not appear to have a remote tracking branch associated in its config file section.";
 
 const NSInteger PBNotAGitRepositoryErrorCode        = 1;
 const NSInteger PBFileReadingUnsupportedErrorCode   = 2;
 const NSInteger PBGitBinaryNotFoundErrorCode        = 3;
+const NSInteger PBGitInvalidBranchErrorCode         = 4;
+const NSInteger PBGitFetchErrorCode                 = 5;
+const NSInteger PBGitPullErrorCode                  = 6;
+const NSInteger PBGitPushErrorCode                  = 7;
+const NSInteger PBGitCheckoutErrorCode              = 8;
+const NSInteger PBGitCherryPickErrorCode            = 9;
+const NSInteger PBGitRebaseErrorCode                = 10;
+const NSInteger PBGitCreateBranchErrorCode          = 11;
+const NSInteger PBGitAddTagErrorCode                = 12;
+const NSInteger PBGitAddRemoteErrorCode             = 13;
+

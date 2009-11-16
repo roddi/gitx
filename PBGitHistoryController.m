@@ -125,7 +125,7 @@
     BOOL valid = YES;
     
     if ([candidates containsObject:[menuItem title]]) {
-        NSString *remote = [repository remoteForRefName:[[repository headRef] refName]];
+        NSString *remote = [repository remoteForRefName:[[repository activeBranch] refName] presentError:NO];
         if (!remote) {
             valid = NO;
         }
@@ -450,37 +450,37 @@
 #pragma mark Repository Menu Methods
 - (IBAction) fetchDefaultRemote:(id)sender
 {
-    [refController fetchButton:sender];
+    [refController fetchCurrentRemote:sender];
 }
 
 - (IBAction) pullDefaultRemote:(id)sender
 {
-    [refController pullButton:sender];
+    [refController pullCurrentRemote:sender];
 }
 
 - (IBAction) rebaseDefaultRemote:(id)sender
 {
-    [refController rebaseButton:sender];
+    [refController rebaseCurrentBranch:sender];
 }
 
 - (IBAction) pushDefaultRemote:(id)sender
 {
-    [refController pushButton:sender];
+    [refController pushCurrentRemote:sender];
 }
 
 - (IBAction) createBranch:(id)sender
 {
-    [refController addRef:sender];
+    [refController showCreateBranchSheet:sender];
 }
 
 - (IBAction) createTag:(id)sender
 {
-    [refController newTagButton:sender];
+    [refController showCreateTagSheet:sender];
 }
 
 - (IBAction) addRemote:(id)sender
 {
-    [refController addRemoteButton:sender];
+    [refController showAddRemoteSheet:sender];
 }
 
 @end

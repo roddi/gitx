@@ -21,10 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="459"/>
-			<integer value="4"/>
-			<integer value="237"/>
-			<integer value="427"/>
+			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1712,7 +1709,7 @@
 				<string key="NSWindowContentMaxSize">{1000, 102}</string>
 				<string key="NSWindowContentMinSize">{346, 102}</string>
 				<object class="NSView" key="NSWindowView" id="562356688">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1816,7 +1813,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{346, 102}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{346, 124}</string>
@@ -1833,7 +1829,7 @@
 				<string key="NSWindowContentMaxSize">{1000, 130}</string>
 				<string key="NSWindowContentMinSize">{346, 102}</string>
 				<object class="NSView" key="NSWindowView" id="640239639">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1963,7 +1959,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{474, 130}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1578}}</string>
 				<string key="NSMinSize">{346, 124}</string>
@@ -1980,7 +1975,7 @@
 				<string key="NSWindowContentMaxSize">{1000, 700}</string>
 				<string key="NSWindowContentMinSize">{400, 300}</string>
 				<object class="NSView" key="NSWindowView" id="1050310277">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2317,7 +2312,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{424, 297}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1578}}</string>
 				<string key="NSMinSize">{400, 322}</string>
@@ -2708,22 +2702,6 @@
 					<int key="connectionID">250</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">closeSheet:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="78666935"/>
-					</object>
-					<int key="connectionID">252</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">saveSheet:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="150049899"/>
-					</object>
-					<int key="connectionID">253</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">contextMenuDelegate</string>
 						<reference key="source" ref="977219207"/>
@@ -2815,38 +2793,6 @@
 						<reference key="destination" ref="535247570"/>
 					</object>
 					<int key="connectionID">386</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addRef:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="773908116"/>
-					</object>
-					<int key="connectionID">387</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">rebaseButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="166309462"/>
-					</object>
-					<int key="connectionID">388</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">pullButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="665398151"/>
-					</object>
-					<int key="connectionID">389</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">pushButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="1070051133"/>
-					</object>
-					<int key="connectionID">390</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2994,38 +2940,6 @@
 					<int key="connectionID">456</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addRemoteSheet:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="528074022"/>
-					</object>
-					<int key="connectionID">457</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newTagSheet</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="862557126"/>
-					</object>
-					<int key="connectionID">474</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">closeNewTagSheet:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="813634481"/>
-					</object>
-					<int key="connectionID">476</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">newTagSheet:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="452086381"/>
-					</object>
-					<int key="connectionID">477</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">newTagName</string>
 						<reference key="source" ref="892732705"/>
@@ -3040,22 +2954,6 @@
 						<reference key="destination" ref="491318570"/>
 					</object>
 					<int key="connectionID">484</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addRemoteButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="165790808"/>
-					</object>
-					<int key="connectionID">485</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">newTagButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="11575938"/>
-					</object>
-					<int key="connectionID">486</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3138,20 +3036,116 @@
 					<int key="connectionID">523</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">fetchButton:</string>
-						<reference key="source" ref="892732705"/>
-						<reference key="destination" ref="387743434"/>
-					</object>
-					<int key="connectionID">524</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">checkoutItem</string>
 						<reference key="source" ref="892732705"/>
 						<reference key="destination" ref="740642631"/>
 					</object>
 					<int key="connectionID">529</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">fetchCurrentRemote:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="387743434"/>
+					</object>
+					<int key="connectionID">536</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pullCurrentRemote:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="665398151"/>
+					</object>
+					<int key="connectionID">537</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pushCurrentRemote:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="1070051133"/>
+					</object>
+					<int key="connectionID">538</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">rebaseCurrentBranch:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="166309462"/>
+					</object>
+					<int key="connectionID">539</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">saveNewBranch:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="150049899"/>
+					</object>
+					<int key="connectionID">541</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closeCreateBranchSheet:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="78666935"/>
+					</object>
+					<int key="connectionID">542</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showCreateTagSheet:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="11575938"/>
+					</object>
+					<int key="connectionID">545</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showCreateBranchSheet:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="773908116"/>
+					</object>
+					<int key="connectionID">546</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">saveNewTag:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="452086381"/>
+					</object>
+					<int key="connectionID">547</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closeCreateTagSheet:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="813634481"/>
+					</object>
+					<int key="connectionID">548</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showAddRemoteSheet:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="165790808"/>
+					</object>
+					<int key="connectionID">549</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">saveNewRemote:</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="528074022"/>
+					</object>
+					<int key="connectionID">550</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">newTagSheet</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="862557126"/>
+					</object>
+					<int key="connectionID">556</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4486,7 +4480,6 @@
 					<string>526.IBPluginDependency</string>
 					<string>527.CustomClassName</string>
 					<string>527.IBPluginDependency</string>
-					<string>530.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -4610,12 +4603,16 @@
 						<object class="IBToolTipAttribute" key="NS.object.0">
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="166309462"/>
-							<string type="base64-UTF8" key="toolTip">Z2l0IHB1bGwgLS1yZWJhc2UgPHJlbW90ZSBvciBsb2NhbCBicmFuY2g+IDxsb2NhbCBicmFuY2g+CgpU
-aGlzIHdpbGwgZmV0Y2ggYWxsIGNoYW5nZXMgZnJvbSA8cmVtb3RlIG9yIGxvY2FsIGJyYW5jaD4gYW5k
-IGluc3RlYWQgb2YgYSBtZXJnZSwgcGVyZm9ybSBhIHJlYmFzZSBhZnRlciBmZXRjaGluZyBvbnRvIHRo
-ZSBhY3RpdmUgYnJhbmNoLgoKPHJlbW90ZSBicmFuY2g+IHdpbGwgYmUgdGhlIGRlZmF1bHQgcmVtb3Rl
-IGNvbmZpZ3VyZWQgZm9yIHRoZSBhY3RpdmUgYnJhbmNoLiBPciBwcmVzcyBhbmQgaG9sZCB0byBjaG9v
-c2UgYSByZW1vdGUgb3IgbG9jYWwgYnJhbmNoIGZyb20gdGhlIHBvcHVwIG1lbnUuA</string>
+							<string type="base64-UTF8" key="toolTip">Z2l0IHJlYmFzZSA8dXBzdHJlYW0gYnJhbmNoPiA8YnJhbmNoPgoKVGhpcyB3aWxsIHJlcGxhY2UgPGJy
+YW5jaD4gd2l0aCBhIG5ldyBicmFuY2ggb2YgdGhlIHNhbWUgbmFtZS4gSXQgdGhlbiBhdHRlbXB0cyB0
+byBjcmVhdGUgYSBuZXcgY29tbWl0IGZvciBlYWNoIGNvbW1pdCBmcm9tIHRoZSBvcmlnaW5hbCA8YnJh
+bmNoPiB0aGF0IGRvZXMgbm90IGV4aXN0IGluIHRoZSA8dXBzdHJlYW0+IGJyYW5jaC4KCjx1cHN0cmVh
+bSBicmFuY2g+IHdpbGwgYmUgdGhlIGRlZmF1bHQgcmVtb3RlIGNvbmZpZ3VyZWQgZm9yIHRoZSBjdXJy
+ZW50bHkgdmlld2VkIGJyYW5jaC4gUHJlc3MgYW5kIGhvbGQgdG8gY2hvb3NlIGEgcmVtb3RlIG9yIGxv
+Y2FsIGJyYW5jaCBmcm9tIHRoZSBwb3B1cCBtZW51IG9yIHJpZ2h0IGNsaWNrIG9uIGEgYnJhbmNoIGlu
+IHRoZSBoaXN0b3J5IHZpZXcuCgpXaGVuIHZpZXdpbmcgQWxsIEJyYW5jaGVzIG9yIExvY2FsIEJyYW5j
+aGVzIHRoZSBjdXJyZW50IGJyYW5jaCB3aWxsIGJlIHRoZSBicmFuY2ggdGhhdCBpcyBjaGVja2VkIG91
+dC4</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4628,10 +4625,13 @@ c2UgYSByZW1vdGUgb3IgbG9jYWwgYnJhbmNoIGZyb20gdGhlIHBvcHVwIG1lbnUuA</string>
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="665398151"/>
 							<string type="base64-UTF8" key="toolTip">Z2l0IHB1bGwgPHJlbW90ZT4gPGxvY2FsIGFjdGl2ZSBicmFuY2g+CgpUaGlzIHdpbGwgZmV0Y2ggYWxs
-IGNoYW5nZXMgZnJvbSA8cmVtb3RlPiBhbmQgdGhlbiBtZXJnZSB0aGUgcmVzdWx0IGludG8gdGhlIGFj
-dGl2ZSBicmFuY2guCgo8cmVtb3RlPiB3aWxsIGJlIHRoZSBkZWZhdWx0IHJlbW90ZSBjb25maWd1cmVk
-IGZvciB0aGUgYWN0aXZlIGJyYW5jaC4gT3IgcHJlc3MgYW5kIGhvbGQgdG8gY2hvb3NlIGEgcmVtb3Rl
-IGZyb20gdGhlIHBvcHVwIG1lbnUuA</string>
+IGNoYW5nZXMgZnJvbSA8cmVtb3RlPiBhbmQgdGhlbiBtZXJnZSB0aGUgcmVzdWx0IGludG8gdGhlIGN1
+cnJlbnRseSB2aWV3ZWQgYnJhbmNoLgoKPHJlbW90ZT4gd2lsbCBiZSB0aGUgZGVmYXVsdCByZW1vdGUg
+Y29uZmlndXJlZCBmb3IgdGhlIGN1cnJlbnRseSB2aWV3ZWQgYnJhbmNoLiBQcmVzcyBhbmQgaG9sZCB0
+byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudSBvciByaWdodCBjbGljayBvbiBhIGJy
+YW5jaCB3aXRoIGEgcmVtb3RlIGluIHRoZSBoaXN0b3J5IHZpZXcuCgpXaGVuIHZpZXdpbmcgQWxsIEJy
+YW5jaGVzIG9yIExvY2FsIEJyYW5jaGVzIHRoZSBjdXJyZW50IGJyYW5jaCB3aWxsIGJlIHRoZSBicmFu
+Y2ggdGhhdCBpcyBjaGVja2VkIG91dC4</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4645,9 +4645,12 @@ IGZyb20gdGhlIHBvcHVwIG1lbnUuA</string>
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="1070051133"/>
 							<string type="base64-UTF8" key="toolTip">Z2l0IHB1c2ggPHJlbW90ZSBicmFuY2g+CgpUaGlzIHdpbGwgcHVzaCBhbGwgbG9jYWwgY2hhbmdlcyBp
-biB0aGUgYWN0aXZlIGJyYW5jaCB0byA8cmVtb3RlIGJyYW5jaD4uCgo8cmVtb3RlIGJyYW5jaD4gaXMg
-dGhlIGRlZmF1bHQgcmVtb3RlIGNvbmZpZ3VyZWQgZm9yIHRoZSBhY3RpdmUgYnJhbmNoLiBPciBwcmVz
-cyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
+biB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2ggdG8gPHJlbW90ZSBicmFuY2g+LgoKPHJlbW90ZSBi
+cmFuY2g+IGlzIHRoZSBkZWZhdWx0IHJlbW90ZSBjb25maWd1cmVkIGZvciB0aGUgY3VycmVudGx5IHZp
+ZXdlZCBicmFuY2guIFByZXNzIGFuZCBob2xkIHRvIGNob29zZSBhIHJlbW90ZSBmcm9tIHRoZSBwb3B1
+cCBtZW51IG9yIHJpZ2h0IGNsaWNrIG9uIGEgYnJhbmNoIHdpdGggYSByZW1vdGUgaW4gdGhlIGhpc3Rv
+cnkgdmlldy4KCldoZW4gdmlld2luZyBBbGwgQnJhbmNoZXMgb3IgTG9jYWwgQnJhbmNoZXMgdGhlIGN1
+cnJlbnQgYnJhbmNoIHdpbGwgYmUgdGhlIGJyYW5jaCB0aGF0IGlzIGNoZWNrZWQgb3V0Lg</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4760,9 +4763,13 @@ cyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="387743434"/>
 							<string type="base64-UTF8" key="toolTip">Z2l0IGZldGNoIDxyZW1vdGUgYnJhbmNoPgoKVGhpcyB3aWxsIGZldGNoIGFsbCBjaGFuZ2VzIGZyb20g
-PHJlbW90ZSBicmFuY2g+IHRvIHRoZSBsb2NhbCByZXBvc2l0b3J5LgoKPHJlbW90ZSBicmFuY2g+IHdp
-bGwgYmUgdGhlIGRlZmF1bHQgcmVtb3RlIGNvbmZpZ3VyZWQgZm9yIHRoZSBhY3RpdmUgYnJhbmNoLiBP
-ciBwcmVzcyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
+PHJlbW90ZSBicmFuY2g+IHRvIHRoZSBsb2NhbCByZXBvc2l0b3J5LiBJdCB3aWxsIG5vdCBjaGFuZ2Ug
+dGhlIGNoZWNrZWQgb3V0IGJyYW5jaC4KCjxyZW1vdGUgYnJhbmNoPiB3aWxsIGJlIHRoZSBkZWZhdWx0
+IHJlbW90ZSBjb25maWd1cmVkIGZvciB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2guIFByZXNzIGFu
+ZCBob2xkIHRvIGNob29zZSBhIHJlbW90ZSBmcm9tIHRoZSBwb3B1cCBtZW51IG9yIHJpZ2h0IGNsaWNr
+IG9uIGEgcmVtb3RlIGl0ZW0gaW4gdGhlIGhpc3Rvcnkgdmlldy4KCldoZW4gdmlld2luZyBBbGwgQnJh
+bmNoZXMgb3IgTG9jYWwgQnJhbmNoZXMgdGhlIGN1cnJlbnQgYnJhbmNoIHdpbGwgYmUgdGhlIGJyYW5j
+aCB0aGF0IGlzIGNoZWNrZWQgb3V0Lg</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4779,15 +4786,16 @@ ciBwcmVzcyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudS4</str
 							<reference key="object" ref="491543627"/>
 							<string type="base64-UTF8" key="toolTip">Z2l0IGNoZWNrb3V0IDxyZW1vdGUgb3IgbG9jYWwgYnJhbmNoIG9yIHRhZz4KClRoaXMgd2lsbCBjaGVj
 a291dCBhbGwgY2hhbmdlcyBmcm9tIDxyZW1vdGUgb3IgbG9jYWwgYnJhbmNoPiBhbmQgbWFrZSBpdCB0
-aGUgYWN0aXZlIGJyYW5jaC4gCgpJZiB5b3UgY2hvb3NlIGEgcmVtb3RlIGJyYW5jaCB5b3Ugd2lsbCBn
-ZXQgdGhlIGxvY2FsIGNvcHkgb2Ygb2YgdGhlIGJyYW5jaCwgZmV0Y2ggdGhlIGJyYW5jaCB0byB1cGRh
-dGUgaXQgdG8gaXQncyByZW1vdGUuCgpQcmVzcyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUsIGJy
-YW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
+aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2guIAoKSWYgeW91IGNob29zZSBhIHJlbW90ZSBicmFuY2gg
+eW91IHdpbGwgZ2V0IHRoZSBjdXJyZW50IGxvY2FsIGNvcHkgb2Ygb2YgdGhlIGJyYW5jaCwgZmV0Y2gg
+dGhlIGJyYW5jaCB0byB1cGRhdGUgaXQgdG8gaXQncyByZW1vdGUncyBsYXRlc3QuCgpQcmVzcyBhbmQg
+aG9sZCB0byBjaG9vc2UgYSByZW1vdGUsIGJyYW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudSBv
+ciByaWdodCBjbGljayBvbiBhIGNvbW1pdCwgYnJhbmNoLCByZW1vdGUgb3IgdGFnIGl0ZW0gaW4gdGhl
+IGhpc3Rvcnkgdmlldy4</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>KBDelayedPopUpButtonCell</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4811,7 +4819,7 @@ YW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">532</int>
+			<int key="maxID">558</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4993,47 +5001,63 @@ YW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addRef:</string>
-							<string>addRemoteButton:</string>
-							<string>addRemoteSheet:</string>
 							<string>changeBranch:</string>
-							<string>checkoutMenuAction:</string>
+							<string>checkoutCommit:</string>
+							<string>checkoutFromRef:</string>
+							<string>checkoutRef:</string>
+							<string>cherryPick:</string>
 							<string>closeAddRemoteSheet:</string>
-							<string>closeNewTagSheet:</string>
-							<string>closeSheet:</string>
-							<string>fetchButton:</string>
-							<string>fetchMenuAction:</string>
-							<string>newTagButton:</string>
-							<string>newTagSheet:</string>
-							<string>pullButton:</string>
-							<string>pullMenuAction:</string>
-							<string>pushButton:</string>
-							<string>pushMenuAction:</string>
-							<string>rebaseButton:</string>
-							<string>rebaseMenuAction:</string>
-							<string>saveSheet:</string>
+							<string>closeCreateBranchSheet:</string>
+							<string>closeCreateTagSheet:</string>
+							<string>createBranchHere:</string>
+							<string>fetchCurrentRemote:</string>
+							<string>fetchFromRemote:</string>
+							<string>pullCurrentRemote:</string>
+							<string>pullFromRemote:</string>
+							<string>pullRemoteForRef:</string>
+							<string>pushCurrentRemote:</string>
+							<string>pushRemoteForRef:</string>
+							<string>pushToRemote:</string>
+							<string>rebaseCurrentBranch:</string>
+							<string>rebaseOnUpstreamBranch:</string>
+							<string>rebaseOnUpstreamRef:</string>
+							<string>saveNewBranch:</string>
+							<string>saveNewRemote:</string>
+							<string>saveNewTag:</string>
+							<string>showAddRemoteSheet:</string>
+							<string>showCreateBranchSheet:</string>
+							<string>showCreateTagSheet:</string>
+							<string>showDeleteRefSheet:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
-							<string>id</string>
-							<string>NSMenuItem</string>
-							<string>id</string>
-							<string>id</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
+							<string>PBRefMenuItem</string>
 							<string>NSMenuItem</string>
 							<string>id</string>
+							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>PBRefMenuItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -5063,6 +5087,7 @@ YW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
 							<string>pullItem</string>
 							<string>pushItem</string>
 							<string>rebaseItem</string>
+							<string>tableMenu</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -5089,11 +5114,20 @@ YW5jaCBvciB0YWcgZnJvbSB0aGUgcG9wdXAgbWVudS4</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
+							<string>NSMenu</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">PBRefController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PBRefMenuItem</string>
+					<string key="superclassName">NSMenuItem</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">PBRefMenuItem.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

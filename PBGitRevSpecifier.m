@@ -100,6 +100,16 @@
 			 (!description  || [description isEqualToString:other.description]));
 }
 
+- (BOOL) isAllBranchesRev
+{
+    return [self isEqualTo:[PBGitRevSpecifier allBranchesRevSpec]];
+}
+
+- (BOOL) isLocalBranchesRev
+{
+    return [self isEqualTo:[PBGitRevSpecifier localBranchesRevSpec]];
+}
+
 - (void) encodeWithCoder:(NSCoder *)coder
 {
 	[coder encodeObject:description forKey:@"Description"];

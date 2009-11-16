@@ -14,6 +14,7 @@
 #import "PBRefContextDelegate.h"
 
 @class KBPopUpToolbarItem;
+@class PBRefMenuItem;
 
 @interface PBRefController : NSObject <PBRefContextDelegate> {
 	IBOutlet __weak PBGitHistoryController *historyController;
@@ -44,53 +45,53 @@
     IBOutlet KBPopUpToolbarItem *rebaseItem;
     IBOutlet KBPopUpToolbarItem *fetchItem;
     IBOutlet KBPopUpToolbarItem *checkoutItem;
+    
+    IBOutlet NSMenu *tableMenu;
 }
 
-- (IBAction)addRef:(id)sender;
-- (IBAction)closeSheet:(id) sender;
-- (IBAction)saveSheet:(id) sender;
+- (IBAction) fetchCurrentRemote:(id)sender;
+- (void) fetchFromRemote:(NSMenuItem *)sender;
 
-- (IBAction)rebaseButton:(id)sender;
-- (IBAction)pushButton:(id)sender;
-- (IBAction)pullButton:(id)sender;
-- (IBAction)fetchButton:(id)sender;
+- (void) pullRemoteForRef:(PBRefMenuItem *)sender;
+- (IBAction) pullCurrentRemote:(id)sender;
+- (void) pullFromRemote:(NSMenuItem *)sender;
 
-- (IBAction)addRemoteButton:(id)sender;
-- (IBAction)addRemoteSheet:(id)sender;
-- (IBAction)closeAddRemoteSheet:(id)sender;
+- (void) pushRemoteForRef:(PBRefMenuItem *)sender;
+- (IBAction) pushCurrentRemote:(id)sender;
+- (void) pushToRemote:(NSMenuItem *)sender;
 
-- (IBAction)newTagButton:(id)sender;
-- (IBAction)newTagSheet:(id)sender;
-- (IBAction)closeNewTagSheet:(id)sender;
+- (void) checkoutRef:(PBRefMenuItem *)sender;
+- (void) checkoutCommit:(PBRefMenuItem *)sender;
+- (void) checkoutFromRef:(NSMenuItem *)sender;
 
-- (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit;
-- (NSArray *) menuItemsForCommit:(PBGitCommit *)commit;
+- (void) cherryPick:(PBRefMenuItem *)sender;
+
+- (void) rebaseOnUpstreamRef:(PBRefMenuItem *)sender;
+- (IBAction) rebaseCurrentBranch:(id)sender;
+- (void) rebaseOnUpstreamBranch:(NSMenuItem *)sender;
+
+- (IBAction) showCreateBranchSheet:(id)sender;
+- (IBAction) saveNewBranch:(id) sender;
+- (IBAction) closeCreateBranchSheet:(id) sender;
+- (void) createBranchHere:(PBRefMenuItem *)sender;
 
 - (void) changeBranch:(NSMenuItem *)sender;
 - (void) selectCurrentBranch;
-- (void) updateBranchMenus;
-- (void) updateAllBranchesMenuWithLocal:(NSMutableArray *)localBranches remote:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags other:(NSMutableArray *)other;
-- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags action:(SEL)action title:(NSString *)title;
 
-- (void) pullMenuAction:(NSMenuItem *)sender;
-- (void) pushMenuAction:(NSMenuItem *)sender;
-- (void) rebaseMenuAction:(NSMenuItem *)sender;
-- (void) fetchMenuAction:(NSMenuItem *)sender;
-- (void) checkoutMenuAction:(NSMenuItem *)sender;
+- (void) showDeleteRefSheet:(PBRefMenuItem *)sender;
 
-- (BOOL) checkoutImpl:(NSString *)refName;
-- (BOOL) pullImpl:(NSString *)refName;
-- (BOOL) pushImpl:(NSString *)refName;
-- (BOOL) rebaseImpl:(NSString *)refName;
-- (BOOL) fetchImpl:(NSString *)refName;
-- (BOOL) cherryPickImpl:(PBGitCommit *)commit;
-- (BOOL) addRemoteImplWithName:(NSString *)remoteName forURL:(NSString *)remoteURL;
+- (IBAction) showCreateTagSheet:(id)sender;
+- (IBAction) saveNewTag:(id)sender;
+- (IBAction) closeCreateTagSheet:(id)sender;
 
-- (void) showMessageSheet:(NSString *)title message:(NSString *)msg;
+- (IBAction) showAddRemoteSheet:(id)sender;
+- (IBAction) saveNewRemote:(id)sender;
+- (IBAction) closeAddRemoteSheet:(id)sender;
+
 - (void) toggleToolbarItems:(NSToolbar *)tb matchingLabels:(NSArray *)labels enabledState:(BOOL)state;
 
-@end
+- (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit;
+- (NSArray *) menuItemsForCommit:(PBGitCommit *)commit;
+- (void) updateBranchMenus;
 
-@interface NSString (PBRefSpecAdditions)
-- (NSString *) refForSpec;
 @end

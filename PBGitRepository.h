@@ -27,6 +27,18 @@
 	PBGitRevSpecifier *_headRef; // Caching
 }
 
+- (BOOL) fetchRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) pullRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) pushRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
+- (BOOL) cherryPickCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onUpstream:(PBGitRevSpecifier *)upstream presentError:(BOOL)shouldPresentError;
+- (BOOL) createBranch:(NSString *)branchRefName onSHA:(NSString *)sha presentError:(BOOL)shouldPresentError;
+- (PBGitRevSpecifier*) addBranch:(PBGitRevSpecifier*)rev;
+- (BOOL) removeBranch:(PBGitRevSpecifier *)rev;
+- (BOOL) addTag:(NSString *)tagName message:(NSString *)message forCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
+- (BOOL) addRemote:(NSString *)remoteName forURL:(NSString *)remoteURL presentError:(BOOL)shouldPresentError;
+
 - (NSFileHandle*) handleForCommand:(NSString*) cmd;
 - (NSFileHandle*) handleForArguments:(NSArray*) args;
 - (NSFileHandle *) handleInWorkDirForArguments:(NSArray *)args;
@@ -53,11 +65,13 @@
 - (PBGitRevSpecifier*) headRef;
 - (NSString *) headSHA;
 - (PBGitCommit *) headCommit;
-- (NSString *) remoteForRefName:(NSString *)refName;
+- (NSString *) realSHAForRev:(PBGitRevSpecifier *)rev;
+- (PBGitCommit *) commitForRev:(PBGitRevSpecifier *)rev;
+- (NSString *) remoteForRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
+- (BOOL) checkRefFormat:(NSString *)refName;
 
 - (void) readCurrentBranch;
-- (PBGitRevSpecifier*) addBranch: (PBGitRevSpecifier*) rev;
-- (BOOL)removeBranch:(PBGitRevSpecifier *)rev;
+- (PBGitRevSpecifier *)activeBranch;
 
 - (NSString*) parseSymbolicReference:(NSString*) ref;
 - (NSString*) parseReference:(NSString*) ref;

@@ -25,6 +25,8 @@
 - (BOOL) hasLeftRight;
 
 - (BOOL) isEqualTo: (PBGitRevSpecifier*) other;
+- (BOOL) isAllBranchesRev;
+- (BOOL) isLocalBranchesRev;
 
 + (PBGitRevSpecifier *)allBranchesRevSpec;
 + (PBGitRevSpecifier *)localBranchesRevSpec;

@@ -37,6 +37,7 @@
 - (NSString *)realSha;
 - (BOOL) isOnSameBranchAs:(PBGitCommit *)other;
 - (BOOL) isOnHeadBranch;
+- (BOOL) isOnActiveBranch;
 
 @property (readonly) git_oid *sha;
 @property (copy) NSString* subject;
