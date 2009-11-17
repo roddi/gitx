@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10B504</string>
+		<string key="IBDocument.SystemVersion">10C540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.2</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.AppKitVersion">1038.25</string>
+		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
@@ -22,10 +22,10 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="237"/>
-			<integer value="4"/>
-			<integer value="427"/>
+			<integer value="27"/>
 			<integer value="459"/>
 			<integer value="354"/>
+			<integer value="427"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -220,7 +220,11 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<object class="NSFont" key="NSSupport" id="1054667745">
+																<string key="NSName">LucidaGrande</string>
+																<double key="NSSize">12</double>
+																<int key="NSfFlags">16</int>
+															</object>
 															<reference key="NSControlView" ref="254268962"/>
 															<object class="NSColor" key="NSBackgroundColor" id="827363147">
 																<int key="NSColorSpace">6</int>
@@ -259,7 +263,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="1054667745"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -293,7 +297,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="1054667745"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -319,7 +323,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="1054667745"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -342,7 +346,7 @@
 														<bytes key="NSWhite">MC41AA</bytes>
 													</object>
 												</object>
-												<double key="NSRowHeight">16</double>
+												<double key="NSRowHeight">19</double>
 												<int key="NSTvFlags">-683671552</int>
 												<reference key="NSDelegate"/>
 												<reference key="NSDataSource"/>
@@ -405,7 +409,7 @@
 								<reference key="NSContentView" ref="546023969"/>
 								<reference key="NSHeaderClipView" ref="906093892"/>
 								<reference key="NSCornerView" ref="806470424"/>
-								<bytes key="NSScrollAmts">QSAAAEEgAABBkAAAQZAAAA</bytes>
+								<bytes key="NSScrollAmts">QSAAAEEgAABBqAAAQagAAA</bytes>
 							</object>
 							<object class="NSTabView" id="135073984">
 								<reference key="NSNextResponder" ref="202620420"/>
@@ -4289,9 +4293,9 @@
 						</object>
 					</object>
 					<string>com.apple.WebKitIBPlugin</string>
-					<string>{{497, 406}, {346, 102}}</string>
+					<string>{{453, 406}, {346, 102}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{497, 406}, {346, 102}}</string>
+					<string>{{453, 406}, {346, 102}}</string>
 					<integer value="0"/>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
@@ -4335,7 +4339,7 @@
 					<string>PBGitRevisionCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{870, 618}, {616, 285}}</string>
+					<string>{{765, 571}, {616, 285}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{132, 614}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4442,9 +4446,9 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{864, 502}, {474, 130}}</string>
+					<string>{{325, 502}, {474, 130}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{864, 502}, {474, 130}}</string>
+					<string>{{325, 502}, {474, 130}}</string>
 					<integer value="0"/>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
@@ -4475,16 +4479,16 @@ IHNwZWNpZmljLiAnQWxsIGJyYW5jaGVzJyBvciAnTG9jYWwgYnJhbmNoZXMnIHdpbGwgbm90IHdvcms<
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{496, 766}, {424, 297}}</string>
+					<string>{{496, 559}, {424, 297}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{496, 766}, {424, 297}}</string>
+					<string>{{496, 559}, {424, 297}}</string>
 					<integer value="0"/>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{1000, 700}</string>
 					<string>{400, 300}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{736, 195}, {852, 432}}</string>
+					<string>{{198, 167}, {852, 432}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
