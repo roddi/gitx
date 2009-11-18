@@ -156,7 +156,13 @@
     if ([otherSHA isEqualToString:mySHA])
         return YES;
     
-	NSString *mergeSHA = [repository outputForArguments:[NSArray arrayWithObjects:@"merge-base",  mySHA, otherSHA, nil]];
+    NSString *commitRange = [NSString stringWithFormat:@"%@..%@", mySHA, otherSHA];
+    NSString *parentsOutput = [repository outputForArguments:[NSArray arrayWithObjects:@"rev-list", @"--parents", @"-1", commitRange, nil]];
+    if ([parentsOutput isEqualToString:@""]) {
+        return NO;
+    }
+    
+	NSString *mergeSHA = [repository outputForArguments:[NSArray arrayWithObjects:@"merge-base", mySHA, otherSHA, nil]];
     if ([mergeSHA isEqualToString:mySHA] || [mergeSHA isEqualToString:otherSHA])
         return YES;
     
