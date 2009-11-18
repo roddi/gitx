@@ -97,7 +97,7 @@
     
     [items addObject:[[PBRefMenuItem alloc] initWithTitle:@"Checkout Commit" action:@selector(checkoutCommit:) keyEquivalent:@""]];
     
-    // cherry pick (only works on cheched out branch)
+    // cherry pick (only works on checked out branch)
     menuItem = [[PBRefMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Cherry pick commit to %@", headBranch]
                                              action:@selector(cherryPick:) 
                                       keyEquivalent:@""];
@@ -107,7 +107,7 @@
     
     // rebase active branch starting here
     menuItem = [[PBRefMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rebase %@ starting here", activeBranch]
-                                             action:@selector(rebaseOnUpstreamRef:)
+                                             action:@selector(rebaseOnUpstreamCommit:)
                                       keyEquivalent:@""];
     if ([commit isOnActiveBranch])
         [menuItem setEnabled:NO];

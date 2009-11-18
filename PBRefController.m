@@ -167,6 +167,16 @@
         [commitController rearrangeObjects];
 }
 
+// called by the contextual menu for commits
+- (void) rebaseOnUpstreamCommit:(PBRefMenuItem *)sender
+{
+    PBGitCommit *commit = [sender commit];
+    PBGitRevSpecifier *currentRev = [historyController.repository activeBranch];
+    
+    if ([historyController.repository rebaseBranch:currentRev onSHA:[commit realSha] presentError:YES])
+        [commitController rearrangeObjects];
+}
+
 // called by the toolbar button and the Repository menu
 -(void)rebaseCurrentBranch:(id)sender
 {

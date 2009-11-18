@@ -567,6 +567,40 @@ static NSString * repositoryBasePath = nil;
     return YES;
 }
 
+// a nil branch means the head ref
+// a nil onSHA is not allowed
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onSHA:(NSString *)upstreamSHA presentError:(BOOL)shouldPresentError
+{
+    if (!upstreamSHA)
+        return NO;
+        
+    NSString *branchRefName = nil;
+    if (branch)
+        branchRefName = [branch refName];
+    else
+        branchRefName = [[self headRef] refName];
+    
+	int ret = 1;
+    NSArray * args = [NSArray arrayWithObjects:@"rebase", upstreamSHA, branchRefName, nil]; 
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Rebase of %@ on %@ failed.", branchRefName, [upstreamSHA substringToIndex:8]];
+            NSString *info = [NSString stringWithFormat:@"There was an error rebasing the branch.\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitRebaseErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+    [self readCurrentBranch];
+    return YES;
+}
+
 - (BOOL) createBranch:(NSString *)branchRefName onSHA:(NSString *)sha presentError:(BOOL)shouldPresentError
 {
 	int ret = 1;

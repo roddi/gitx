@@ -67,6 +67,7 @@
 - (void) cherryPick:(PBRefMenuItem *)sender;
 
 - (void) rebaseOnUpstreamRef:(PBRefMenuItem *)sender;
+- (void) rebaseOnUpstreamCommit:(PBRefMenuItem *)sender;
 - (IBAction) rebaseCurrentBranch:(id)sender;
 - (void) rebaseOnUpstreamBranch:(NSMenuItem *)sender;
 

@@ -33,6 +33,7 @@
 - (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
 - (BOOL) cherryPickCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
 - (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onUpstream:(PBGitRevSpecifier *)upstream presentError:(BOOL)shouldPresentError;
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onSHA:(NSString *)upstreamSHA presentError:(BOOL)shouldPresentError;
 - (BOOL) createBranch:(NSString *)branchRefName onSHA:(NSString *)sha presentError:(BOOL)shouldPresentError;
 - (PBGitRevSpecifier*) addBranch:(PBGitRevSpecifier*)rev;
 - (BOOL) removeBranch:(PBGitRevSpecifier *)rev;
