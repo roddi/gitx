@@ -263,7 +263,6 @@
 // called by observeValueForKeyPath when the currently viewed branch changes
 - (void) selectCurrentBranch
 {
-    [self updateBranchMenus];
 	PBGitRevSpecifier *rev = historyController.repository.currentBranch;
     [branchPopUp setTitle:[rev description]];
 }
@@ -401,7 +400,6 @@
 {
     NSString *remoteName = [addRemoteName stringValue];
     NSString *remoteURL = [addRemoteURL stringValue];
-    NSLog(@"%s  remoteName = %@  remoteURL = %@", _cmd, remoteName, remoteURL);
     
     if ([remoteName isEqualToString:@""]) {
         [addRemoteErrorMessage setStringValue:@"Remote name is required"];
@@ -673,6 +671,7 @@
 	}
 
     [self updateAllBranchesMenuWithLocal:localBranches remote:remoteBranches tag:tags other:other];
+    [self selectCurrentBranch];
     
     [self updatePopUpToolbarItemMenu:fetchItem local:nil remotes:remoteBranches tag:nil action:@selector(fetchFromRemote:) title:nil];
     [self updatePopUpToolbarItemMenu:pushItem local:nil remotes:remoteBranches tag:nil action:@selector(pushToRemote:) title:@"Push"];

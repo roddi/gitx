@@ -358,7 +358,9 @@ static NSString * repositoryBasePath = nil;
 
 - (void) readCurrentBranch
 {
-    self.currentBranch = [self addBranch: [self headRef]];
+    PBGitRevSpecifier *branch = [self addBranch:[self headRef]];
+    if (![self.currentBranch isAllBranchesRev] && ![self.currentBranch isLocalBranchesRev])
+        self.currentBranch = branch;
 }
 
 - (NSString *) remoteForRefName:(NSString *)refName presentError:(BOOL)shouldPresentError
@@ -618,8 +620,6 @@ static NSString * repositoryBasePath = nil;
         }
 		return NO;
 	}
-    [self addBranch:[[PBGitRevSpecifier alloc] initWithRef:[PBGitRef refFromString:branchRefName]]];
-	//[commit addRef:[PBGitRef refFromString:branchRefName]];
     [self reloadRefs];
     return YES;
 }
