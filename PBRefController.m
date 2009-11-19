@@ -29,7 +29,7 @@
 		[self updateBranchMenus];
 	}
 	else if ([(NSString *)context isEqualToString:@"currentBranchChange"]) {
-		[self selectCurrentBranch];
+		[self updateBranchMenus];
 	}
 	else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
