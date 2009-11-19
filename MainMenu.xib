@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="29"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -722,7 +723,7 @@
 								<object class="NSMenuItem" id="876671747">
 									<reference key="NSMenu" ref="509818460"/>
 									<string key="NSTitle">Add Remote</string>
-									<string key="NSKeyEquiv">r</string>
+									<string key="NSKeyEquiv">R</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="889736156"/>
@@ -2757,13 +2758,13 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{426, 748}, {420, 20}}</string>
+					<string>{{74, 433}, {420, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{297, 739}, {329, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{664, 555}, {231, 193}}</string>
+					<string>{{312, 240}, {231, 193}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{499, 623}, {234, 113}}</string>
@@ -2834,7 +2835,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{573, 545}, {220, 203}}</string>
+					<string>{{221, 230}, {220, 203}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3035,13 +3036,11 @@
 							<string>createTag:</string>
 							<string>fetchDefaultRemote:</string>
 							<string>openFilesAction:</string>
-							<string>openInTerminal:</string>
 							<string>openSelectedFile:</string>
 							<string>pullDefaultRemote:</string>
 							<string>pushDefaultRemote:</string>
 							<string>rebaseDefaultRemote:</string>
 							<string>refresh:</string>
-							<string>revealInFinder:</string>
 							<string>setDetailedView:</string>
 							<string>setRawView:</string>
 							<string>setTreeView:</string>
@@ -3051,8 +3050,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3148,11 +3145,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>openInTerminal:</string>
+							<string>revealInFinder:</string>
 							<string>showCommitView:</string>
 							<string>showHistoryView:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -3240,42 +3241,64 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changeBranch:</string>
+							<string>checkoutCommit:</string>
+							<string>checkoutFromRef:</string>
+							<string>checkoutRef:</string>
+							<string>cherryPick:</string>
 							<string>closeAddRemoteSheet:</string>
 							<string>closeCreateBranchSheet:</string>
 							<string>closeCreateTagSheet:</string>
+							<string>createBranchHere:</string>
 							<string>fetchCurrentRemote:</string>
+							<string>fetchFromRemote:</string>
 							<string>pullCurrentRemote:</string>
 							<string>pullFromRemote:</string>
+							<string>pullRemoteForRef:</string>
 							<string>pushCurrentRemote:</string>
+							<string>pushRemoteForRef:</string>
 							<string>pushToRemote:</string>
 							<string>rebaseCurrentBranch:</string>
 							<string>rebaseOnUpstreamBranch:</string>
+							<string>rebaseOnUpstreamCommit:</string>
+							<string>rebaseOnUpstreamRef:</string>
 							<string>saveNewBranch:</string>
 							<string>saveNewRemote:</string>
 							<string>saveNewTag:</string>
 							<string>showAddRemoteSheet:</string>
 							<string>showCreateBranchSheet:</string>
 							<string>showCreateTagSheet:</string>
+							<string>showDeleteRefSheet:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
-							<string>id</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
+							<string>PBRefMenuItem</string>
 							<string>NSMenuItem</string>
 							<string>id</string>
+							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
+							<string>PBRefMenuItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -3287,9 +3310,11 @@
 							<string>addRemoteSheet</string>
 							<string>addRemoteURL</string>
 							<string>branchPopUp</string>
+							<string>checkoutItem</string>
 							<string>commitController</string>
 							<string>commitList</string>
 							<string>errorMessage</string>
+							<string>fetchItem</string>
 							<string>historyController</string>
 							<string>newBranchName</string>
 							<string>newBranchSheet</string>
@@ -3303,6 +3328,7 @@
 							<string>pullItem</string>
 							<string>pushItem</string>
 							<string>rebaseItem</string>
+							<string>tableMenu</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3311,9 +3337,11 @@
 							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>NSPopUpButton</string>
+							<string>KBPopUpToolbarItem</string>
 							<string>NSArrayController</string>
 							<string>PBCommitList</string>
 							<string>NSTextField</string>
+							<string>KBPopUpToolbarItem</string>
 							<string>PBGitHistoryController</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
@@ -3327,11 +3355,20 @@
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
+							<string>NSMenu</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">PBRefController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PBRefMenuItem</string>
+					<string key="superclassName">NSMenuItem</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">PBRefMenuItem.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -4291,6 +4328,29 @@
 						</object>
 					</object>
 					<reference key="sourceIdentifier" ref="886518508"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">QCView</string>
+					<string key="superclassName">NSView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>play:</string>
+							<string>start:</string>
+							<string>stop:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzComposer.framework/Headers/QCView.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SUUpdater</string>
