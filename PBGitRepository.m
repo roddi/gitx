@@ -359,7 +359,9 @@ static NSString * repositoryBasePath = nil;
 - (void) readCurrentBranch
 {
     PBGitRevSpecifier *branch = [self addBranch:[self headRef]];
-    if (![self.currentBranch isAllBranchesRev] && ![self.currentBranch isLocalBranchesRev])
+    if ([self.currentBranch isAllBranchesRev] || [self.currentBranch isLocalBranchesRev])
+        self.currentBranch = self.currentBranch; // cause KVO notification
+    else
         self.currentBranch = branch;
 }
 
