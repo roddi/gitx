@@ -259,17 +259,19 @@
 - (void)validate
 {
 	// First, make sure the toolbar image size fits the toolbar size mode; there must be a better place to do this!
-	NSToolbarSizeMode sizeMode = [[self toolbar] sizeMode];
-	float imgWidth = [[self image] size].width;
-	
-	if (sizeMode == NSToolbarSizeModeSmall && imgWidth != 24)
-	{
-		[[self popupCell] setImage:smallImage];
-	}
-	else if (sizeMode == NSToolbarSizeModeRegular && imgWidth == 24)
-	{
-		[[self popupCell] setImage:regularImage];
-	}
+    if (regularImage) {
+        NSToolbarSizeMode sizeMode = [[self toolbar] sizeMode];
+        float imgWidth = [[self image] size].width;
+        
+        if (sizeMode == NSToolbarSizeModeSmall && imgWidth != 24)
+        {
+            [[self popupCell] setImage:smallImage];
+        }
+        else if (sizeMode == NSToolbarSizeModeRegular && imgWidth == 24)
+        {
+            [[self popupCell] setImage:regularImage];
+        }
+    }
 	
 	if ([[self toolbar] delegate])
 	{
