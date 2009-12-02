@@ -131,4 +131,161 @@
     return item;
 }
 
+
++ (NSUInteger) addLocalBranches:(NSMutableArray *)localBranches toMenu:(NSMenu *)toolbarMenu target:(id)target action:(SEL)action
+{    
+    for (PBGitRevSpecifier *rev in localBranches) {
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
+        [item setTarget:target];
+        [item setRepresentedObject:rev];
+        [toolbarMenu addItem:item];
+    }
+    
+    return [localBranches count];
+}
+
++ (NSUInteger) addRemoteBranches:(NSMutableArray *)remoteBranches toMenu:(NSMenu *)toolbarMenu target:(id)target action:(SEL)action
+{    
+	NSMenu *currentMenu = nil;
+	for (PBGitRevSpecifier *rev in remoteBranches) {
+		NSString *ref = [rev simpleRef];
+		NSArray *components = [ref componentsSeparatedByString:@"/"];
+        
+		NSString *remoteName = [components objectAtIndex:2];
+		if (![[currentMenu title] isEqualToString:remoteName]) {
+			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
+			[item setSubmenu:currentMenu];
+			[toolbarMenu addItem:item];
+		}
+        
+		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:action keyEquivalent:@""];
+		[item setTarget:target];
+		[item setRepresentedObject:rev];
+		[currentMenu addItem:item];
+	}
+    
+    return [remoteBranches count];
+}
+
++ (NSUInteger) addTrackingRemotes:(NSMutableArray *)remoteBranches toMenu:(NSMenu *)toolbarMenu target:(id)target action:(SEL)action
+{    
+    NSString *currentRemoteName = nil;
+    for (PBGitRevSpecifier *rev in remoteBranches) {
+        NSString *ref = [rev simpleRef];
+        NSArray *components = [ref componentsSeparatedByString:@"/"];
+        
+        NSString *remoteName = [components objectAtIndex:2];
+        if (![currentRemoteName isEqualToString:remoteName]) {
+            currentRemoteName = remoteName;
+            
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:currentRemoteName action:action keyEquivalent:@""];
+            [item setTarget:target];
+            [item setRepresentedObject:[[PBGitRevSpecifier alloc] initWithRef:[PBGitRef refFromString:currentRemoteName]]];
+            [toolbarMenu addItem:item];
+        }
+    }
+    
+    return [remoteBranches count];
+}
+
++ (NSUInteger) addTags:(NSMutableArray *)tags toMenu:(NSMenu *)toolbarMenu target:(id)target action:(SEL)action
+{
+    NSMenu *tagMenu = [[NSMenu alloc] initWithTitle:@""];
+    for (PBGitRevSpecifier *rev in tags) {
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
+        [item setTarget:target];
+        [item setRepresentedObject:rev];
+        [tagMenu addItem:item];
+    }		
+    
+    NSMenuItem *tagItem = [[NSMenuItem alloc] initWithTitle:@"Tags" action:NULL keyEquivalent:@""];
+    [tagItem setSubmenu:tagMenu];
+    [toolbarMenu addItem:tagItem];
+    
+    return [tags count];
+}
+
++ (NSUInteger) addOtherItems:(NSMutableArray *)other toMenu:(NSMenu *)toolbarMenu target:(id)target action:(SEL)action
+{
+	for (PBGitRevSpecifier *rev in other)
+	{
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
+		[item setRepresentedObject:rev];
+		[item setTarget:target];
+		[toolbarMenu addItem:item];
+	}
+    
+    return [other count];
+}
+
+
++ (NSMenu *) pullDownMenuForRemotes:(NSMutableArray *)remoteBranches target:(id)target action:(SEL)action
+{
+    if (![remoteBranches count])
+        return nil;
+    
+    NSMenu *toolbarMenu = [[NSMenu alloc] initWithTitle:@""];
+    
+    [self addTrackingRemotes:remoteBranches toMenu:toolbarMenu target:target action:action];
+    [toolbarMenu addItem:[NSMenuItem separatorItem]];
+    [self addRemoteBranches:remoteBranches toMenu:toolbarMenu target:target action:action];
+    
+    return toolbarMenu;
+}
+
++ (NSMenu *) pullDownMenuForLocalBranches:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tags:(NSMutableArray *)tags target:(id)target action:(SEL)action
+{
+    NSMenu *toolbarMenu = [[NSMenu alloc] initWithTitle:@""];
+    
+    NSUInteger itemCount = [self addLocalBranches:localBranches toMenu:toolbarMenu target:target action:action];
+    
+    if ([remoteBranches count]) {
+        if (itemCount)
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        itemCount += [self addRemoteBranches:remoteBranches toMenu:toolbarMenu target:target action:action];
+    }
+    
+    if ([tags count]) {
+        if (itemCount)
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        itemCount += [self addTags:tags toMenu:toolbarMenu target:target action:action];
+    }
+    
+    return toolbarMenu;
+}
+
++ (NSMenu *) pullDownMenuForLocalBranches:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tags:(NSMutableArray *)tags other:(NSMutableArray *)other target:(id)target action:(SEL)action
+{
+    NSMenu *toolbarMenu = [[NSMenu alloc] initWithTitle:@""];
+    
+    NSUInteger itemCount = [self addLocalBranches:localBranches toMenu:toolbarMenu target:target action:action];
+    
+    if ([remoteBranches count]) {
+        if (itemCount)
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        NSMenu *subMenu = [[NSMenu alloc] initWithTitle:@""];
+        itemCount += [self addRemoteBranches:remoteBranches toMenu:subMenu target:target action:action];
+        NSMenuItem *remoteItem = [[NSMenuItem alloc] initWithTitle:@"Remotes" action:nil keyEquivalent:@""];
+        [remoteItem setSubmenu:subMenu];
+        [toolbarMenu addItem:remoteItem];
+    }
+    
+    if ([tags count]) {
+        if (itemCount && ![remoteBranches count])
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        itemCount += [self addTags:tags toMenu:toolbarMenu target:target action:action];
+    }
+    
+    if ([other count]) {
+        if (itemCount)
+            [toolbarMenu addItem:[NSMenuItem separatorItem]];
+        [self addOtherItems:other toMenu:toolbarMenu target:target action:action];
+    }
+    
+    return toolbarMenu;
+}
+
+
 @end

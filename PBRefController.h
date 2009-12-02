@@ -45,8 +45,6 @@
     IBOutlet KBPopUpToolbarItem *rebaseItem;
     IBOutlet KBPopUpToolbarItem *fetchItem;
     IBOutlet KBPopUpToolbarItem *checkoutItem;
-    
-    IBOutlet NSMenu *tableMenu;
 }
 
 - (IBAction) fetchCurrentRemote:(id)sender;
@@ -88,8 +86,6 @@
 - (IBAction) showAddRemoteSheet:(id)sender;
 - (IBAction) saveNewRemote:(id)sender;
 - (IBAction) closeAddRemoteSheet:(id)sender;
-
-- (void) toggleToolbarItems:(NSToolbar *)tb matchingLabels:(NSArray *)labels enabledState:(BOOL)state;
 
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit;
 - (NSArray *) menuItemsForCommit:(PBGitCommit *)commit;

@@ -458,27 +458,6 @@
     [pasteboard setString:[commit patch] forType:NSStringPboardType];
 }
 
-#pragma mark Toolbar
-
-- (void) toggleToolbarItems:(NSToolbar *)tb matchingLabels:(NSArray *)labels enabledState:(BOOL)state  {
-    NSArray * tbItems = [tb items];
-    
-    /* if labels is nil, assume all toolbar items */
-    if (!labels) {
-        for (NSToolbarItem * curItem in tbItems) {
-            [curItem setEnabled:state];
-        }
-    } else {
-        for (NSToolbarItem * curItem in tbItems) {
-            for (NSString * curLabel in labels) {
-                if ([[curItem label] isEqualToString:curLabel]) {
-                    [curItem setEnabled:state];
-                }
-            }
-        }
-    }
-}
-
 # pragma mark Menus
 
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit
@@ -488,162 +467,8 @@
 
 - (NSArray *) menuItemsForCommit:(PBGitCommit *)commit
 {
-	NSArray *items = [PBRefMenuItem defaultMenuItemsForCommit:commit target:self];
-    
-    NSMenu *menu = [[NSMenu alloc] init];
-    [menu setAutoenablesItems:NO];
-    if (items) {
-        for (NSMenuItem *item in items)
-            [menu addItem:[item copyWithZone:[NSMenu menuZone]]];
-        tableMenu = menu;
-    }
-    return items;
-}
-
-- (void) updateAllBranchesMenuWithLocal:(NSMutableArray *)localBranches remote:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags other:(NSMutableArray *)other
-{
-	if (!branchPopUp)
-        return;
-
-	NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Branch menu"];
-
-    // Local
-	for (PBGitRevSpecifier *rev in localBranches)
-	{
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:@selector(changeBranch:) keyEquivalent:@""];
-		[item setRepresentedObject:rev];
-		[item setTarget:self];
-		[menu addItem:item];
-	}
-
-	[menu addItem:[NSMenuItem separatorItem]];
-
-	// Remotes
-	NSMenu *remoteMenu = [[NSMenu alloc] initWithTitle:@"Remotes"];
-	NSMenu *currentMenu = nil;
-	for (PBGitRevSpecifier *rev in remoteBranches)
-	{
-		NSString *ref = [rev simpleRef];
-		NSArray *components = [ref componentsSeparatedByString:@"/"];
-		
-		NSString *remoteName = [components objectAtIndex:2];
-		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
-
-		if (![[currentMenu title] isEqualToString:remoteName])
-		{
-			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
-			[item setSubmenu:currentMenu];
-			[remoteMenu addItem:item];
-		}
-
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:@selector(changeBranch:) keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[currentMenu addItem:item];
-	}
-
-	NSMenuItem *remoteItem = [[NSMenuItem alloc] initWithTitle:@"Remotes" action:NULL keyEquivalent:@""];
-	[remoteItem setSubmenu:remoteMenu];
-	[menu addItem:remoteItem];
-
-	// Tags
-	NSMenu *tagMenu = [[NSMenu alloc] initWithTitle:@"Tags"];
-	for (PBGitRevSpecifier *rev in tags)
-	{
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:@selector(changeBranch:) keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[tagMenu addItem:item];
-	}		
-	
-	NSMenuItem *tagItem = [[NSMenuItem alloc] initWithTitle:@"Tags" action:NULL keyEquivalent:@""];
-	[tagItem setSubmenu:tagMenu];
-	[menu addItem:tagItem];
-
-	// Others
-	[menu addItem:[NSMenuItem separatorItem]];
-
-	for (PBGitRevSpecifier *rev in other)
-	{
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:@selector(changeBranch:) keyEquivalent:@""];
-		[item setRepresentedObject:rev];
-		[item setTarget:self];
-		[menu addItem:item];
-	}
-	
-	[[branchPopUp cell] setMenu: menu];
-}
-
-- (void) updatePopUpToolbarItemMenu:(KBPopUpToolbarItem *)item local:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tag:(NSMutableArray *)tags action:(SEL)action title:(NSString *)title
-{
-    if (!item)
-        return;
-    
-	NSMenu *toolbarMenu = [[NSMenu alloc] initWithTitle:@""];
-    
-    if (title) {
-        NSString *activeBranchRefName = [[historyController.repository activeBranch] refName];
-        if ([title isEqualToString:@"Push"])
-        	title = [NSString stringWithFormat:@"%@ from %@ to:", title, activeBranchRefName];
-        else
-            title = [NSString stringWithFormat:@"%@ to %@ from:", title, activeBranchRefName];
-        
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-        [toolbarMenu addItem:item];
-        [toolbarMenu addItem:[NSMenuItem separatorItem]];
-    }
-    
-    if ([localBranches count]) {
-        for (PBGitRevSpecifier *rev in localBranches) {
-            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
-            [item setTarget:self];
-            [item setRepresentedObject:rev];
-            [toolbarMenu addItem:item];
-        }
-        
-        if ([remoteBranches count])
-            [toolbarMenu addItem:[NSMenuItem separatorItem]];
-    }
-    
-    // Remotes
-	NSMenu *currentMenu = nil;
-	for (PBGitRevSpecifier *rev in remoteBranches) {
-		NSString *ref = [rev simpleRef];
-		NSArray *components = [ref componentsSeparatedByString:@"/"];
-        
-		NSString *remoteName = [components objectAtIndex:2];
-		NSString *branchName = [[components subarrayWithRange:NSMakeRange(3, [components count] - 3)] componentsJoinedByString:@"/"];
-        
-		if (![[currentMenu title] isEqualToString:remoteName]) {
-			currentMenu = [[NSMenu alloc] initWithTitle:remoteName];
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:remoteName action:NULL keyEquivalent:@""];
-			[item setSubmenu:currentMenu];
-			[toolbarMenu addItem:item];
-		}
-        
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:branchName action:action keyEquivalent:@""];
-		[item setTarget:self];
-		[item setRepresentedObject:rev];
-		[currentMenu addItem:item];
-	}
-    
-	if (tags) {
-        NSMenu *tagMenu = [[NSMenu alloc] initWithTitle:@"Tags"];
-        for (PBGitRevSpecifier *rev in tags) {
-            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[rev description] action:action keyEquivalent:@""];
-            [item setTarget:self];
-            [item setRepresentedObject:rev];
-            [tagMenu addItem:item];
-        }		
-        
-        NSMenuItem *tagItem = [[NSMenuItem alloc] initWithTitle:@"Tags" action:NULL keyEquivalent:@""];
-        [tagItem setSubmenu:tagMenu];
-        [toolbarMenu addItem:tagItem];
-    }
-    
-    [item setMenu: toolbarMenu];
-}
+	return [PBRefMenuItem defaultMenuItemsForCommit:commit target:self];
+}    
 
 - (void) updateBranchMenus
 {
@@ -652,32 +477,32 @@
 	NSMutableArray *tags = [NSMutableArray array];
 	NSMutableArray *other = [NSMutableArray array];
 
-	for (PBGitRevSpecifier *rev in historyController.repository.branches)
-	{
-		if (![rev isSimpleRef])
-		{
-			[other addObject:rev];
-			continue;
-		}
-
+	for (PBGitRevSpecifier *rev in historyController.repository.branches) {
 		NSString *ref = [rev simpleRef];
-
-		if ([ref hasPrefix:@"refs/heads"])
+        if (!ref)
+			[other addObject:rev];
+		else if ([ref hasPrefix:@"refs/heads"])
 			[localBranches addObject:rev];
 		else if ([ref hasPrefix:@"refs/tags"])
 			[tags addObject:rev];
 		else if ([ref hasPrefix:@"refs/remote"])
 			[remoteBranches addObject:rev];
 	}
-
-    [self updateAllBranchesMenuWithLocal:localBranches remote:remoteBranches tag:tags other:other];
+    
+    [[branchPopUp cell] setMenu:[PBRefMenuItem pullDownMenuForLocalBranches:localBranches remotes:remoteBranches tags:tags other:other target:self action:@selector(changeBranch:)]];
     [self selectCurrentBranch];
     
-    [self updatePopUpToolbarItemMenu:fetchItem local:nil remotes:remoteBranches tag:nil action:@selector(fetchFromRemote:) title:nil];
-    [self updatePopUpToolbarItemMenu:pushItem local:nil remotes:remoteBranches tag:nil action:@selector(pushToRemote:) title:@"Push"];
-    [self updatePopUpToolbarItemMenu:pullItem local:nil remotes:remoteBranches tag:nil action:@selector(pullFromRemote:) title:@"Pull"];
-    [self updatePopUpToolbarItemMenu:rebaseItem local:localBranches remotes:remoteBranches tag:nil action:@selector(rebaseOnUpstreamBranch:) title:@"Rebase"];
-    [self updatePopUpToolbarItemMenu:checkoutItem local:localBranches remotes:remoteBranches tag:tags action:@selector(checkoutFromRef:) title:nil];
+    [fetchItem setMenu:[PBRefMenuItem pullDownMenuForRemotes:remoteBranches target:self action:@selector(fetchFromRemote:)]];
+    [pushItem  setMenu:[PBRefMenuItem pullDownMenuForRemotes:remoteBranches target:self action:@selector(pushToRemote:)]];
+    [pullItem  setMenu:[PBRefMenuItem pullDownMenuForRemotes:remoteBranches target:self action:@selector(pullFromRemote:)]];
+    
+    [checkoutItem setMenu:[PBRefMenuItem pullDownMenuForLocalBranches:localBranches remotes:remoteBranches tags:tags target:self action:@selector(checkoutFromRef:)]];
+     
+    NSString *activeBranchName = [[historyController.repository activeBranch] refName];
+    NSMenu *rebaseMenu = [PBRefMenuItem pullDownMenuForLocalBranches:localBranches remotes:remoteBranches tags:tags target:self action:@selector(rebaseOnUpstreamBranch:)];
+    [rebaseMenu insertItem:[[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rebase %@ starting at:", activeBranchName] action:nil keyEquivalent:@""] atIndex:0];
+    [rebaseMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
+    [rebaseItem setMenu:rebaseMenu];
 }
 
 # pragma mark Tableview delegate methods

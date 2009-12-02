@@ -21,6 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="354"/>
 			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -968,7 +969,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {87, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<int key="NSTag">3</int>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="56766133">
@@ -1026,7 +1026,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{17, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="577118520">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1069,7 +1068,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{1, 14}, {36, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="925817965">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1114,7 +1112,6 @@
 								<int key="NSvFlags">265</int>
 								<string key="NSFrame">{{0, 14}, {183, 22}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSearchFieldCell" key="NSCell" id="505917296">
 									<int key="NSCellFlags">343014976</int>
@@ -1200,7 +1197,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{21, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="432301582">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1243,7 +1239,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {134, 26}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="905550433">
 									<int key="NSCellFlags">-2076049856</int>
@@ -1333,7 +1328,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{10, 14}, {38, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="1003536225">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1376,7 +1370,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {35, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="962315566">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1419,7 +1412,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {35, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="305150720">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1462,7 +1454,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{4, 14}, {38, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="345325065">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1505,7 +1496,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{1, 14}, {35, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="338477603">
 									<int key="NSCellFlags">-2080244224</int>
@@ -1548,7 +1538,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{13, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="399232314">
 									<int key="NSCellFlags">-2080244224</int>
@@ -4624,14 +4613,15 @@ dC4</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="665398151"/>
-							<string type="base64-UTF8" key="toolTip">Z2l0IHB1bGwgPHJlbW90ZT4gPGxvY2FsIGFjdGl2ZSBicmFuY2g+CgpUaGlzIHdpbGwgZmV0Y2ggYWxs
-IGNoYW5nZXMgZnJvbSA8cmVtb3RlPiBhbmQgdGhlbiBtZXJnZSB0aGUgcmVzdWx0IGludG8gdGhlIGN1
-cnJlbnRseSB2aWV3ZWQgYnJhbmNoLgoKPHJlbW90ZT4gd2lsbCBiZSB0aGUgZGVmYXVsdCByZW1vdGUg
-Y29uZmlndXJlZCBmb3IgdGhlIGN1cnJlbnRseSB2aWV3ZWQgYnJhbmNoLiBQcmVzcyBhbmQgaG9sZCB0
-byBjaG9vc2UgYSByZW1vdGUgZnJvbSB0aGUgcG9wdXAgbWVudSBvciByaWdodCBjbGljayBvbiBhIGJy
-YW5jaCB3aXRoIGEgcmVtb3RlIGluIHRoZSBoaXN0b3J5IHZpZXcuCgpXaGVuIHZpZXdpbmcgQWxsIEJy
-YW5jaGVzIG9yIExvY2FsIEJyYW5jaGVzIHRoZSBjdXJyZW50IGJyYW5jaCB3aWxsIGJlIHRoZSBicmFu
-Y2ggdGhhdCBpcyBjaGVja2VkIG91dC4</string>
+							<string type="base64-UTF8" key="toolTip">Z2l0IHB1bGwgPHJlbW90ZT4KZ2l0IHB1bGwgPHJlbW90ZT4gPGJyYW5jaD4KClRoaXMgd2lsbCBmZXRj
+aCBhbGwgY2hhbmdlcyBmcm9tIHRoZSByZW1vdGUgb3IganVzdCBhIGJyYW5jaCBvZiB0aGUgcmVtb3Rl
+IGFuZCB0aGVuIG1lcmdlIHRoZSByZXN1bHQgaW50byB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2gu
+Cgo8cmVtb3RlPiB3aWxsIGJlIHRoZSBkZWZhdWx0IHJlbW90ZSBjb25maWd1cmVkIGZvciB0aGUgY3Vy
+cmVudGx5IHZpZXdlZCBicmFuY2guIFByZXNzIGFuZCBob2xkIHRvIGNob29zZSBhIHJlbW90ZSBvciBh
+IHJlbW90ZSBicmFuY2ggZnJvbSB0aGUgcG9wdXAgbWVudSBvciByaWdodCBjbGljayBvbiBhIGJyYW5j
+aCB3aXRoIGEgcmVtb3RlIGluIHRoZSBoaXN0b3J5IHZpZXcuCgpXaGVuIHZpZXdpbmcgQWxsIEJyYW5j
+aGVzIG9yIExvY2FsIEJyYW5jaGVzIHRoZSBjdXJyZW50IGJyYW5jaCB3aWxsIGJlIHRoZSBicmFuY2gg
+dGhhdCBpcyBjaGVja2VkIG91dC4</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4644,13 +4634,14 @@ Y2ggdGhhdCBpcyBjaGVja2VkIG91dC4</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="1070051133"/>
-							<string type="base64-UTF8" key="toolTip">Z2l0IHB1c2ggPHJlbW90ZSBicmFuY2g+CgpUaGlzIHdpbGwgcHVzaCBhbGwgbG9jYWwgY2hhbmdlcyBp
-biB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2ggdG8gPHJlbW90ZSBicmFuY2g+LgoKPHJlbW90ZSBi
-cmFuY2g+IGlzIHRoZSBkZWZhdWx0IHJlbW90ZSBjb25maWd1cmVkIGZvciB0aGUgY3VycmVudGx5IHZp
-ZXdlZCBicmFuY2guIFByZXNzIGFuZCBob2xkIHRvIGNob29zZSBhIHJlbW90ZSBmcm9tIHRoZSBwb3B1
-cCBtZW51IG9yIHJpZ2h0IGNsaWNrIG9uIGEgYnJhbmNoIHdpdGggYSByZW1vdGUgaW4gdGhlIGhpc3Rv
-cnkgdmlldy4KCldoZW4gdmlld2luZyBBbGwgQnJhbmNoZXMgb3IgTG9jYWwgQnJhbmNoZXMgdGhlIGN1
-cnJlbnQgYnJhbmNoIHdpbGwgYmUgdGhlIGJyYW5jaCB0aGF0IGlzIGNoZWNrZWQgb3V0Lg</string>
+							<string type="base64-UTF8" key="toolTip">Z2l0IHB1c2ggPHJlbW90ZT4KZ2l0IHB1c2ggPHJlbW90ZT4gPGJyYW5jaD4KClRoaXMgd2lsbCBwdXNo
+IGFsbCBsb2NhbCBjaGFuZ2VzIGluIHRoZSBjdXJyZW50bHkgdmlld2VkIGJyYW5jaCB0byB0aGUgcmVt
+b3RlIG9yIGp1c3QgYSBicmFuY2ggb2YgdGhlIHJlbW90ZS4KCjxyZW1vdGUgYnJhbmNoPiBpcyB0aGUg
+ZGVmYXVsdCByZW1vdGUgY29uZmlndXJlZCBmb3IgdGhlIGN1cnJlbnRseSB2aWV3ZWQgYnJhbmNoLiBQ
+cmVzcyBhbmQgaG9sZCB0byBjaG9vc2UgYSByZW1vdGUgb3IgYSByZW1vdGUgYnJhbmNoIGZyb20gdGhl
+IHBvcHVwIG1lbnUgb3IgcmlnaHQgY2xpY2sgb24gYSBicmFuY2ggd2l0aCBhIHJlbW90ZSBpbiB0aGUg
+aGlzdG9yeSB2aWV3LgoKV2hlbiB2aWV3aW5nIEFsbCBCcmFuY2hlcyBvciBMb2NhbCBCcmFuY2hlcyB0
+aGUgY3VycmVudCBicmFuY2ggd2lsbCBiZSB0aGUgYnJhbmNoIHRoYXQgaXMgY2hlY2tlZCBvdXQuA</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4762,14 +4753,15 @@ cnJlbnQgYnJhbmNoIHdpbGwgYmUgdGhlIGJyYW5jaCB0aGF0IGlzIGNoZWNrZWQgb3V0Lg</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
 							<string key="name">ToolTip</string>
 							<reference key="object" ref="387743434"/>
-							<string type="base64-UTF8" key="toolTip">Z2l0IGZldGNoIDxyZW1vdGUgYnJhbmNoPgoKVGhpcyB3aWxsIGZldGNoIGFsbCBjaGFuZ2VzIGZyb20g
-PHJlbW90ZSBicmFuY2g+IHRvIHRoZSBsb2NhbCByZXBvc2l0b3J5LiBJdCB3aWxsIG5vdCBjaGFuZ2Ug
-dGhlIGNoZWNrZWQgb3V0IGJyYW5jaC4KCjxyZW1vdGUgYnJhbmNoPiB3aWxsIGJlIHRoZSBkZWZhdWx0
-IHJlbW90ZSBjb25maWd1cmVkIGZvciB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2guIFByZXNzIGFu
-ZCBob2xkIHRvIGNob29zZSBhIHJlbW90ZSBmcm9tIHRoZSBwb3B1cCBtZW51IG9yIHJpZ2h0IGNsaWNr
-IG9uIGEgcmVtb3RlIGl0ZW0gaW4gdGhlIGhpc3Rvcnkgdmlldy4KCldoZW4gdmlld2luZyBBbGwgQnJh
-bmNoZXMgb3IgTG9jYWwgQnJhbmNoZXMgdGhlIGN1cnJlbnQgYnJhbmNoIHdpbGwgYmUgdGhlIGJyYW5j
-aCB0aGF0IGlzIGNoZWNrZWQgb3V0Lg</string>
+							<string type="base64-UTF8" key="toolTip">Z2l0IGZldGNoIDxyZW1vdGU+CmdpdCBmZXRjaCA8cmVtb3RlPiA8YnJhbmNoPgoKVGhpcyB3aWxsIGZl
+dGNoIGFsbCBjaGFuZ2VzIGZyb20gdGhlIHJlbW90ZSBvciBqdXN0IGZyb20gYSBicmFuY2ggb2YgdGhl
+IHJlbW90ZSB0byB0aGUgbG9jYWwgcmVwb3NpdG9yeS4gSXQgd2lsbCBub3QgY2hhbmdlIHRoZSBjaGVj
+a2VkIG91dCBicmFuY2guCgo8cmVtb3RlPiB3aWxsIGJlIHRoZSBkZWZhdWx0IHJlbW90ZSBjb25maWd1
+cmVkIGZvciB0aGUgY3VycmVudGx5IHZpZXdlZCBicmFuY2guIFByZXNzIGFuZCBob2xkIHRvIGNob29z
+ZSBhIHJlbW90ZSBvciBhIHJlbW90ZSBicmFuY2ggZnJvbSB0aGUgcG9wdXAgbWVudSBvciByaWdodCBj
+bGljayBvbiBhIHJlbW90ZSBpdGVtIGluIHRoZSBoaXN0b3J5IHZpZXcuCgpXaGVuIHZpZXdpbmcgQWxs
+IEJyYW5jaGVzIG9yIExvY2FsIEJyYW5jaGVzIHRoZSBjdXJyZW50IGJyYW5jaCB3aWxsIGJlIHRoZSBi
+cmFuY2ggdGhhdCBpcyBjaGVja2VkIG91dC4</string>
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5020,6 +5012,7 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>pushToRemote:</string>
 							<string>rebaseCurrentBranch:</string>
 							<string>rebaseOnUpstreamBranch:</string>
+							<string>rebaseOnUpstreamCommit:</string>
 							<string>rebaseOnUpstreamRef:</string>
 							<string>saveNewBranch:</string>
 							<string>saveNewRemote:</string>
@@ -5050,6 +5043,7 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>NSMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>id</string>
@@ -5087,7 +5081,6 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>pullItem</string>
 							<string>pushItem</string>
 							<string>rebaseItem</string>
-							<string>tableMenu</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -5114,7 +5107,6 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>KBPopUpToolbarItem</string>
-							<string>NSMenu</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

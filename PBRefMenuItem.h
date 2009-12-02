@@ -23,4 +23,8 @@
 + (NSArray *) defaultMenuItemsForCommit:(PBGitCommit *)commit target:(id)target;
 + (PBRefMenuItem *)separatorItem;
 
++ (NSMenu *) pullDownMenuForRemotes:(NSMutableArray *)remoteBranches target:(id)target action:(SEL)action;
++ (NSMenu *) pullDownMenuForLocalBranches:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tags:(NSMutableArray *)tags target:(id)target action:(SEL)action;
++ (NSMenu *) pullDownMenuForLocalBranches:(NSMutableArray *)localBranches remotes:(NSMutableArray *)remoteBranches tags:(NSMutableArray *)tags other:(NSMutableArray *)other target:(id)target action:(SEL)action;
+
 @end

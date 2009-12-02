@@ -98,25 +98,17 @@
 }
 
 #pragma mark NSToolbarItemValidation Methods
-/*
-- (BOOL) validateToolbarItem:(NSToolbarItem *)theItem {
+
+- (BOOL) validateToolbarItem:(NSToolbarItem *)theItem
+{
+	NSArray *candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Fetch", nil];
     
-    NSString * curBranchDesc = [[repository currentBranch] description];
-    NSArray * candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Rebase", nil];
-    BOOL res;
+    if ([candidates containsObject:[theItem label]] && ![(KBPopUpToolbarItem *)theItem menu])
+        return NO;
     
-    if (([candidates containsObject:[theItem label]]) && 
-        (([curBranchDesc isEqualToString:@"All branches"]) || 
-         ([curBranchDesc isEqualToString:@"Local branches"])))
-    {
-        res = NO;
-    } else {
-        res = YES;
-    }
-    
-    return res;
+    return YES;
 }
-*/
+
 
 #pragma mark NSMenuValidation Methods
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem

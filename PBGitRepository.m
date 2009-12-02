@@ -371,6 +371,16 @@ static NSString * repositoryBasePath = nil;
     if (remote) 
         return remote;
     
+	int ret = 1;
+	NSString *rval = [self outputForCommand:@"remote" retValue:&ret];
+    if (![rval isEqualToString:@""]) {
+        NSArray *remotes = [rval componentsSeparatedByString:@"\n"];
+        for (NSString *remoteName in remotes) {
+        	if ([remoteName isEqualToString:refName])
+                return refName;
+        }
+    }
+    
     if (shouldPresentError) {
         NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitInvalidBranchErrorCode 
                                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -405,13 +415,17 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSArray * args = [NSArray arrayWithObjects:@"fetch", remote, branchName, nil];
-    NSLog(@"%s %@", _cmd, args);
-	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    NSString *command = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        command = [NSString stringWithFormat:@"fetch %@", remote];
+    else
+        command = [NSString stringWithFormat:@"fetch %@ %@", remote, branchName];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputForCommand:command retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Fetch failed for %@/%@.", remote, branchName];
-            NSString *info = [NSString stringWithFormat:@"There was an error fetching from the remote repository.\n\n%d\n%@", ret, rval];
+            NSString *info = [NSString stringWithFormat:@"There was an error fetching from the remote repository.\n\ncommand: git $@\n%d\n%@", command, ret, rval];
             NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitFetchErrorCode 
                                              userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        description, NSLocalizedDescriptionKey,
@@ -435,13 +449,17 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSArray * args = [NSArray arrayWithObjects:@"pull", remote, branchName, nil];
-    NSLog(@"%s %@", _cmd, args);
-	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    NSString *command = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        command = [NSString stringWithFormat:@"pull %@", remote];
+    else
+        command = [NSString stringWithFormat:@"pull %@ %@", remote, branchName];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputForCommand:command retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Pull failed for %@/%@.", remote, branchName];
-            NSString *info = [NSString stringWithFormat:@"There was an error pulling from the remote repository.\n\n%d\n%@", ret, rval];
+            NSString *info = [NSString stringWithFormat:@"There was an error pulling from the remote repository.\n\ncommand: git %@\n%d\n%@", command, ret, rval];
             NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitPullErrorCode 
                                              userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        description, NSLocalizedDescriptionKey,
@@ -465,13 +483,17 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSArray * args = [NSArray arrayWithObjects:@"push", remote, branchName, nil];
-    NSLog(@"%s %@", _cmd, args);
-	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    NSString *command = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        command = [NSString stringWithFormat:@"push %@", remote];
+    else
+        command = [NSString stringWithFormat:@"push %@ %@", remote, branchName];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputForCommand:command retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Push failed for %@/%@.", remote, branchName];
-            NSString *info = [NSString stringWithFormat:@"There was an error pushing to the remote repository.\n\n%d\n%@", ret, rval];
+            NSString *info = [NSString stringWithFormat:@"There was an error pushing to the remote repository.\n\ncommand: git %@\n%d\n%@", command, ret, rval];
             NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitPushErrorCode 
                                              userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        description, NSLocalizedDescriptionKey,
