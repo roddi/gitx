@@ -39,12 +39,14 @@
 #pragma mark Fetch
 
 // called from toolbar button and the Repository menu
--(void) fetchCurrentRemote:(id)sender
+- (void) fetchCurrentRemote:(id)sender
 {
     PBGitRevSpecifier *rev = [historyController.repository activeBranch];
     
-    if ([historyController.repository fetchRemote:rev presentError:YES])
+    if ([historyController.repository fetchRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called from toolbar menu
@@ -52,8 +54,10 @@
 {
     PBGitRevSpecifier *rev = [sender representedObject];
     
-    if ([historyController.repository fetchRemote:rev presentError:YES])
+    if ([historyController.repository fetchRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Pull
@@ -63,8 +67,10 @@
 {
     PBGitRevSpecifier *rev = [[PBGitRevSpecifier alloc] initWithRef:[sender ref]];
     
-    if ([historyController.repository pullRemote:rev presentError:YES])
+    if ([historyController.repository pullRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by the toolbar button and the Repository menu
@@ -72,8 +78,10 @@
 {
     PBGitRevSpecifier *rev = [historyController.repository activeBranch];
     
-    if ([historyController.repository pullRemote:rev presentError:YES])
+    if ([historyController.repository pullRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by toolbar menu
@@ -82,8 +90,10 @@
     PBGitRevSpecifier *rev = [sender representedObject];
     
     NSError *error = nil;
-    if ([historyController.repository pullRemote:rev presentError:YES])
+    if ([historyController.repository pullRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Push
@@ -93,17 +103,15 @@
 {
     PBGitRevSpecifier *rev = [[PBGitRevSpecifier alloc] initWithRef:[sender ref]];
     
-    if ([historyController.repository pushRemote:rev presentError:YES])
-        [commitController rearrangeObjects];
+    [historyController.repository pushRemote:rev presentError:YES];
 }
 
 // called by the toolbar button and the Repository menu
--(void) pushCurrentRemote:(id)sender
+- (void) pushCurrentRemote:(id)sender
 {
     PBGitRevSpecifier *rev = [historyController.repository activeBranch];
     
-    if ([historyController.repository pushRemote:rev presentError:YES])
-        [commitController rearrangeObjects];
+    [historyController.repository pushRemote:rev presentError:YES];
 }
 
 // called by toolbar menu
@@ -112,6 +120,7 @@
     PBGitRevSpecifier *rev = [sender representedObject];
     
     if ([historyController.repository pushRemote:rev presentError:YES])
+    [historyController.repository pushRemote:rev presentError:YES];
         [commitController rearrangeObjects];
 }
 
@@ -122,8 +131,10 @@
 {
     NSString *refName = [[sender ref] shortName];
     
-    if ([historyController.repository checkoutRefName:refName presentError:YES])
+    if ([historyController.repository checkoutRefName:refName presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by the contextual menu for a commit
@@ -131,8 +142,10 @@
 {
     NSString *refName = [[sender commit] realSha];
     
-    if ([historyController.repository checkoutRefName:refName presentError:YES])
+    if ([historyController.repository checkoutRefName:refName presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by the toolbar menu for a branch, remote or tag
@@ -140,8 +153,10 @@
 {
     NSString *refName = [[sender representedObject] description];
     
-    if ([historyController.repository checkoutRefName:refName presentError:YES])
+    if ([historyController.repository checkoutRefName:refName presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Cherry Pick
@@ -151,8 +166,10 @@
 {
     PBGitCommit *commit = [sender commit];
     
-    if ([historyController.repository cherryPickCommit:commit presentError:YES])
+    if ([historyController.repository cherryPickCommit:commit presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Rebase
@@ -163,8 +180,10 @@
     PBGitRevSpecifier *upstreamRev = [[PBGitRevSpecifier alloc] initWithRef:[sender ref]];
     PBGitRevSpecifier *currentRev = [historyController.repository activeBranch];
         
-    if ([historyController.repository rebaseBranch:currentRev onUpstream:upstreamRev presentError:YES])
+    if ([historyController.repository rebaseBranch:currentRev onUpstream:upstreamRev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by the contextual menu for commits
@@ -173,17 +192,21 @@
     PBGitCommit *commit = [sender commit];
     PBGitRevSpecifier *currentRev = [historyController.repository activeBranch];
     
-    if ([historyController.repository rebaseBranch:currentRev onSHA:[commit realSha] presentError:YES])
+    if ([historyController.repository rebaseBranch:currentRev onSHA:[commit realSha] presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called by the toolbar button and the Repository menu
--(void)rebaseCurrentBranch:(id)sender
+- (void)rebaseCurrentBranch:(id)sender
 {
     PBGitRevSpecifier *currentRev = [historyController.repository activeBranch];
     
-    if ([historyController.repository rebaseBranch:currentRev onUpstream:nil presentError:YES])
+    if ([historyController.repository rebaseBranch:currentRev onUpstream:nil presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 // called from the toolbar menu
@@ -192,14 +215,16 @@
     PBGitRevSpecifier *upstreamRev = [sender representedObject];
     PBGitRevSpecifier *currentRev = [historyController.repository activeBranch];
     
-    if ([historyController.repository rebaseBranch:currentRev onUpstream:upstreamRev presentError:YES])
+    if ([historyController.repository rebaseBranch:currentRev onUpstream:upstreamRev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Create Branch
 
 // called by the Create Branch toolbar button and the Repository menu
--(void) showCreateBranchSheet:(id)sender
+- (void) showCreateBranchSheet:(id)sender
 {    
     [errorMessage setStringValue:@""];
     [NSApp beginSheet:newBranchSheet
@@ -209,7 +234,7 @@
           contextInfo:NULL];
 }
 
--(void) saveNewBranch:(id) sender
+- (void) saveNewBranch:(id) sender
 {
 	NSString *branchName = [@"refs/heads/" stringByAppendingString:[newBranchName stringValue]];
     
@@ -236,7 +261,7 @@
 	[commitController rearrangeObjects];
 }
 
--(void) closeCreateBranchSheet:(id) sender
+- (void) closeCreateBranchSheet:(id) sender
 {	
 	[NSApp endSheet:newBranchSheet];
 	[newBranchName setStringValue:@""];
