@@ -77,7 +77,7 @@
 				     [NSNumber numberWithBool:selectedFileIsCached], nil]];
 }
 
-- (void)stageHunk:(NSString *)hunk reverse:(BOOL)reverse
+- (void) stageHunk:(NSString *)hunk reverse:(BOOL)reverse
 {
 	[controller.index applyPatch:hunk stage:YES reverse:reverse];
 	// FIXME: Don't need a hard refresh
@@ -85,15 +85,21 @@
 	[self refresh];
 }
 
-- (void) discardHunkAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void) discardHunk:(NSString *)hunk
 {
-	if (returnCode == NSAlertDefaultReturn) {
-		[controller.index applyPatch:contextInfo stage:NO reverse:YES];
-		[self refresh];
-	}
+    [controller.index applyPatch:hunk stage:NO reverse:YES];
+    [self refresh];
 }
 
-- (void)discardHunk:(NSString *)hunk altKey:(BOOL)altKey
+- (void) discardHunkAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [[alert window] orderOut:nil];
+    
+	if (returnCode == NSAlertDefaultReturn)
+		[self discardHunk:contextInfo];
+}
+
+- (void) discardHunk:(NSString *)hunk altKey:(BOOL)altKey
 {
 	if (!altKey) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Discard hunk" 
@@ -105,7 +111,9 @@
                           modalDelegate:self 
                          didEndSelector:@selector(discardHunkAlertDidEnd:returnCode:contextInfo:)
                             contextInfo:hunk];
-	}
+	} else {
+        [self discardHunk:hunk];
+    }
 }
 
 - (void) setStateMessage:(NSString *)state

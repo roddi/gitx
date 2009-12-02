@@ -198,6 +198,8 @@
 
 - (void) discardChangesForFilesAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
+    [[alert window] orderOut:nil];
+    
 	if (returnCode == NSAlertDefaultReturn) {
         [commitController.index discardChangesForFiles:contextInfo];
 	}
@@ -215,7 +217,9 @@
                           modalDelegate:self 
                          didEndSelector:@selector(discardChangesForFilesAlertDidEnd:returnCode:contextInfo:)
                             contextInfo:files];
-	}
+	} else {
+        [commitController.index discardChangesForFiles:files];
+    }
 }
 
 # pragma mark TableView icon delegate
