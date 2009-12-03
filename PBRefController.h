@@ -45,6 +45,7 @@
     IBOutlet KBPopUpToolbarItem *rebaseItem;
     IBOutlet KBPopUpToolbarItem *fetchItem;
     IBOutlet KBPopUpToolbarItem *checkoutItem;
+    IBOutlet KBPopUpToolbarItem *mergeItem;
 }
 
 - (IBAction) fetchCurrentRemote:(id)sender;
@@ -57,6 +58,10 @@
 - (void) pushRemoteForRef:(PBRefMenuItem *)sender;
 - (IBAction) pushCurrentRemote:(id)sender;
 - (void) pushToRemote:(NSMenuItem *)sender;
+
+- (void) mergeWithRef:(PBRefMenuItem *)sender;
+- (void) mergeWithCommit:(PBRefMenuItem *)sender;
+- (void) mergeWithBranch:(NSMenuItem *)sender;
 
 - (void) checkoutRef:(PBRefMenuItem *)sender;
 - (void) checkoutCommit:(PBRefMenuItem *)sender;

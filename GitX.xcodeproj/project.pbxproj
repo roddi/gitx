@@ -56,6 +56,7 @@
 		93CB42C20EAB7B2200530609 /* PBGitDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB42C10EAB7B2200530609 /* PBGitDefaults.m */; };
 		93F7857F0EA3ABF100C1F443 /* PBCommitMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */; };
 		D26DC6450E782C9000C777B2 /* gitx.icns in Resources */ = {isa = PBXBuildFile; fileRef = D26DC6440E782C9000C777B2 /* gitx.icns */; };
+		D8342DDC10C77561009A00F8 /* MergePopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */; };
 		D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8701E0D10ADFED70073689C /* ScriptingBridge.framework */; };
 		D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */; };
 		D8701EDE10AE393B0073689C /* CheckoutPopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8701EDD10AE393B0073689C /* CheckoutPopUpTemplate.png */; };
@@ -236,6 +237,7 @@
 		93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBCommitMessageView.m; sourceTree = "<group>"; };
 		93FCCBA80EA8AF450061B02B /* PBGitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBGitConfig.m; sourceTree = "<group>"; };
 		D26DC6440E782C9000C777B2 /* gitx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gitx.icns; sourceTree = "<group>"; };
+		D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MergePopUpTemplate.png; path = Images/MergePopUpTemplate.png; sourceTree = "<group>"; };
 		D8701DF810ADF7410073689C /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		D8701E0D10ADFED70073689C /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FetchPopUpTemplate.png; path = Images/FetchPopUpTemplate.png; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				652C162410A94D0800B80380 /* PullPopUpTemplate.png */,
 				652C162510A94D0800B80380 /* PushPopUpTemplate.png */,
 				652C162610A94D0800B80380 /* RebasePopUpTemplate.png */,
+				D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */,
 				653D94A4109C42A500B26705 /* CloneRepositoryTemplate.png */,
 				3BC07F4A0ED5A5C5009A7768 /* HistoryViewTemplate.png */,
 				3BC07F4B0ED5A5C5009A7768 /* CommitViewTemplate.png */,
@@ -899,6 +902,7 @@
 				652C162910A94D0800B80380 /* RebasePopUpTemplate.png in Resources */,
 				D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */,
 				D8701EDE10AE393B0073689C /* CheckoutPopUpTemplate.png in Resources */,
+				D8342DDC10C77561009A00F8 /* MergePopUpTemplate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

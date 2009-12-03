@@ -38,4 +38,4 @@ OBJC_EXTERN const NSInteger PBGitRebaseErrorCode;
 OBJC_EXTERN const NSInteger PBGitCreateBranchErrorCode;
 OBJC_EXTERN const NSInteger PBGitAddTagErrorCode;
 OBJC_EXTERN const NSInteger PBGitAddRemoteErrorCode;
-
+OBJC_EXTERN const NSInteger PBGitMergeErrorCode;

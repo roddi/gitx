@@ -40,4 +40,4 @@ const NSInteger PBGitRebaseErrorCode                = 10;
 const NSInteger PBGitCreateBranchErrorCode          = 11;
 const NSInteger PBGitAddTagErrorCode                = 12;
 const NSInteger PBGitAddRemoteErrorCode             = 13;
-
+const NSInteger PBGitMergeErrorCode                 = 14;

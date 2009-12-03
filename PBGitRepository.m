@@ -507,6 +507,59 @@ static NSString * repositoryBasePath = nil;
     return YES;
 }
 
+- (BOOL) mergeWithBranch:(PBGitRevSpecifier *)branch presentError:(BOOL)shouldPresentError
+{
+    NSString *branchName = [branch refName];
+    
+    int ret = 1;
+    NSArray *args = [NSArray arrayWithObjects:@"merge", branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+    NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Merge failed for %@.", branchName];
+            NSString *info = [NSString stringWithFormat:@"There was an error merging %@ with %@.\n\ncommand: git %@\n%d\n%@", [[self headRef] refName], branchName, command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitMergeErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+        return NO;
+    }
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) mergeWithCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError
+{
+    NSString *commitSHA = [commit realSha];
+    
+    int ret = 1;
+    NSArray *args = [NSArray arrayWithObjects:@"merge", commitSHA, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+    NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    if (ret) {
+        if (shouldPresentError) {
+            NSString *shortSHA = [commitSHA substringToIndex:8];
+            NSString *description = [NSString stringWithFormat:@"Merge failed for %@.", shortSHA];
+            NSString *info = [NSString stringWithFormat:@"There was an error merging %@ with %@.\n\ncommand: git %@\n%d\n%@", [[self headRef] refName], shortSHA, command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitMergeErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+        return NO;
+    }
+    [self reloadRefs];
+    return YES;
+}
+
 - (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError
 {
 	int ret = 1;

@@ -926,7 +926,7 @@
 			</object>
 			<object class="NSToolbar" id="931038723">
 				<object class="NSMutableString" key="NSToolbarIdentifier">
-					<characters key="NS.bytes">3DC1ECE8-C325-4A32-9225-3937FE1462A0</characters>
+					<characters key="NS.bytes">E3ABA551-98DB-4A92-9F72-54F4CDA33699</characters>
 				</object>
 				<nil key="NSToolbarDelegate"/>
 				<bool key="NSToolbarPrefersToBeShown">YES</bool>
@@ -946,6 +946,7 @@
 						<string>86360841-A2B1-4802-845A-AE424521FE99</string>
 						<string>99C2C9EB-AE16-42A9-BE52-46CE903E9AF9</string>
 						<string>A1AE204D-2CE3-4713-8514-824202042440</string>
+						<string>A476B356-2DD9-460C-82B2-0536A41E67F9</string>
 						<string>AF4D111F-4FE6-4D6A-8B1E-827F7A419C11</string>
 						<string>C034B3AD-2E7F-4D76-BCB7-E8332F007018</string>
 						<string>EB7863DB-808B-46C2-8B61-65D6C40F796C</string>
@@ -1351,7 +1352,49 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{25, 25}</string>
-							<string key="NSToolbarItemMaxSize">{42, 25}</string>
+							<string key="NSToolbarItemMaxSize">{35, 25}</string>
+							<bool key="NSToolbarItemEnabled">YES</bool>
+							<bool key="NSToolbarItemAutovalidates">YES</bool>
+							<int key="NSToolbarItemTag">0</int>
+							<bool key="NSToolbarIsUserRemovable">YES</bool>
+							<int key="NSToolbarItemVisibilityPriority">0</int>
+						</object>
+						<object class="NSToolbarItem" id="677544345">
+							<object class="NSMutableString" key="NSToolbarItemIdentifier">
+								<characters key="NS.bytes">A476B356-2DD9-460C-82B2-0536A41E67F9</characters>
+							</object>
+							<string key="NSToolbarItemLabel">Merge</string>
+							<string key="NSToolbarItemPaletteLabel">Merge</string>
+							<string key="NSToolbarItemToolTip"/>
+							<object class="NSButton" key="NSToolbarItemView" id="94822105">
+								<reference key="NSNextResponder"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{2, 14}, {38, 25}}</string>
+								<reference key="NSSuperview"/>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSButtonCell" key="NSCell" id="864578243">
+									<int key="NSCellFlags">-2080244224</int>
+									<int key="NSCellFlags2">134217728</int>
+									<string key="NSContents"/>
+									<reference key="NSSupport" ref="924107556"/>
+									<reference key="NSControlView" ref="94822105"/>
+									<int key="NSButtonFlags">-2033434369</int>
+									<int key="NSButtonFlags2">163</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="75109982">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">MergePopUpTemplate</string>
+									</object>
+									<string key="NSAlternateContents"/>
+									<string key="NSKeyEquivalent"/>
+									<int key="NSPeriodicDelay">400</int>
+									<int key="NSPeriodicInterval">75</int>
+								</object>
+							</object>
+							<reference key="NSToolbarItemImage" ref="75109982"/>
+							<nil key="NSToolbarItemTarget"/>
+							<nil key="NSToolbarItemAction"/>
+							<string key="NSToolbarItemMinSize">{25, 25}</string>
+							<string key="NSToolbarItemMaxSize">{35, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -1463,7 +1506,7 @@
 									<reference key="NSControlView" ref="166309462"/>
 									<int key="NSButtonFlags">-2033434369</int>
 									<int key="NSButtonFlags2">163</int>
-									<object class="NSCustomResource" key="NSNormalImage" id="994310630">
+									<object class="NSCustomResource" key="NSNormalImage" id="1059478942">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">RebasePopUpTemplate</string>
 									</object>
@@ -1473,11 +1516,11 @@
 									<int key="NSPeriodicInterval">75</int>
 								</object>
 							</object>
-							<reference key="NSToolbarItemImage" ref="994310630"/>
+							<reference key="NSToolbarItemImage" ref="1059478942"/>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{25, 25}</string>
-							<string key="NSToolbarItemMaxSize">{42, 25}</string>
+							<string key="NSToolbarItemMaxSize">{35, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -1656,17 +1699,18 @@
 					<reference ref="774449010"/>
 					<reference ref="131368024"/>
 					<reference ref="520297562"/>
-					<reference ref="77495503"/>
 					<reference ref="995733896"/>
+					<reference ref="77495503"/>
+					<reference ref="587605996"/>
 					<reference ref="740642631"/>
+					<reference ref="677544345"/>
+					<reference ref="1033703265"/>
 					<reference ref="840575537"/>
 					<reference ref="412717087"/>
-					<reference ref="1033703265"/>
 					<reference ref="425122427"/>
-					<reference ref="587605996"/>
+					<reference ref="1046415447"/>
 					<reference ref="974113713"/>
 					<reference ref="773751720"/>
-					<reference ref="1046415447"/>
 					<reference ref="348901587"/>
 				</object>
 				<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
@@ -1677,8 +1721,8 @@
 					<reference ref="520297562"/>
 					<reference ref="1046415447"/>
 					<reference ref="740642631"/>
-					<reference ref="412717087"/>
-					<reference ref="1033703265"/>
+					<reference ref="677544345"/>
+					<reference ref="840575537"/>
 					<reference ref="425122427"/>
 					<reference ref="773751720"/>
 					<reference ref="348901587"/>
@@ -3136,6 +3180,14 @@
 					</object>
 					<int key="connectionID">556</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mergeItem</string>
+						<reference key="source" ref="892732705"/>
+						<reference key="destination" ref="677544345"/>
+					</object>
+					<int key="connectionID">563</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3930,6 +3982,7 @@
 							<reference ref="840575537"/>
 							<reference ref="740642631"/>
 							<reference ref="974113713"/>
+							<reference ref="677544345"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">History Toolbar</string>
@@ -4056,6 +4109,29 @@
 						<int key="objectID">530</int>
 						<reference key="object" ref="974113713"/>
 						<reference key="parent" ref="931038723"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">559</int>
+						<reference key="object" ref="677544345"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="94822105"/>
+						</object>
+						<reference key="parent" ref="931038723"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">560</int>
+						<reference key="object" ref="94822105"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="864578243"/>
+						</object>
+						<reference key="parent" ref="677544345"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">561</int>
+						<reference key="object" ref="864578243"/>
+						<reference key="parent" ref="94822105"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">526</int>
@@ -4469,6 +4545,13 @@
 					<string>526.IBPluginDependency</string>
 					<string>527.CustomClassName</string>
 					<string>527.IBPluginDependency</string>
+					<string>559.CustomClassName</string>
+					<string>559.IBPluginDependency</string>
+					<string>560.CustomClassName</string>
+					<string>560.IBAttributePlaceholdersKey</string>
+					<string>560.IBPluginDependency</string>
+					<string>561.CustomClassName</string>
+					<string>561.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -4547,7 +4630,7 @@
 					<string>PBGitRevisionCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{1003, 658}, {616, 285}}</string>
+					<string>{{74, 892}, {616, 285}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{132, 614}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4789,6 +4872,23 @@ IGhpc3Rvcnkgdmlldy4</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>KBDelayedPopUpButtonCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>KBPopUpToolbarItem</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>KBDelayedPopUpButton</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="94822105"/>
+							<string type="base64-UTF8" key="toolTip">Z2l0IG1lcmdlIDxicmFuY2ggcmVtb3RlIG9yIHRhZz4KClRoaXMgd2lsbCBtZXJnZSB0aGUgY3VyZW50
+bHkgY2hlY2tlZCBvdXQgaGVhZCB3aXRoIHRoZSBzZWxlY3RlZCBicmFuY2gsIHJlbW90ZSBvciB0YWcu
+CgpDaG9vc2UgYSByZW1vdGUgb3IgbG9jYWwgYnJhbmNoIGZyb20gdGhlIHBvcHVwIG1lbnUgb3Igcmln
+aHQgY2xpY2sgb24gYSBicmFuY2gsIHJlbW90ZSBvciB0YWcgaW4gdGhlIGhpc3Rvcnkgdmlldy4</string>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>KBDelayedPopUpButtonCell</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4811,7 +4911,7 @@ IGhpc3Rvcnkgdmlldy4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">558</int>
+			<int key="maxID">569</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5004,6 +5104,9 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>createBranchHere:</string>
 							<string>fetchCurrentRemote:</string>
 							<string>fetchFromRemote:</string>
+							<string>mergeWithBranch:</string>
+							<string>mergeWithCommit:</string>
+							<string>mergeWithRef:</string>
 							<string>pullCurrentRemote:</string>
 							<string>pullFromRemote:</string>
 							<string>pullRemoteForRef:</string>
@@ -5035,6 +5138,9 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
+							<string>NSMenuItem</string>
+							<string>PBRefMenuItem</string>
+							<string>PBRefMenuItem</string>
 							<string>id</string>
 							<string>NSMenuItem</string>
 							<string>PBRefMenuItem</string>
@@ -5069,6 +5175,7 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>errorMessage</string>
 							<string>fetchItem</string>
 							<string>historyController</string>
+							<string>mergeItem</string>
 							<string>newBranchName</string>
 							<string>newBranchSheet</string>
 							<string>newTagCommit</string>
@@ -5095,6 +5202,7 @@ IGhpc3Rvcnkgdmlldy4</string>
 							<string>NSTextField</string>
 							<string>KBPopUpToolbarItem</string>
 							<string>PBGitHistoryController</string>
+							<string>KBPopUpToolbarItem</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
 							<string>NSTextField</string>

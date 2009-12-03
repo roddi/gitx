@@ -32,6 +32,7 @@
 	NSString *remote = [commit.repository remoteForRefName:targetRef presentError:NO];
 	BOOL hasRemote = (remote ? YES : NO);
     NSString *activeBranch = [[commit.repository activeBranch] refName];
+    NSString *headRef = [[commit.repository headRef] refName];
     
 	if ([type isEqualToString:@"branch"]) {
         if (hasRemote) {        
@@ -68,8 +69,16 @@
     if ([commit isOnActiveBranch])
         [item setEnabled:NO];
     [array addObject:item];
+    
+    // merge HEAD with ref
+    item = [[PBRefMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Merge %@ with %@", headRef, targetRef]
+                                         action:@selector(mergeWithRef:)
+                                  keyEquivalent:@""];
+    if ([commit isOnActiveBranch])
+        [item setEnabled:NO];
+    [array addObject:item];
 
-    // delet ref
+    // delete ref
 	[array addObject:[[PBRefMenuItem alloc] initWithTitle:[@"Delete " stringByAppendingString:targetRef]
 												   action:@selector(showDeleteRefSheet:)
 											keyEquivalent: @""]];
@@ -109,6 +118,14 @@
     menuItem = [[PBRefMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rebase %@ starting here", activeBranch]
                                              action:@selector(rebaseOnUpstreamCommit:)
                                       keyEquivalent:@""];
+    if ([commit isOnActiveBranch])
+        [menuItem setEnabled:NO];
+    [items addObject:menuItem];
+    
+    // merge HEAD with commit
+    menuItem = [[PBRefMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Merge %@ here", headBranch]
+                                         action:@selector(mergeWithCommit:)
+                                  keyEquivalent:@""];
     if ([commit isOnActiveBranch])
         [menuItem setEnabled:NO];
     [items addObject:menuItem];

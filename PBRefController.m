@@ -16,6 +16,7 @@
 - (void)awakeFromNib
 {
     [checkoutItem setPopUpDelay:0.0];
+    [mergeItem setPopUpDelay:0.0];
 	[commitList registerForDraggedTypes:[NSArray arrayWithObject:@"PBGitRef"]];
 	[historyController addObserver:self forKeyPath:@"repository.branches" options:0 context:@"branchChange"];
 	[historyController addObserver:self forKeyPath:@"repository.currentBranch" options:0 context:@"currentBranchChange"];
@@ -119,9 +120,42 @@
 {
     PBGitRevSpecifier *rev = [sender representedObject];
     
-    if ([historyController.repository pushRemote:rev presentError:YES])
     [historyController.repository pushRemote:rev presentError:YES];
+}
+
+#pragma mark Merge
+
+// called by the contextual menu for branches
+- (void) mergeWithRef:(PBRefMenuItem *)sender
+{
+    PBGitRevSpecifier *rev = [[PBGitRevSpecifier alloc] initWithRef:[sender ref]];
+    
+    if ([historyController.repository mergeWithBranch:rev presentError:YES]) {
         [commitController rearrangeObjects];
+        [historyController updateView];
+    }
+}
+
+// called by the contextual menu for commits
+- (void) mergeWithCommit:(PBRefMenuItem *)sender
+{
+    PBGitCommit *commit = [sender commit];
+    
+    if ([historyController.repository mergeWithCommit:commit presentError:YES]) {
+        [commitController rearrangeObjects];
+        [historyController updateView];
+    }
+}
+
+// called by toolbar menu
+- (void) mergeWithBranch:(NSMenuItem *)sender
+{
+    PBGitRevSpecifier *rev = [sender representedObject];
+    
+    if ([historyController.repository mergeWithBranch:rev presentError:YES]) {
+        [commitController rearrangeObjects];
+        [historyController updateView];
+    }
 }
 
 #pragma mark Checkout
@@ -528,6 +562,12 @@
     [rebaseMenu insertItem:[[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rebase %@ starting at:", activeBranchName] action:nil keyEquivalent:@""] atIndex:0];
     [rebaseMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
     [rebaseItem setMenu:rebaseMenu];
+    
+    NSString *headRefName = [[historyController.repository headRef] refName];
+    NSMenu *mergeMenu = [PBRefMenuItem pullDownMenuForLocalBranches:localBranches remotes:remoteBranches tags:tags target:self action:@selector(mergeWithBranch:)];
+    [mergeMenu insertItem:[[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Merge %@ with:", headRefName] action:nil keyEquivalent:@""] atIndex:0];
+    [mergeMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
+    [mergeItem setMenu:mergeMenu];
 }
 
 # pragma mark Tableview delegate methods

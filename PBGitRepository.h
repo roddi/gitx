@@ -30,6 +30,8 @@
 - (BOOL) fetchRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
 - (BOOL) pullRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
 - (BOOL) pushRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) mergeWithBranch:(PBGitRevSpecifier *)branch presentError:(BOOL)shouldPresentError;
+- (BOOL) mergeWithCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
 - (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
 - (BOOL) cherryPickCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
 - (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onUpstream:(PBGitRevSpecifier *)upstream presentError:(BOOL)shouldPresentError;
