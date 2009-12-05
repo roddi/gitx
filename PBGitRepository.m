@@ -313,24 +313,27 @@ static NSString * repositoryBasePath = nil;
 {
     char const *hex = [[self headSHA] UTF8String];
     git_oid sha;
-    if (git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
+    if (hex && git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
         return [PBGitCommit commitWithRepository:self andSha:sha];
     return nil;
 }
 
 - (NSString *) realSHAForRev:(PBGitRevSpecifier *)rev
 {
-    if (![rev isSimpleRef])
-        return nil;
+    if ([rev isSimpleRef])
+        return [self outputForArguments:[NSArray arrayWithObjects:@"rev-list", @"-1", [rev refName], nil]];
+
+    if (![rev isAllBranchesRev] && ![rev isLocalBranchesRev])
+        return [self headSHA]; // detached head
     
-    return [self outputForArguments:[NSArray arrayWithObjects:@"rev-list", @"-1", [rev refName], nil]];
+    return nil;
 }
 
 - (PBGitCommit *) commitForRev:(PBGitRevSpecifier *)rev
 {
     char const *hex = [[self realSHAForRev:rev] UTF8String];
     git_oid sha;
-    if (git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
+    if (hex && git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
         return [PBGitCommit commitWithRepository:self andSha:sha];
     return nil;
 }
