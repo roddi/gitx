@@ -50,6 +50,7 @@
     
 	NSPipe* pipe = [NSPipe pipe];
 	[task setStandardOutput:pipe];
+	[task setStandardError:pipe];
 	return task;
 }
 
