@@ -415,13 +415,14 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSString *command = nil;
+    NSArray *args = nil;
     if ([remote isEqualToString:[rev simpleRef]]) 
-        command = [NSString stringWithFormat:@"fetch %@", remote];
+        args = [NSArray arrayWithObjects:@"fetch", remote, nil];
     else
-        command = [NSString stringWithFormat:@"fetch %@ %@", remote, branchName];
+        args = [NSArray arrayWithObjects:@"fetch", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
     NSLog(@"%s %@", _cmd, command);
-	NSString *rval = [self outputForCommand:command retValue:&ret];
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Fetch failed for %@/%@.", remote, branchName];
@@ -449,13 +450,14 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSString *command = nil;
+    NSArray *args = nil;
     if ([remote isEqualToString:[rev simpleRef]]) 
-        command = [NSString stringWithFormat:@"pull %@", remote];
+        args = [NSArray arrayWithObjects:@"pull", remote, nil];
     else
-        command = [NSString stringWithFormat:@"pull %@ %@", remote, branchName];
+        args = [NSArray arrayWithObjects:@"pull", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
     NSLog(@"%s %@", _cmd, command);
-	NSString *rval = [self outputForCommand:command retValue:&ret];
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Pull failed for %@/%@.", remote, branchName];
@@ -483,13 +485,14 @@ static NSString * repositoryBasePath = nil;
     }
     
 	int ret = 1;
-    NSString *command = nil;
+    NSArray *args = nil;
     if ([remote isEqualToString:[rev simpleRef]]) 
-        command = [NSString stringWithFormat:@"push %@", remote];
+        args = [NSArray arrayWithObjects:@"push", remote, nil];
     else
-        command = [NSString stringWithFormat:@"push %@ %@", remote, branchName];
+        args = [NSArray arrayWithObjects:@"push", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
     NSLog(@"%s %@", _cmd, command);
-	NSString *rval = [self outputForCommand:command retValue:&ret];
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
             NSString *description = [NSString stringWithFormat:@"Push failed for %@/%@.", remote, branchName];
