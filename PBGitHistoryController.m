@@ -7,6 +7,7 @@
 //
 
 #import "PBGitHistoryController.h"
+#import "PBRefController.h"
 #import "PBGitGrapher.h"
 #import "PBGitRevisionCell.h"
 #import "PBCommitList.h"
@@ -16,7 +17,7 @@
 @implementation PBGitHistoryController
 @synthesize selectedTab, webCommit, rawCommit, gitTree, commitController;
 
-// MARK: Quick Look panel support
+#pragma mark Quick Look panel support
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel;
 {
@@ -41,7 +42,7 @@
     previewPanel = nil;
 }
 
-// MARK: Quick Look panel data source
+#pragma mark Quick Look panel data source
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
@@ -53,7 +54,7 @@
     return [[treeController selectedObjects] objectAtIndex:index];
 }
 
-// MARK: Quick Look panel delegate
+#pragma mark Quick Look panel delegate
 
 - (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
 {
@@ -96,27 +97,36 @@
     return treeItem.iconImage;
 }
 
-// MARK: NSToolbarItemValidation Methods
+#pragma mark NSToolbarItemValidation Methods
 
-- (BOOL) validateToolbarItem:(NSToolbarItem *)theItem {
+- (BOOL) validateToolbarItem:(NSToolbarItem *)theItem
+{
+	NSArray *candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Fetch", nil];
     
-    NSString * curBranchDesc = [[repository currentBranch] description];
-    NSArray * candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Rebase", nil];
-    BOOL res;
+    if ([candidates containsObject:[theItem label]] && ![(KBPopUpToolbarItem *)theItem menu])
+        return NO;
     
-    if (([candidates containsObject:[theItem label]]) && 
-        (([curBranchDesc isEqualToString:@"All branches"]) || 
-         ([curBranchDesc isEqualToString:@"Local branches"])))
-    {
-        res = NO;
-    } else {
-        res = YES;
-    }
-    
-    return res;
+    return YES;
 }
 
-// MARK: PBGitHistoryController
+
+#pragma mark NSMenuValidation Methods
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    NSArray * candidates = [NSArray arrayWithObjects:@"Push", @"Pull", @"Rebase", @"Fetch", nil];
+    BOOL valid = YES;
+    
+    if ([candidates containsObject:[menuItem title]]) {
+        NSString *remote = [repository remoteForRefName:[[repository activeBranch] refName] presentError:NO];
+        if (!remote) {
+            valid = NO;
+        }
+    }
+    
+    return valid;
+}
+
+#pragma mark PBGitHistoryController
 
 - (void)awakeFromNib
 {
@@ -427,6 +437,42 @@
 	if(offset == 1)
 		return proposedMax - historySplitView.bottomViewMin;
 	return [sender frame].size.height;
+}
+
+#pragma mark Repository Menu Methods
+- (IBAction) fetchDefaultRemote:(id)sender
+{
+    [refController fetchCurrentRemote:sender];
+}
+
+- (IBAction) pullDefaultRemote:(id)sender
+{
+    [refController pullCurrentRemote:sender];
+}
+
+- (IBAction) rebaseDefaultRemote:(id)sender
+{
+    [refController rebaseCurrentBranch:sender];
+}
+
+- (IBAction) pushDefaultRemote:(id)sender
+{
+    [refController pushCurrentRemote:sender];
+}
+
+- (IBAction) createBranch:(id)sender
+{
+    [refController showCreateBranchSheet:sender];
+}
+
+- (IBAction) createTag:(id)sender
+{
+    [refController showCreateTagSheet:sender];
+}
+
+- (IBAction) addRemote:(id)sender
+{
+    [refController showAddRemoteSheet:sender];
 }
 
 @end

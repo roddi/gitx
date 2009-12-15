@@ -28,3 +28,14 @@ OBJC_EXTERN NSString * const PBMissingRemoteErrorMessage;
 OBJC_EXTERN const NSInteger PBFileReadingUnsupportedErrorCode;   /* @"Reading files is not supported." */
 OBJC_EXTERN const NSInteger PBNotAGitRepositoryErrorCode;        /* @"%@ does not appear to be a git repository." */
 OBJC_EXTERN const NSInteger PBGitBinaryNotFoundErrorCode;
+OBJC_EXTERN const NSInteger PBGitInvalidBranchErrorCode;         // branch does not have a remote configured
+OBJC_EXTERN const NSInteger PBGitFetchErrorCode;
+OBJC_EXTERN const NSInteger PBGitPullErrorCode;
+OBJC_EXTERN const NSInteger PBGitPushErrorCode;
+OBJC_EXTERN const NSInteger PBGitCheckoutErrorCode;
+OBJC_EXTERN const NSInteger PBGitCherryPickErrorCode;
+OBJC_EXTERN const NSInteger PBGitRebaseErrorCode;
+OBJC_EXTERN const NSInteger PBGitCreateBranchErrorCode;
+OBJC_EXTERN const NSInteger PBGitAddTagErrorCode;
+OBJC_EXTERN const NSInteger PBGitAddRemoteErrorCode;
+OBJC_EXTERN const NSInteger PBGitMergeErrorCode;

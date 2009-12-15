@@ -9,9 +9,23 @@
 #import "KBPopUpToolbarItem.h"
 
 @interface KBDelayedPopUpButtonCell : NSButtonCell
+{
+    NSTimeInterval delay;
+}
+- (void)setDelay:(NSTimeInterval)newDelay;
 @end
 
 @implementation KBDelayedPopUpButtonCell
+
+- awakeFromNib
+{
+    delay = 0.25;
+}
+
+- (void)setDelay:(NSTimeInterval)newDelay
+{
+    delay = newDelay;
+}
 
 - (NSPoint)menuPositionForFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
@@ -57,7 +71,7 @@
 		
 		// Set up timer for pop-up menu if we have one
 		if ([self menu])
-			endDate = [NSDate dateWithTimeIntervalSinceNow:0.6];
+			endDate = [NSDate dateWithTimeIntervalSinceNow:delay];
 		else
 			endDate = [NSDate distantFuture];
 		
@@ -115,6 +129,7 @@
 
 @end
 
+
 @interface KBDelayedPopUpButton : NSButton
 @end
 
@@ -130,11 +145,11 @@
 			if (title == nil) title = @"";			
 			[self setCell:[[[KBDelayedPopUpButtonCell alloc] initTextCell:title] autorelease]];
 			[[self cell] setControlSize:NSRegularControlSize];
+            [[self cell] setDelay:0.25];
 		}
 	}
 	return self;
 }
-
 @end
 
 
@@ -184,6 +199,11 @@
 - (NSMenu *)menu
 {
 	return [[self popupCell] menu];
+}
+
+- (void)setPopUpDelay:(NSTimeInterval)newDelay
+{
+    [[self popupCell] setDelay:newDelay];
 }
 
 - (void)setAction:(SEL)aSelector
@@ -239,27 +259,29 @@
 - (void)validate
 {
 	// First, make sure the toolbar image size fits the toolbar size mode; there must be a better place to do this!
-	NSToolbarSizeMode sizeMode = [[self toolbar] sizeMode];
-	float imgWidth = [[self image] size].width;
-	
-	if (sizeMode == NSToolbarSizeModeSmall && imgWidth != 24)
-	{
-		[[self popupCell] setImage:smallImage];
-	}
-	else if (sizeMode == NSToolbarSizeModeRegular && imgWidth == 24)
-	{
-		[[self popupCell] setImage:regularImage];
-	}
+    if (regularImage) {
+        NSToolbarSizeMode sizeMode = [[self toolbar] sizeMode];
+        float imgWidth = [[self image] size].width;
+        
+        if (sizeMode == NSToolbarSizeModeSmall && imgWidth != 24)
+        {
+            [[self popupCell] setImage:smallImage];
+        }
+        else if (sizeMode == NSToolbarSizeModeRegular && imgWidth == 24)
+        {
+            [[self popupCell] setImage:regularImage];
+        }
+    }
 	
 	if ([[self toolbar] delegate])
 	{
 		BOOL enabled = YES;
 		
 		if ([[[self toolbar] delegate] respondsToSelector:@selector(validateToolbarItem:)])
-			enabled = [[[self toolbar] delegate] validateToolbarItem:self];
+			enabled = [(id)[[self toolbar] delegate] validateToolbarItem:self];
 		
 		else if ([[[self toolbar] delegate] respondsToSelector:@selector(validateUserInterfaceItem:)])
-			enabled = [[[self toolbar] delegate] validateUserInterfaceItem:self];
+			enabled = [(id)[[self toolbar] delegate] validateUserInterfaceItem:self];
 		
 		[self setEnabled:enabled];
 	}

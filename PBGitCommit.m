@@ -13,6 +13,19 @@
 
 @synthesize repository, subject, timestamp, author, parentShas, nParents, sign, lineInfo;
 
+- (NSString *) description
+{
+    NSMutableString *description = [NSMutableString stringWithFormat:@"sha: %@\n", [self realSha]];
+    [description appendFormat:@"subject: %@\n", self.subject];
+    [description appendFormat:@"author: %@\n", self.author];
+    [description appendFormat:@"date: %@\n", self.date];
+    [description appendFormat:@"parents: %@\n", self.parents];
+    [description appendFormat:@"refs: %@\n", self.refs];
+    [description appendFormat:@"tree sha: %@\n", self.tree.sha];
+    
+    return [[description copy] autorelease];
+}
+
 - (NSArray *) parents
 {
 	if (nParents == 0)
@@ -111,6 +124,11 @@
 	return &sha;
 }
 
++ commitWithRepository:(PBGitRepository*) repo andSha:(git_oid)newSha
+{
+    return [[[self alloc] initWithRepository:repo andSha:newSha] autorelease];
+}
+
 - initWithRepository:(PBGitRepository*) repo andSha:(git_oid)newSha
 {
 	details = nil;
@@ -125,6 +143,40 @@
 	NSString *str = [NSString stringWithUTF8String:hex];
 	free(hex);
 	return str;
+}
+
+- (BOOL) isOnSameBranchAs:(PBGitCommit *)other
+{
+    if (!other)
+        return NO;
+    
+    NSString *mySHA = [self realSha];
+    NSString *otherSHA = [other	realSha];
+    
+    if ([otherSHA isEqualToString:mySHA])
+        return YES;
+    
+    NSString *commitRange = [NSString stringWithFormat:@"%@..%@", mySHA, otherSHA];
+    NSString *parentsOutput = [repository outputForArguments:[NSArray arrayWithObjects:@"rev-list", @"--parents", @"-1", commitRange, nil]];
+    if ([parentsOutput isEqualToString:@""]) {
+        return NO;
+    }
+    
+	NSString *mergeSHA = [repository outputForArguments:[NSArray arrayWithObjects:@"merge-base", mySHA, otherSHA, nil]];
+    if ([mergeSHA isEqualToString:mySHA] || [mergeSHA isEqualToString:otherSHA])
+        return YES;
+    
+    return NO;
+}
+
+- (BOOL) isOnHeadBranch
+{
+    return [self isOnSameBranchAs:[repository headCommit]];
+}
+
+- (BOOL) isOnActiveBranch
+{
+    return [self isOnSameBranchAs:[repository commitForRev:[repository activeBranch]]];
 }
 
 // FIXME: Remove this method once it's unused.

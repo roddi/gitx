@@ -10,4 +10,5 @@
 
 @protocol PBRefContextDelegate
 - (NSArray *) menuItemsForRef:(PBGitRef *)ref commit:(PBGitCommit *)commit;
+- (NSArray *) menuItemsForCommit:(PBGitCommit *)commit;
 @end

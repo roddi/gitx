@@ -133,7 +133,7 @@ static NSString * repositoryBasePath = nil;
 
 - (void) setup
 {
-	config = [[PBGitConfig alloc] initWithRepository:[[self fileURL] path]];
+	config = [[PBGitConfig alloc] initWithRepositoryPath:[[self fileURL] path]];
 	self.branches = [NSMutableArray array];
 	[self reloadRefs];
 	revisionList = [[PBGitRevList alloc] initWithRepository:self];
@@ -175,8 +175,13 @@ static NSString * repositoryBasePath = nil;
 	if (![[PBGitRef refFromString:[[self headRef] simpleRef]] type]) {
 		displayName = [NSString stringWithFormat:@"%@ (detached HEAD)", dirName];
 	} else {
-		displayName = [NSString stringWithFormat:@"%@ (branch: %@)", dirName,
-					 [[self headRef] description]];
+        NSString *headRef = [[self headRef] description];
+        NSString *remote = [self remoteForRefName:[[self headRef] refName] presentError:NO];
+        if (remote) {
+            displayName = [NSString stringWithFormat:@"%@ (branch: %@ — remote: %@)", dirName, headRef, remote];
+        } else {
+            displayName = [NSString stringWithFormat:@"%@ (branch: %@)", dirName, headRef];
+        }
 	}
 
 	return displayName;
@@ -298,9 +303,412 @@ static NSString * repositoryBasePath = nil;
 
 	return _headRef;
 }
+
+- (NSString *) headSHA
+{
+    return [self outputForCommand:@"rev-list -1 HEAD"];
+}
+
+- (PBGitCommit *) headCommit
+{
+    char const *hex = [[self headSHA] UTF8String];
+    git_oid sha;
+    if (hex && git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
+        return [PBGitCommit commitWithRepository:self andSha:sha];
+    return nil;
+}
+
+- (NSString *) realSHAForRev:(PBGitRevSpecifier *)rev
+{
+    if ([rev isSimpleRef])
+        return [self outputForArguments:[NSArray arrayWithObjects:@"rev-list", @"-1", [rev refName], nil]];
+
+    if (![rev isAllBranchesRev] && ![rev isLocalBranchesRev])
+        return [self headSHA]; // detached head
+    
+    return nil;
+}
+
+- (PBGitCommit *) commitForRev:(PBGitRevSpecifier *)rev
+{
+    char const *hex = [[self realSHAForRev:rev] UTF8String];
+    git_oid sha;
+    if (hex && git_oid_mkstr(&sha, hex) == GIT_SUCCESS)
+        return [PBGitCommit commitWithRepository:self andSha:sha];
+    return nil;
+}
+
+
+- (BOOL) checkRefFormat:(NSString *)refName
+{
+	int ret = 1;
+	[self outputForArguments:[NSArray arrayWithObjects:@"check-ref-format", refName, nil] retValue:&ret];
+    if (ret)
+        return NO;
+    return YES;
+}
+
+// the active branch is the currently viewed branch, unless the view is for all or local 
+// branches, in which case it's the currently checked out branch
+// this is used by some actions to determine what branch to act on
+- (PBGitRevSpecifier *)activeBranch
+{
+    if ([self.currentBranch isAllBranchesRev] || [self.currentBranch isLocalBranchesRev])
+        return [self headRef];
+    
+    return self.currentBranch;
+}
+
+- (void) readCurrentBranch
+{
+    PBGitRevSpecifier *branch = [self addBranch:[self headRef]];
+    if ([self.currentBranch isAllBranchesRev] || [self.currentBranch isLocalBranchesRev])
+        self.currentBranch = self.currentBranch; // cause KVO notification
+    else
+        self.currentBranch = branch;
+}
+
+- (NSString *) remoteForRefName:(NSString *)refName presentError:(BOOL)shouldPresentError
+{
+	NSString *remote = [[self config] valueForKeyPath:[NSString stringWithFormat:@"branch.%@.remote", refName]];
+    if (remote) 
+        return remote;
+    
+	int ret = 1;
+	NSString *rval = [self outputForCommand:@"remote" retValue:&ret];
+    if (![rval isEqualToString:@""]) {
+        NSArray *remotes = [rval componentsSeparatedByString:@"\n"];
+        for (NSString *remoteName in remotes) {
+        	if ([remoteName isEqualToString:refName])
+                return refName;
+        }
+    }
+    
+    if (shouldPresentError) {
+        NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitInvalidBranchErrorCode 
+                                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [NSString stringWithFormat:@"No remote configured for %@.", refName], NSLocalizedDescriptionKey,
+                                                   PBInvalidBranchErrorMessage, NSLocalizedRecoverySuggestionErrorKey,
+                                                   nil]];
+        [self.windowController showErrorSheet:error];
+    }
+    return nil;
+}
+
+- (NSString *) workingDirectory
+{
+    NSString * dotGitSuffix = @"/.git";
+	if ([[[self fileURL] path] hasSuffix:dotGitSuffix])
+		return [[[self fileURL] path] substringToIndex:[[[self fileURL] path] length] - [dotGitSuffix length]];
+	else if ([[self outputForCommand:@"rev-parse --is-inside-work-tree"] isEqualToString:@"true"])
+		return [PBGitBinary path];
+	
+	return nil;
+}	
+
+#pragma mark Repository commands
+
+- (BOOL) fetchRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError
+{
+    NSString *branchName = [rev refName];
+	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
+    if (!remote) {
+        NSLog(@"%s branch: %@", _cmd, branchName);
+        return NO;
+    }
+    
+	int ret = 1;
+    NSArray *args = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        args = [NSArray arrayWithObjects:@"fetch", remote, nil];
+    else
+        args = [NSArray arrayWithObjects:@"fetch", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Fetch failed for %@/%@.", remote, branchName];
+            NSString *info = [NSString stringWithFormat:@"There was an error fetching from the remote repository.\n\ncommand: git $@\n%d\n%@", command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitFetchErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) pullRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError
+{
+    NSString *branchName = [rev refName];
+	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
+    if (!remote) {
+        NSLog(@"%s branch: %@", _cmd, branchName);
+        return NO;
+    }
+    
+	int ret = 1;
+    NSArray *args = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        args = [NSArray arrayWithObjects:@"pull", remote, nil];
+    else
+        args = [NSArray arrayWithObjects:@"pull", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Pull failed for %@/%@.", remote, branchName];
+            NSString *info = [NSString stringWithFormat:@"There was an error pulling from the remote repository.\n\ncommand: git %@\n%d\n%@", command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitPullErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) pushRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError
+{
+    NSString *branchName = [rev refName];
+	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
+    if (!remote) {
+        NSLog(@"%s branch: %@", _cmd, branchName);
+        return NO;
+    }
+    
+	int ret = 1;
+    NSArray *args = nil;
+    if ([remote isEqualToString:[rev simpleRef]]) 
+        args = [NSArray arrayWithObjects:@"push", remote, nil];
+    else
+        args = [NSArray arrayWithObjects:@"push", remote, branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Push failed for %@/%@.", remote, branchName];
+            NSString *info = [NSString stringWithFormat:@"There was an error pushing to the remote repository.\n\ncommand: git %@\n%d\n%@", command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitPushErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) mergeWithBranch:(PBGitRevSpecifier *)branch presentError:(BOOL)shouldPresentError
+{
+    NSString *branchName = [branch refName];
+    
+    int ret = 1;
+    NSArray *args = [NSArray arrayWithObjects:@"merge", branchName, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+    NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Merge failed for %@.", branchName];
+            NSString *info = [NSString stringWithFormat:@"There was an error merging %@ with %@.\n\ncommand: git %@\n%d\n%@", [[self headRef] refName], branchName, command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitMergeErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+        return NO;
+    }
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) mergeWithCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError
+{
+    NSString *commitSHA = [commit realSha];
+    
+    int ret = 1;
+    NSArray *args = [NSArray arrayWithObjects:@"merge", commitSHA, nil];
+    NSString *command = [args componentsJoinedByString:@" "];
+    NSLog(@"%s %@", _cmd, command);
+    NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+    if (ret) {
+        if (shouldPresentError) {
+            NSString *shortSHA = [commitSHA substringToIndex:8];
+            NSString *description = [NSString stringWithFormat:@"Merge failed for %@.", shortSHA];
+            NSString *info = [NSString stringWithFormat:@"There was an error merging %@ with %@.\n\ncommand: git %@\n%d\n%@", [[self headRef] refName], shortSHA, command, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitMergeErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+        return NO;
+    }
+    [self reloadRefs];
+    return YES;
+}
+
+- (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError
+{
+	int ret = 1;
+	NSString *rval = [self outputInWorkdirForArguments:[NSArray arrayWithObjects:@"checkout", refName, nil] retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *info = [NSString stringWithFormat:@"There was an error checking out the branch or commit. Perhaps your working directory is not clean?\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitCheckoutErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       @"Checkout failed.", NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+	[self readCurrentBranch];
+    return YES;
+}
+
+// cherry pick only applies to the currently checked out branch
+- (BOOL) cherryPickCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError
+{
+	int ret = 1;
+	NSString *rval = [self outputInWorkdirForArguments:[NSArray arrayWithObjects:@"cherry-pick", [commit realSha], nil] retValue: &ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *info = [NSString stringWithFormat:@"There was an error applying the commit to the branch. Perhaps your working directory is not clean?\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitCherryPickErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       @"Cherry pick failed.", NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+	[self readCurrentBranch];
+    return YES;
+}
+
+// a nil upstream means the default remote branch
+// a nil branch means the head ref
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onUpstream:(PBGitRevSpecifier *)upstream presentError:(BOOL)shouldPresentError
+{
+    NSString *branchRefName = nil;
+    if (branch)
+        branchRefName = [branch refName];
+    else
+        branchRefName = [[self headRef] refName];
+    
+    NSString *upstreamRefName = nil;
+    if (upstream)
+        upstreamRefName = [upstream refName];
+    else {
+        NSString *remote = [self remoteForRefName:branchRefName presentError:shouldPresentError];
+        if (!remote) {
+            NSLog(@"%s branch: %@", _cmd, branchRefName);
+            return NO;
+        }
+        upstreamRefName = [NSString stringWithFormat:@"%@/%@", remote, branchRefName];
+    }
+    
+	int ret = 1;
+    NSArray * args = [NSArray arrayWithObjects:@"rebase", upstreamRefName, branchRefName, nil]; 
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Rebase of %@ on %@ failed.", branchRefName, upstreamRefName];
+            NSString *info = [NSString stringWithFormat:@"There was an error rebasing the branch.\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitRebaseErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+    [self readCurrentBranch];
+    return YES;
+}
+
+// a nil branch means the head ref
+// a nil onSHA is not allowed
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onSHA:(NSString *)upstreamSHA presentError:(BOOL)shouldPresentError
+{
+    if (!upstreamSHA)
+        return NO;
+        
+    NSString *branchRefName = nil;
+    if (branch)
+        branchRefName = [branch refName];
+    else
+        branchRefName = [[self headRef] refName];
+    
+	int ret = 1;
+    NSArray * args = [NSArray arrayWithObjects:@"rebase", upstreamSHA, branchRefName, nil]; 
+	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Rebase of %@ on %@ failed.", branchRefName, [upstreamSHA substringToIndex:8]];
+            NSString *info = [NSString stringWithFormat:@"There was an error rebasing the branch.\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitRebaseErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+    [self readCurrentBranch];
+    return YES;
+}
+
+- (BOOL) createBranch:(NSString *)branchRefName onSHA:(NSString *)sha presentError:(BOOL)shouldPresentError
+{
+	int ret = 1;
+	NSString *rval = [self outputForArguments:[NSArray arrayWithObjects:@"update-ref", @"-mCreate branch from GitX", branchRefName, sha, @"0000000000000000000000000000000000000000", nil] retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Create Branch failed for %@.", branchRefName];
+            NSString *info = [NSString stringWithFormat:@"There was an error creatin a branch in the repository.\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitCreateBranchErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+    [self reloadRefs];
+    return YES;
+}
 		
 // Returns either this object, or an existing, equal object
-- (PBGitRevSpecifier*) addBranch: (PBGitRevSpecifier*) rev
+- (PBGitRevSpecifier*) addBranch:(PBGitRevSpecifier*)rev
 {
 	if ([[rev parameters] count] == 0)
 		rev = [self headRef];
@@ -316,7 +724,7 @@ static NSString * repositoryBasePath = nil;
 	return rev;
 }
 
-- (BOOL)removeBranch:(PBGitRevSpecifier *)rev
+- (BOOL) removeBranch:(PBGitRevSpecifier *)rev
 {
 	for (PBGitRevSpecifier *r in branches) {
 		if ([rev isEqualTo:r]) {
@@ -328,22 +736,64 @@ static NSString * repositoryBasePath = nil;
 	}
 	return FALSE;
 }
-	
-- (void) readCurrentBranch
-{
-		self.currentBranch = [self addBranch: [self headRef]];
+
+- (BOOL) addTag:(NSString *)tagName message:(NSString *)message forCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError
+{    
+    NSMutableArray *arguments = [NSMutableArray arrayWithObject:@"tag"];
+    
+    // if there is a message then make this an annotated tag
+    if (message && ![message isEqualToString:@""]) {
+        [arguments addObject:@"-a"];
+        [arguments addObject:[@"-m" stringByAppendingString:message]];
+    }
+    
+    [arguments addObject:tagName];
+    
+    if (commit)
+        [arguments addObject:[commit realSha]];
+    
+	int ret = 1;
+	NSString *rval = [self outputForArguments:arguments retValue:&ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Add Tag failed for %@.", tagName];
+            NSString *info = [NSString stringWithFormat:@"There was an error adding the tag.\n\n%d\n%@", ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitAddTagErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+    return YES;
 }
 
-- (NSString *) workingDirectory
+- (BOOL) addRemote:(NSString *)remoteName forURL:(NSString *)remoteURL presentError:(BOOL)shouldPresentError
 {
-    NSString * dotGitSuffix = @"/.git";
-	if ([[[self fileURL] path] hasSuffix:dotGitSuffix])
-		return [[[self fileURL] path] substringToIndex:[[[self fileURL] path] length] - [dotGitSuffix length]];
-	else if ([[self outputForCommand:@"rev-parse --is-inside-work-tree"] isEqualToString:@"true"])
-		return [PBGitBinary path];
-	
-	return nil;
-}		
+	int ret = 1;
+	NSString *rval = [self outputInWorkdirForArguments:[NSArray arrayWithObjects:@"remote",  @"add", @"-f", remoteName, remoteURL, nil] retValue: &ret];
+	if (ret) {
+        if (shouldPresentError) {
+            NSString *description = [NSString stringWithFormat:@"Add Remote failed for %@.", remoteName];
+            NSString *info = [NSString stringWithFormat:@"There was an error adding the remote.\nURL: %@\n\n%d\n%@", remoteURL, ret, rval];
+            NSError *error = [NSError errorWithDomain:PBGitXErrorDomain code:PBGitAddRemoteErrorCode 
+                                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       description, NSLocalizedDescriptionKey,
+                                                       info, NSLocalizedRecoverySuggestionErrorKey,
+                                                       nil]];
+            [self.windowController showErrorSheet:error];
+        }
+		return NO;
+	}
+	[self reloadRefs];
+    return YES;
+}	
+
+
+#pragma mark low level 
 
 - (int) returnValueForCommand:(NSString *)cmd
 {

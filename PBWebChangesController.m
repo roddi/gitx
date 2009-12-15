@@ -77,7 +77,7 @@
 				     [NSNumber numberWithBool:selectedFileIsCached], nil]];
 }
 
-- (void)stageHunk:(NSString *)hunk reverse:(BOOL)reverse
+- (void) stageHunk:(NSString *)hunk reverse:(BOOL)reverse
 {
 	[controller.index applyPatch:hunk stage:YES reverse:reverse];
 	// FIXME: Don't need a hard refresh
@@ -85,21 +85,35 @@
 	[self refresh];
 }
 
-- (void)discardHunk:(NSString *)hunk altKey:(BOOL)altKey
+- (void) discardHunk:(NSString *)hunk
 {
-	int ret = NSAlertDefaultReturn;
-	if (!altKey) {
-		ret = [[NSAlert alertWithMessageText:@"Discard hunk"
-			defaultButton:nil
-			alternateButton:@"Cancel"
-			otherButton:nil
-			informativeTextWithFormat:@"Are you sure you wish to discard the changes in this hunk?\n\nYou cannot undo this operation."] runModal];
-	}
+    [controller.index applyPatch:hunk stage:NO reverse:YES];
+    [self refresh];
+}
 
-	if (ret == NSAlertDefaultReturn) {
-		[controller.index applyPatch:hunk stage:NO reverse:YES];
-		[self refresh];
-	}
+- (void) discardHunkAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [[alert window] orderOut:nil];
+    
+	if (returnCode == NSAlertDefaultReturn)
+		[self discardHunk:contextInfo];
+}
+
+- (void) discardHunk:(NSString *)hunk altKey:(BOOL)altKey
+{
+	if (!altKey) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Discard hunk" 
+                                         defaultButton:nil 
+                                       alternateButton:@"Cancel" 
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Are you sure you wish to discard the changes in this hunk?\n\nYou cannot undo this operation."];
+		[alert beginSheetModalForWindow:[[controller view] window] 
+                          modalDelegate:self 
+                         didEndSelector:@selector(discardHunkAlertDidEnd:returnCode:contextInfo:)
+                            contextInfo:hunk];
+	} else {
+        [self discardHunk:hunk];
+    }
 }
 
 - (void) setStateMessage:(NSString *)state
