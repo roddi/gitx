@@ -962,7 +962,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=$PATH:$HOME/bin:$HOME/local/bin:/sw/bin:/opt/local/bin:`\"$TARGET_BUILD_DIR\"/gitx --git-path`\ngit submodule init\ngit submodule update\ncd libgit2\nrm -f libgit2.a\nmake CFLAGS=\"-arch i386 -arch ppc\"\nranlib libgit2.a";
+			shellScript = "export PATH=$PATH:$HOME/bin:$HOME/local/bin:/sw/bin:/opt/local/bin:`\"$TARGET_BUILD_DIR\"/gitx --git-path`\ncd libgit2\nrm -f libgit2.a\nmake CFLAGS=\"-arch i386 -arch ppc -arch x86_64\"\nranlib libgit2.a";
 		};
 		F5CF04A20EAE696C00D75C81 /* Copy HTML files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1225,6 +1225,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 654D18EF108C9597008D960C /* Install.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1244,7 +1245,9 @@
 				INFOPLIST_PREPROCESS = YES;
 				LIBRARY_SEARCH_PATHS = libgit2;
 				LLVM_LTO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GitX;
+				SDKROOT = "";
 				STRIP_INSTALLED_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
