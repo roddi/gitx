@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
 		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
@@ -15,14 +15,14 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>732</string>
-				<string>732</string>
+				<string>740</string>
+				<string>740</string>
 			</object>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="354"/>
-			<integer value="3"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -217,7 +217,11 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<object class="NSFont" key="NSSupport" id="78660763">
+																<string key="NSName">LucidaGrande</string>
+																<double key="NSSize">12</double>
+																<int key="NSfFlags">16</int>
+															</object>
 															<reference key="NSControlView" ref="254268962"/>
 															<object class="NSColor" key="NSBackgroundColor" id="827363147">
 																<int key="NSColorSpace">6</int>
@@ -256,7 +260,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="78660763"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -290,7 +294,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="78660763"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -316,7 +320,7 @@
 															<int key="NSCellFlags">337772096</int>
 															<int key="NSCellFlags2">2048</int>
 															<string key="NSContents">Text Cell</string>
-															<reference key="NSSupport" ref="924107556"/>
+															<reference key="NSSupport" ref="78660763"/>
 															<reference key="NSControlView" ref="254268962"/>
 															<reference key="NSBackgroundColor" ref="827363147"/>
 															<reference key="NSTextColor" ref="57062640"/>
@@ -339,7 +343,7 @@
 														<bytes key="NSWhite">MC41AA</bytes>
 													</object>
 												</object>
-												<double key="NSRowHeight">16</double>
+												<double key="NSRowHeight">18</double>
 												<int key="NSTvFlags">-683671552</int>
 												<reference key="NSDelegate"/>
 												<reference key="NSDataSource"/>
@@ -402,7 +406,7 @@
 								<reference key="NSContentView" ref="546023969"/>
 								<reference key="NSHeaderClipView" ref="906093892"/>
 								<reference key="NSCornerView" ref="806470424"/>
-								<bytes key="NSScrollAmts">QSAAAEEgAABBkAAAQZAAAA</bytes>
+								<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 							</object>
 							<object class="NSTabView" id="135073984">
 								<reference key="NSNextResponder" ref="202620420"/>
@@ -1352,7 +1356,7 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{25, 25}</string>
-							<string key="NSToolbarItemMaxSize">{35, 25}</string>
+							<string key="NSToolbarItemMaxSize">{38, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -1394,7 +1398,7 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{25, 25}</string>
-							<string key="NSToolbarItemMaxSize">{35, 25}</string>
+							<string key="NSToolbarItemMaxSize">{38, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -1520,7 +1524,7 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{25, 25}</string>
-							<string key="NSToolbarItemMaxSize">{35, 25}</string>
+							<string key="NSToolbarItemMaxSize">{38, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -4630,7 +4634,7 @@
 					<string>PBGitRevisionCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{74, 892}, {616, 285}}</string>
+					<string>{{74, 721}, {616, 285}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{132, 614}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4784,7 +4788,7 @@ aGUgY3VycmVudCBicmFuY2ggd2lsbCBiZSB0aGUgYnJhbmNoIHRoYXQgaXMgY2hlY2tlZCBvdXQuA</s
 					<string>{1000, 700}</string>
 					<string>{400, 300}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{736, 195}, {852, 432}}</string>
+					<string>{{163, 210}, {852, 432}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
