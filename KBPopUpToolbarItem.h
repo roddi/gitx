@@ -21,4 +21,5 @@
 }
 - (void)setMenu:(NSMenu *)menu;
 - (NSMenu *)menu;
+- (void)setPopUpDelay:(NSTimeInterval)delay;
 @end

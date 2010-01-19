@@ -50,8 +50,7 @@
     
 	NSPipe* pipe = [NSPipe pipe];
 	[task setStandardOutput:pipe];
-   [task setStandardError:pipe];
-   
+	[task setStandardError:pipe];
 	return task;
 }
 
@@ -75,6 +74,8 @@
     NSFileHandle * handle = [[task standardOutput] fileHandleForReading];
 
     if (input) {
+        if (([[NSUserDefaults standardUserDefaults] boolForKey:@"Show Debug Messages"]) || (getenv("PBDebugEnabled"))) 
+        	NSLog(@"Standard input:\n%@", input);
         [task setStandardInput:[NSPipe pipe]];
         NSFileHandle * inHandle = [task.standardInput fileHandleForWriting];
         [inHandle writeData:[input dataUsingEncoding:NSUTF8StringEncoding]];

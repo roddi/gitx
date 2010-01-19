@@ -20,10 +20,13 @@
 
 - (BOOL) isSimpleRef;
 - (NSString*) simpleRef;
+- (NSString *) refName;
 - (BOOL) hasPathLimiter;
 - (BOOL) hasLeftRight;
 
 - (BOOL) isEqualTo: (PBGitRevSpecifier*) other;
+- (BOOL) isAllBranchesRev;
+- (BOOL) isLocalBranchesRev;
 
 + (PBGitRevSpecifier *)allBranchesRevSpec;
 + (PBGitRevSpecifier *)localBranchesRevSpec;

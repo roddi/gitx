@@ -56,6 +56,10 @@
 		93CB42C20EAB7B2200530609 /* PBGitDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB42C10EAB7B2200530609 /* PBGitDefaults.m */; };
 		93F7857F0EA3ABF100C1F443 /* PBCommitMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */; };
 		D26DC6450E782C9000C777B2 /* gitx.icns in Resources */ = {isa = PBXBuildFile; fileRef = D26DC6440E782C9000C777B2 /* gitx.icns */; };
+		D8342DDC10C77561009A00F8 /* MergePopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */; };
+		D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8701E0D10ADFED70073689C /* ScriptingBridge.framework */; };
+		D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */; };
+		D8701EDE10AE393B0073689C /* CheckoutPopUpTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D8701EDD10AE393B0073689C /* CheckoutPopUpTemplate.png */; };
 		D8E41F1410A7B023007BB8FC /* KBPopUpToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */; };
 		EB2A734A0FEE3F09006601CF /* PBCollapsibleSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A73490FEE3F09006601CF /* PBCollapsibleSplitView.m */; };
 		F50A411F0EBB874C00208746 /* mainSplitterBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F50A411D0EBB874C00208746 /* mainSplitterBar.tiff */; };
@@ -233,6 +237,11 @@
 		93F7857E0EA3ABF100C1F443 /* PBCommitMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBCommitMessageView.m; sourceTree = "<group>"; };
 		93FCCBA80EA8AF450061B02B /* PBGitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBGitConfig.m; sourceTree = "<group>"; };
 		D26DC6440E782C9000C777B2 /* gitx.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gitx.icns; sourceTree = "<group>"; };
+		D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MergePopUpTemplate.png; path = Images/MergePopUpTemplate.png; sourceTree = "<group>"; };
+		D8701DF810ADF7410073689C /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
+		D8701E0D10ADFED70073689C /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
+		D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FetchPopUpTemplate.png; path = Images/FetchPopUpTemplate.png; sourceTree = "<group>"; };
+		D8701EDD10AE393B0073689C /* CheckoutPopUpTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckoutPopUpTemplate.png; path = Images/CheckoutPopUpTemplate.png; sourceTree = "<group>"; };
 		D8E41F1210A7B019007BB8FC /* KBPopUpToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopUpToolbarItem.h; sourceTree = "<group>"; };
 		D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPopUpToolbarItem.m; sourceTree = "<group>"; };
 		EB2A73480FEE3F09006601CF /* PBCollapsibleSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBCollapsibleSplitView.h; sourceTree = "<group>"; };
@@ -349,6 +358,7 @@
 				F5E4DBFB0EAB58D90013FAFC /* SystemConfiguration.framework in Frameworks */,
 				F5C580E50EDA250900995434 /* libgit2.a in Frameworks */,
 				65C77FA0108BF560003BD3B5 /* Quartz.framework in Frameworks */,
+				D8701E0E10ADFED70073689C /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +415,7 @@
 				77C82804067257F0000B614F /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				D8701E0D10ADFED70073689C /* ScriptingBridge.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -446,12 +457,15 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D8701E8C10AE24340073689C /* FetchPopUpTemplate.png */,
 				653D949D109C257500B26705 /* RebaseTemplate.png */,
+				D8701EDD10AE393B0073689C /* CheckoutPopUpTemplate.png */,
 				653D949F109C27D400B26705 /* PullTemplate.png */,
 				653D94A0109C27D400B26705 /* PushTemplate.png */,
 				652C162410A94D0800B80380 /* PullPopUpTemplate.png */,
 				652C162510A94D0800B80380 /* PushPopUpTemplate.png */,
 				652C162610A94D0800B80380 /* RebasePopUpTemplate.png */,
+				D8342DDB10C77561009A00F8 /* MergePopUpTemplate.png */,
 				653D94A4109C42A500B26705 /* CloneRepositoryTemplate.png */,
 				3BC07F4A0ED5A5C5009A7768 /* HistoryViewTemplate.png */,
 				3BC07F4B0ED5A5C5009A7768 /* CommitViewTemplate.png */,
@@ -626,6 +640,7 @@
 				653D9309109BEAFE00B26705 /* PBGitXErrors.m */,
 				D8E41F1210A7B019007BB8FC /* KBPopUpToolbarItem.h */,
 				D8E41F1310A7B023007BB8FC /* KBPopUpToolbarItem.m */,
+				D8701DF810ADF7410073689C /* Terminal.h */,
 			);
 			name = Aux;
 			sourceTree = "<group>";
@@ -885,6 +900,9 @@
 				652C162710A94D0800B80380 /* PullPopUpTemplate.png in Resources */,
 				652C162810A94D0800B80380 /* PushPopUpTemplate.png in Resources */,
 				652C162910A94D0800B80380 /* RebasePopUpTemplate.png in Resources */,
+				D8701E8D10AE24340073689C /* FetchPopUpTemplate.png in Resources */,
+				D8701EDE10AE393B0073689C /* CheckoutPopUpTemplate.png in Resources */,
+				D8342DDC10C77561009A00F8 /* MergePopUpTemplate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +962,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=$PATH:$HOME/bin:$HOME/local/bin:/sw/bin:/opt/local/bin:`\"$TARGET_BUILD_DIR\"/gitx --git-path`\ngit submodule init\ngit submodule update\ncd libgit2\nrm -f libgit2.a\nmake CFLAGS=\"-arch i386 -arch ppc\"\nranlib libgit2.a";
+			shellScript = "export PATH=$PATH:$HOME/bin:$HOME/local/bin:/sw/bin:/opt/local/bin:`\"$TARGET_BUILD_DIR\"/gitx --git-path`\ncd libgit2\nrm -f libgit2.a\nmake CFLAGS=\"-arch i386 -arch ppc -arch x86_64\"\nranlib libgit2.a";
 		};
 		F5CF04A20EAE696C00D75C81 /* Copy HTML files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1207,6 +1225,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 654D18EF108C9597008D960C /* Install.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1226,7 +1245,9 @@
 				INFOPLIST_PREPROCESS = YES;
 				LIBRARY_SEARCH_PATHS = libgit2;
 				LLVM_LTO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GitX;
+				SDKROOT = "";
 				STRIP_INSTALLED_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

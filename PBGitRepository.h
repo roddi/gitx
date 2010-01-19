@@ -13,6 +13,7 @@
 #import "PBGitXErrors.h"
 
 @class PBGitWindowController;
+@class PBGitCommit;
 
 @interface PBGitRepository : NSDocument {
 	PBGitRevList* revisionList;
@@ -25,6 +26,21 @@
 
 	PBGitRevSpecifier *_headRef; // Caching
 }
+
+- (BOOL) fetchRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) pullRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) pushRemote:(PBGitRevSpecifier *)rev presentError:(BOOL)shouldPresentError;
+- (BOOL) mergeWithBranch:(PBGitRevSpecifier *)branch presentError:(BOOL)shouldPresentError;
+- (BOOL) mergeWithCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
+- (BOOL) checkoutRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
+- (BOOL) cherryPickCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onUpstream:(PBGitRevSpecifier *)upstream presentError:(BOOL)shouldPresentError;
+- (BOOL) rebaseBranch:(PBGitRevSpecifier *)branch onSHA:(NSString *)upstreamSHA presentError:(BOOL)shouldPresentError;
+- (BOOL) createBranch:(NSString *)branchRefName onSHA:(NSString *)sha presentError:(BOOL)shouldPresentError;
+- (PBGitRevSpecifier*) addBranch:(PBGitRevSpecifier*)rev;
+- (BOOL) removeBranch:(PBGitRevSpecifier *)rev;
+- (BOOL) addTag:(NSString *)tagName message:(NSString *)message forCommit:(PBGitCommit *)commit presentError:(BOOL)shouldPresentError;
+- (BOOL) addRemote:(NSString *)remoteName forURL:(NSString *)remoteURL presentError:(BOOL)shouldPresentError;
 
 - (NSFileHandle*) handleForCommand:(NSString*) cmd;
 - (NSFileHandle*) handleForArguments:(NSArray*) args;
@@ -50,10 +66,15 @@
 - (void) addRef:(PBGitRef *)ref fromParameters:(NSArray *)params;
 - (void) lazyReload;
 - (PBGitRevSpecifier*) headRef;
+- (NSString *) headSHA;
+- (PBGitCommit *) headCommit;
+- (NSString *) realSHAForRev:(PBGitRevSpecifier *)rev;
+- (PBGitCommit *) commitForRev:(PBGitRevSpecifier *)rev;
+- (NSString *) remoteForRefName:(NSString *)refName presentError:(BOOL)shouldPresentError;
+- (BOOL) checkRefFormat:(NSString *)refName;
 
 - (void) readCurrentBranch;
-- (PBGitRevSpecifier*) addBranch: (PBGitRevSpecifier*) rev;
-- (BOOL)removeBranch:(PBGitRevSpecifier *)rev;
+- (PBGitRevSpecifier *)activeBranch;
 
 - (NSString*) parseSymbolicReference:(NSString*) ref;
 - (NSString*) parseReference:(NSString*) ref;
