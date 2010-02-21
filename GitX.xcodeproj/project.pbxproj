@@ -160,7 +160,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 551BF110112F371800265053 /* gitx_askpasswd */;
+			remoteGlobalIDString = 551BF110112F371800265053;
 			remoteInfo = gitx_askpasswd;
 		};
 		913D5E590E5564F400CECEA2 /* PBXContainerItemProxy */ = {
