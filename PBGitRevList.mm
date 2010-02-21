@@ -191,8 +191,8 @@ using namespace std;
 			[self performSelectorOnMainThread:@selector(setCommits:) withObject:revisions waitUntilDone:NO];
 	}
 	
-	NSTimeInterval duration = [[NSDate date] timeIntervalSinceDate:start];
 #ifdef DEBUG_BUILD
+	NSTimeInterval duration = [[NSDate date] timeIntervalSinceDate:start];
     NSLog(@"Loaded %i commits in %f seconds", num, duration);
 #endif
 	// Make sure the commits are stored before exiting.
