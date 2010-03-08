@@ -17,7 +17,7 @@
 
 @implementation KBDelayedPopUpButtonCell
 
-- awakeFromNib
+-(void) awakeFromNib
 {
     delay = 0.25;
 }
