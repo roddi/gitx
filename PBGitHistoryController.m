@@ -458,7 +458,6 @@
 - (IBAction) pushDefaultRemote:(id)sender
 {
     [refController pushCurrentRemote:sender];
-	[self refresh: sender];
 }
 
 - (IBAction) createBranch:(id)sender
