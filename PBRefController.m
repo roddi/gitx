@@ -113,6 +113,7 @@
     PBGitRevSpecifier *rev = [historyController.repository activeBranch];
     
     [historyController.repository pushRemote:rev presentError:YES];
+    [historyController updateView];
 }
 
 // called by toolbar menu
