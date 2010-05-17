@@ -229,7 +229,7 @@ static NSString * repositoryBasePath = nil;
 		sha = [components objectAtIndex:2];
 
 	NSMutableArray* curRefs;
-	if (curRefs = [refs objectForKey:sha])
+	if ((curRefs = [refs objectForKey:sha]))
 		[curRefs addObject:ref];
 	else
 		[refs setObject:[NSMutableArray arrayWithObject:ref] forKey:sha];
@@ -413,7 +413,7 @@ static NSString * repositoryBasePath = nil;
     NSString *branchName = [rev refName];
 	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
     if (!remote) {
-        NSLog(@"%s branch: %@", _cmd, branchName);
+        NSLog(@"%@ branch: %@", NSStringFromSelector(_cmd), branchName);
         return NO;
     }
     
@@ -424,7 +424,7 @@ static NSString * repositoryBasePath = nil;
     else
         args = [NSArray arrayWithObjects:@"fetch", remote, branchName, nil];
     NSString *command = [args componentsJoinedByString:@" "];
-    NSLog(@"%s %@", _cmd, command);
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), command);
 	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
@@ -448,7 +448,7 @@ static NSString * repositoryBasePath = nil;
     NSString *branchName = [rev refName];
 	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
     if (!remote) {
-        NSLog(@"%s branch: %@", _cmd, branchName);
+        NSLog(@"%@ branch: %@", NSStringFromSelector(_cmd), branchName);
         return NO;
     }
     
@@ -459,7 +459,7 @@ static NSString * repositoryBasePath = nil;
     else
         args = [NSArray arrayWithObjects:@"pull", remote, branchName, nil];
     NSString *command = [args componentsJoinedByString:@" "];
-    NSLog(@"%s %@", _cmd, command);
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), command);
 	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
@@ -483,7 +483,7 @@ static NSString * repositoryBasePath = nil;
     NSString *branchName = [rev refName];
 	NSString *remote = [self remoteForRefName:branchName presentError:shouldPresentError];
     if (!remote) {
-        NSLog(@"%s branch: %@", _cmd, branchName);
+        NSLog(@"%@ branch: %@", NSStringFromSelector(_cmd), branchName);
         return NO;
     }
     
@@ -494,7 +494,7 @@ static NSString * repositoryBasePath = nil;
     else
         args = [NSArray arrayWithObjects:@"push", remote, branchName, nil];
     NSString *command = [args componentsJoinedByString:@" "];
-    NSLog(@"%s %@", _cmd, command);
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), command);
 	NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
 	if (ret) {
         if (shouldPresentError) {
@@ -520,7 +520,7 @@ static NSString * repositoryBasePath = nil;
     int ret = 1;
     NSArray *args = [NSArray arrayWithObjects:@"merge", branchName, nil];
     NSString *command = [args componentsJoinedByString:@" "];
-    NSLog(@"%s %@", _cmd, command);
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), command);
     NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
     if (ret) {
         if (shouldPresentError) {
@@ -546,7 +546,7 @@ static NSString * repositoryBasePath = nil;
     int ret = 1;
     NSArray *args = [NSArray arrayWithObjects:@"merge", commitSHA, nil];
     NSString *command = [args componentsJoinedByString:@" "];
-    NSLog(@"%s %@", _cmd, command);
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd), command);
     NSString *rval = [self outputInWorkdirForArguments:args retValue:&ret];
     if (ret) {
         if (shouldPresentError) {
@@ -625,7 +625,7 @@ static NSString * repositoryBasePath = nil;
     else {
         NSString *remote = [self remoteForRefName:branchRefName presentError:shouldPresentError];
         if (!remote) {
-            NSLog(@"%s branch: %@", _cmd, branchRefName);
+            NSLog(@"%@ branch: %@", NSStringFromSelector(_cmd), branchRefName);
             return NO;
         }
         upstreamRefName = [NSString stringWithFormat:@"%@/%@", remote, branchRefName];
