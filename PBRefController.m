@@ -90,7 +90,6 @@
 {
     PBGitRevSpecifier *rev = [sender representedObject];
     
-    NSError *error = nil;
     if ([historyController.repository pullRemote:rev presentError:YES]) {
         [commitController rearrangeObjects];
         [historyController updateView];

@@ -158,7 +158,7 @@
     TerminalApplication *term = [SBApplication applicationWithBundleIdentifier: @"com.apple.Terminal"];
 	NSString *workingDirectory = [[repository workingDirectory] stringByAppendingString:@"/"];
     NSString *cmd = [NSString stringWithFormat: @"cd \"%@\"; clear; echo '# Opened by GitX:'; git status", workingDirectory];
-    SBElementArray *termWindows = [term windows];
+    [term windows];
     [term doScript: cmd in: nil];
     [NSThread sleepForTimeInterval: 0.1];
     [term activate];

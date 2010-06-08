@@ -69,7 +69,6 @@ using namespace std;
 
 - (void) walkRevisionListWithSpecifier: (PBGitRevSpecifier*) rev
 {
-	NSDate *start = [NSDate date];
 	NSMutableArray* revisions = [NSMutableArray array];
 	PBGitGrapher* g = [[PBGitGrapher alloc] initWithRepository: repository];
 	std::map<string, NSStringEncoding> encodingMap;
